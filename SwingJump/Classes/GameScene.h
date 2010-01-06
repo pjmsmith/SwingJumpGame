@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
+
 @interface GameScene  : CCScene {}
 @end
 @interface GameLayer : CCLayer {}
