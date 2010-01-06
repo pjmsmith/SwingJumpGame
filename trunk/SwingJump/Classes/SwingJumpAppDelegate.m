@@ -54,7 +54,8 @@
 		
     MainMenuScene *ms = [MainMenuScene node];
 	[[CCDirector sharedDirector] runWithScene:ms];
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"hz_t_menumusic.mp3"];//play a sound
+    
+    //[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"hz_t_menumusic.mp3"];//play a sound
 }
 
 
