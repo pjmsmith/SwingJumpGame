@@ -8,6 +8,7 @@
 
 #import "MainMenuScene.h"
 #import "SimpleAudioEngine.h"
+#import "GameScene.h"
 
 @implementation MainMenuScene
 - (id) init {
@@ -26,8 +27,8 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        [CCMenuItemFont setFontSize:20];
-        [CCMenuItemFont setFontName:@"Helvetica"];
+        [CCMenuItemFont setFontSize:25];
+        [CCMenuItemFont setFontName:@"Marker Felt"];
         CCMenuItem *start = [CCMenuItemFont itemFromString:@"Start Game"
                                                 target:self
                                               selector:@selector(startGame:)];
@@ -41,12 +42,9 @@
     return self;
 }
 -(void)startGame: (id)sender {
-    if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
-        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
-    }
-    else {
-        [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
-    }
+	GameScene * gs = [GameScene node];
+	//[[CCDirector sharedDirector] runWithScene: gs];
+	[[CCDirector sharedDirector] replaceScene: [CCFlipXTransition transitionWithDuration:1.0 scene: gs]];
     NSLog(@"start game");
 }
 -(void)help: (id)sender {
