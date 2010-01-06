@@ -51,6 +51,17 @@
         CCMenu *menu = [CCMenu menuWithItems:start, nil];
         [menu setPosition:ccp(450, 10)];
         [self addChild:menu];
+        CCSprite *leftArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
+        //[leftArrow setBlendFunc: (ccBlendFunc) {GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA}];
+        //[leftArrow setOpacityModifyRGB: NO];
+        [leftArrow setPosition:ccp(50,160)];
+        [leftArrow setOpacity:128];
+        leftArrow.rotation = 180;
+        [self addChild:leftArrow];
+        CCSprite *rightArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
+        [rightArrow setPosition:ccp(430,160)];
+        [rightArrow setOpacity:128];
+        [self addChild:rightArrow];
     }
 
     return self;
@@ -58,7 +69,7 @@
 
 -(void)gameSceneBtn: (id)sender {
     MainMenuScene * ms = [MainMenuScene node];
-	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:1.0 scene: ms]];
+	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
 }
 
 @end
