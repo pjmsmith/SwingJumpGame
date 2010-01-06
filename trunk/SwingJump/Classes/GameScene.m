@@ -9,10 +9,7 @@
 #import "MainMenuScene.h"
 #import "SimpleAudioEngine.h"
 #import "GameScene.h"
-#import "chipmunk.h"
 
-extern cpSpace* space;
-extern cpBody *staticBody;
 
 @implementation GameScene
 - (id) init {
