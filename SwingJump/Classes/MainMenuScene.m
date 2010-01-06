@@ -15,7 +15,7 @@
     self = [super init];
     if (self != nil) {
         CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"];
-        [bg setPosition:ccp(240, 165)]; //the positioning is weird...I made it so it matches with the Default.png's positioning (less noticeable on load)
+        [bg setPosition:ccp(240, 164)]; //the positioning is weird...I made it so it matches with the Default.png's positioning (less noticeable on load)
         [self addChild:bg z:0];
         [self addChild:[MenuLayer node] z:1];
     }
@@ -44,7 +44,7 @@
 -(void)startGame: (id)sender {
 	GameScene * gs = [GameScene node];
 	//[[CCDirector sharedDirector] runWithScene: gs];
-	[[CCDirector sharedDirector] replaceScene: [CCFlipXTransition transitionWithDuration:1.0 scene: gs]];
+	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:1.0 scene: gs]];
     NSLog(@"start game");
 }
 -(void)help: (id)sender {

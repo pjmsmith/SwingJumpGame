@@ -11,7 +11,8 @@
 
 @interface GameScene  : CCScene {}
 @end
-
 @interface GameLayer : CCLayer {}
+@end
+@interface HUDLayer : CCLayer {}
 -(void)gameSceneBtn: (id)sender;
 @end

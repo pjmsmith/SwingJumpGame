@@ -114,6 +114,8 @@
 		46C0C62210F486A000CE2AE1 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C0C62110F486A000CE2AE1 /* MainMenuScene.m */; };
 		46C0C63610F489E400CE2AE1 /* mainmenu_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C0C63510F489E400CE2AE1 /* mainmenu_bg.png */; };
 		46C0C65410F48FEB00CE2AE1 /* hz_t_menumusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 46C0C65310F48FEB00CE2AE1 /* hz_t_menumusic.mp3 */; };
+		46C0C70910F5386600CE2AE1 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */; };
+		46C0C73310F53BFA00CE2AE1 /* swingset_supports.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C0C73210F53BFA00CE2AE1 /* swingset_supports.png */; };
 		505574581045D68500A31725 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
 		505574591045D68500A31725 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		5055745A1045D68500A31725 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -377,6 +379,9 @@
 		46C0C62110F486A000CE2AE1 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
 		46C0C63510F489E400CE2AE1 /* mainmenu_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainmenu_bg.png; sourceTree = "<group>"; };
 		46C0C65310F48FEB00CE2AE1 /* hz_t_menumusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hz_t_menumusic.mp3; sourceTree = "<group>"; };
+		46C0C70710F5386600CE2AE1 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		46C0C70810F5386600CE2AE1 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		46C0C73210F53BFA00CE2AE1 /* swingset_supports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingset_supports.png; sourceTree = "<group>"; };
 		504DFC8A10AF177C006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		504DFC8B10AF177C006D82FE /* LICENSE.cocosdenshion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocosdenshion; sourceTree = "<group>"; };
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -482,6 +487,8 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				46C0C70710F5386600CE2AE1 /* GameScene.h */,
+				46C0C70810F5386600CE2AE1 /* GameScene.m */,
 				507022A2107672FA00393637 /* SwingJumpAppDelegate.m */,
 				1F3B9A2C0EF2145700286867 /* SwingJumpAppDelegate.h */,
 				507022A3107672FA00393637 /* HelloWorldScene.m */,
@@ -808,6 +815,7 @@
 		50F4144210692EE7002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				46C0C73210F53BFA00CE2AE1 /* swingset_supports.png */,
 				46C0C65310F48FEB00CE2AE1 /* hz_t_menumusic.mp3 */,
 				46C0C63510F489E400CE2AE1 /* mainmenu_bg.png */,
 				46C0C5EA10F47C4E00CE2AE1 /* Info.plist */,
@@ -896,6 +904,7 @@
 				469D3DC110F47838002541FC /* swingicon.png in Resources */,
 				46C0C63610F489E400CE2AE1 /* mainmenu_bg.png in Resources */,
 				46C0C65410F48FEB00CE2AE1 /* hz_t_menumusic.mp3 in Resources */,
+				46C0C73310F53BFA00CE2AE1 /* swingset_supports.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,6 +1021,7 @@
 				4607DCF610F45FA4007BEA9F /* CocosDenshion.m in Sources */,
 				4607DCF710F45FA4007BEA9F /* SimpleAudioEngine.m in Sources */,
 				46C0C62210F486A000CE2AE1 /* MainMenuScene.m in Sources */,
+				46C0C70910F5386600CE2AE1 /* GameScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
