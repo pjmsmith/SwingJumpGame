@@ -14,16 +14,30 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"];
-        [bg setPosition:ccp(240, 165)]; //the positioning is weird...I made it so it matches with the Default.png's positioning (less noticeable on load)
+        CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"]; //change this to be the level background
+        [bg setPosition:ccp(240, 165)];
         [self addChild:bg z:0];
         [self addChild:[GameLayer node] z:1];
+        [self addChild:[HUDLayer node] z:2];
     }
     return self;
 }
 @end
 
 @implementation GameLayer
+- (id) init {
+    self = [super init];
+    if (self != nil) {
+        CCSprite *swingSet = [CCSprite spriteWithFile:@"swingset_supports.png"];
+        [swingSet setPosition:ccp(240,160)];
+        [self addChild:swingSet];
+    }
+    return self;
+}
+
+@end
+
+@implementation HUDLayer
 - (id) init {
     self = [super init];
     if (self != nil) {
