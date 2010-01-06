@@ -367,7 +367,7 @@
 		4607DCF310F45FA4007BEA9F /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine.h; sourceTree = "<group>"; };
 		4607DCF410F45FA4007BEA9F /* SimpleAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine.m; sourceTree = "<group>"; };
 		4607DD2E10F46174007BEA9F /* SwingJumpPrefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingJumpPrefix.pch; sourceTree = "<group>"; };
-		46AEEF4F10F462B5004B79F7 /* libcocos2d libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d libraries.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46AEEF4F10F462B5004B79F7 /* libcocos2d libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libcocos2d libraries.a"; path = "/Users/psmith/Documents/iPhone Apps/pubmix/SwingJump/build/Debug-iphonesimulator/libcocos2d libraries.a"; sourceTree = "<absolute>"; };
 		504DFC8A10AF177C006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		504DFC8B10AF177C006D82FE /* LICENSE.cocosdenshion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocosdenshion; sourceTree = "<group>"; };
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -427,7 +427,6 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* SwingJump.app */,
-				46AEEF4F10F462B5004B79F7 /* libcocos2d libraries.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
