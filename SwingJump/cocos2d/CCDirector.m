@@ -611,6 +611,7 @@ static CCDirector *_sharedDirector = nil;
 	
 	[self pushScene:scene];
 	[self startAnimation];
+    [self mainLoop];
 }
 
 -(void) replaceScene: (CCScene*) scene
