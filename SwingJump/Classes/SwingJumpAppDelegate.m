@@ -8,7 +8,8 @@
 
 #import "SwingJumpAppDelegate.h"
 #import "cocos2d.h"
-#import "HelloWorldScene.h"
+#import "MainMenuScene.h"
+#import "SimpleAudioEngine.h"
 
 @implementation SwingJumpAppDelegate
 
@@ -34,7 +35,7 @@
 	
 	// Create a depth buffer of 16 bits
 	// Enable it if you are going to use 3D transitions or 3d objects
-//	[[CCDirector sharedDirector] setDepthBufferFormat:kDepthBuffer16];
+    //[[CCDirector sharedDirector] setDepthBufferFormat:kDepthBuffer16];
 	
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -44,14 +45,16 @@
 	// before creating any layer, set the landscape mode
 	[[CCDirector sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
 	[[CCDirector sharedDirector] setAnimationInterval:1.0/60];
-	[[CCDirector sharedDirector] setDisplayFPS:YES];
+#pragma mark Set FPS Display
+	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	
 	// create an openGL view inside a window
 	[[CCDirector sharedDirector] attachInView:window];	
 	[window makeKeyAndVisible];		
 		
-		
-	[[CCDirector sharedDirector] runWithScene: [HelloWorld scene]];
+    MainMenuScene *ms = [MainMenuScene node];
+	[[CCDirector sharedDirector] runWithScene:ms];
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"hz_t_menumusic.mp3"];//play a sound
 }
 
 
