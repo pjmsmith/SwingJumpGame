@@ -9,6 +9,10 @@
 #import "MainMenuScene.h"
 #import "SimpleAudioEngine.h"
 #import "GameScene.h"
+#import "chipmunk.h"
+
+extern cpSpace* space;
+extern cpBody *staticBody;
 
 @implementation GameScene
 - (id) init {
@@ -46,12 +50,15 @@
         CCMenuItem *start = [CCMenuItemFont itemFromString:@"This is the Game Scene!"
 													target:self
 												  selector:@selector(gameSceneBtn:)];
+		
         CCMenu *menu = [CCMenu menuWithItems:start, nil];
         [menu alignItemsVerticallyWithPadding:100];
         [self addChild:menu];
     }
+
     return self;
 }
+
 -(void)gameSceneBtn: (id)sender {
 }
 
