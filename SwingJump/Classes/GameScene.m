@@ -42,14 +42,14 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        [CCMenuItemFont setFontSize:30];
+        [CCMenuItemFont setFontSize:12];
         [CCMenuItemFont setFontName:@"Marker Felt"];
-        CCMenuItem *start = [CCMenuItemFont itemFromString:@"This is the Game Scene!"
+        CCMenuItem *start = [CCMenuItemFont itemFromString:@"Main Menu"
 													target:self
 												  selector:@selector(gameSceneBtn:)];
 		
         CCMenu *menu = [CCMenu menuWithItems:start, nil];
-        [menu alignItemsVerticallyWithPadding:100];
+        [menu setPosition:ccp(450, 10)];
         [self addChild:menu];
     }
 
@@ -57,6 +57,8 @@
 }
 
 -(void)gameSceneBtn: (id)sender {
+    MainMenuScene * ms = [MainMenuScene node];
+	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:1.0 scene: ms]];
 }
 
 @end
