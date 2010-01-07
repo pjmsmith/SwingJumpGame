@@ -50,11 +50,15 @@
 @synthesize leftArrow;
 @synthesize rightArrow;
 @synthesize gl;
+@synthesize isRightBeingTouched;
+@synthesize isLeftBeingTouched;
 
 - (id) init {
     self = [super init];
     if (self != nil) {
         self.isTouchEnabled = YES;
+        isRightBeingTouched = NO;
+        isLeftBeingTouched = NO;
         leftArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
         [leftArrow setPosition:ccp(50,160)];
         [leftArrow setOpacity:128];
@@ -71,21 +75,68 @@
     return self;
 }
 
-- (BOOL)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
         CGFloat tempX = location.x;
         location.x = location.y;
         location.y = tempX;
+        
 		if (CGRectContainsPoint([leftArrow boundingBox], location)) {
-            NSLog(@"Left touched");
+            //NSLog(@"Left touched");
+            if(!isRightBeingTouched)
+            {
+                isLeftBeingTouched = YES;
+                [leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
+                [self performSelectorInBackground:@selector(rotateChainLeft) withObject:nil];
+            }
         }
         if (CGRectContainsPoint([rightArrow boundingBox], location)) {
-            NSLog(@"Right touched");
-        }        
+            //NSLog(@"Right touched");
+            if(!isLeftBeingTouched)
+            {
+                isRightBeingTouched = YES;
+                [rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
+                [self performSelectorInBackground:@selector(rotateChainRight) withObject:nil];
+            } 
+        }
 	}
 	return kEventHandled;
+}
+
+- (BOOL)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	if(isLeftBeingTouched)
+    {
+        [leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:128]];
+        isLeftBeingTouched = NO;
+    }
+    if(isRightBeingTouched)
+    {
+        [rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:128]];
+        isRightBeingTouched = NO;
+    }
+
+	return kEventHandled;
+}
+
+- (void)rotateChainLeft
+{
+    if(isLeftBeingTouched) 
+    {
+        [self.gl.swingChain runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:5],
+                                       [CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)],nil]];
+    }    
+}
+
+- (void)rotateChainRight
+{
+    if(isRightBeingTouched) 
+    {
+        [self.gl.swingChain runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:-5],
+                                       [CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)],nil]];
+    }
 }
 
 @end
@@ -95,14 +146,14 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        [CCMenuItemFont setFontSize:12];
+        [CCMenuItemFont setFontSize:14];
         [CCMenuItemFont setFontName:@"Marker Felt"];
         CCMenuItem *start = [CCMenuItemFont itemFromString:@"Main Menu"
 													target:self
 												  selector:@selector(gameSceneBtn:)];
 		
         CCMenu *menu = [CCMenu menuWithItems:start, nil];
-        [menu setPosition:ccp(450, 10)];
+        [menu setPosition:ccp(440, 10)];
         [self addChild:menu];
     }
 
