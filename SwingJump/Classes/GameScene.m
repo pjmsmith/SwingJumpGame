@@ -36,8 +36,10 @@
         [swingSet setPosition:ccp(240,160)];
         [self addChild:swingSet];
         swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
-        [swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-(swingChain.contentSize.height/2))];
+        [swingChain setAnchorPoint:ccp(0.5,1)];
+        [swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height))];
         [swingSet addChild:swingChain z:-1];
+        
     }
     return self;
 }
@@ -54,12 +56,12 @@
     if (self != nil) {
         self.isTouchEnabled = YES;
         leftArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
-        [leftArrow setPosition:ccp(70,160)];
+        [leftArrow setPosition:ccp(50,160)];
         [leftArrow setOpacity:128];
         leftArrow.rotation = 180;
         [self addChild:leftArrow z:1];
         rightArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
-        [rightArrow setPosition:ccp(410,160)];
+        [rightArrow setPosition:ccp(430,160)];
         [rightArrow setOpacity:128];
         [self addChild:rightArrow z:1];
         gl = [GameLayer node];
