@@ -328,11 +328,10 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>46C0C7BD10F553C200CE2AE1</string>
+										<string>46C0C89610F56CBB00CE2AE1</string>
 										<key>history</key>
 										<array>
 											<string>469D3DA510F46733002541FC</string>
-											<string>469D3DA610F46733002541FC</string>
 											<string>469D3DA710F46733002541FC</string>
 											<string>469D3DA810F46733002541FC</string>
 											<string>465F82E910F47B940090BEB2</string>
@@ -340,22 +339,26 @@
 											<string>46C0C66510F493AF00CE2AE1</string>
 											<string>46C0C66610F493AF00CE2AE1</string>
 											<string>46C0C66810F493AF00CE2AE1</string>
-											<string>46C0C66B10F493AF00CE2AE1</string>
 											<string>46C0C68A10F4965E00CE2AE1</string>
-											<string>46C0C6AD10F5228B00CE2AE1</string>
-											<string>46C0C6AE10F5228B00CE2AE1</string>
-											<string>46C0C6AF10F5228B00CE2AE1</string>
 											<string>46C0C6BA10F5233400CE2AE1</string>
 											<string>46C0C6C810F5245F00CE2AE1</string>
-											<string>46C0C70E10F5392000CE2AE1</string>
-											<string>46C0C70F10F5392000CE2AE1</string>
-											<string>46C0C76210F5401D00CE2AE1</string>
-											<string>46C0C76A10F5407500CE2AE1</string>
-											<string>46C0C79310F54E7C00CE2AE1</string>
-											<string>46C0C7A310F5528B00CE2AE1</string>
 											<string>46C0C7A410F5528B00CE2AE1</string>
 											<string>46C0C7A510F5528B00CE2AE1</string>
-											<string>46C0C7A610F5528B00CE2AE1</string>
+											<string>46C0C7D410F5580400CE2AE1</string>
+											<string>46C0C7EB10F55B0500CE2AE1</string>
+											<string>46C0C7F710F55B8A00CE2AE1</string>
+											<string>46C0C7F810F55B8A00CE2AE1</string>
+											<string>46C0C82410F5614D00CE2AE1</string>
+											<string>46C0C82610F5614D00CE2AE1</string>
+											<string>46C0C82810F5614D00CE2AE1</string>
+											<string>46C0C82E10F561BF00CE2AE1</string>
+											<string>46C0C83F10F5653000CE2AE1</string>
+											<string>46C0C85E10F56ACD00CE2AE1</string>
+											<string>46C0C87A10F56BFA00CE2AE1</string>
+											<string>46C0C87B10F56BFA00CE2AE1</string>
+											<string>46C0C88510F56C5300CE2AE1</string>
+											<string>46C0C88610F56C5300CE2AE1</string>
+											<string>46C0C88710F56C5300CE2AE1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -557,8 +560,8 @@
 		<string>46C0C67510F4940700CE2AE1</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>4656F92110F45AF700DA3B14</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/psmith/Documents/iPhone Apps/pubmix/SwingJump/SwingJump.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -583,7 +586,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SwingJumpAppDelegate.m</string>
+								<string>GameScene.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -654,7 +657,7 @@
 			<key>WindowToolGUID</key>
 			<string>4656F92110F45AF700DA3B14</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
