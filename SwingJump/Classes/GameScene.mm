@@ -11,6 +11,12 @@
 #import "GameScene.h"
 #import "Box2D.h"
 
+#define PTM_RATIO 32
+
+b2World *world;
+b2Body* body;
+CCSprite *ball;
+
 @implementation GameScene
 - (id) init {
     self = [super init];
@@ -39,9 +45,61 @@
         [swingChain setAnchorPoint:ccp(0.5,1)];
         [swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
         [swingSet addChild:swingChain z:-1];
+		
+		
+		//PHYSICS STARTS HERE
+		ball = [CCSprite spriteWithFile:@"ball.png"];
+		[ball setPosition:CGPointMake(150, 400)];
+		[self addChild:ball z:0];
         
+		//Create a world
+		CGSize screenSize = [CCDirector sharedDirector].winSize;
+		b2AABB worldAABB;
+		float borderSize = 96/PTM_RATIO;
+		worldAABB.lowerBound.Set(-borderSize, -borderSize);
+		worldAABB.upperBound.Set(screenSize.width/PTM_RATIO+borderSize, screenSize.height/PTM_RATIO+borderSize);
+		b2Vec2 gravity(0.0f, -30.0f);
+		bool doSleep = true;
+		world = new b2World(worldAABB, gravity, doSleep);
+        
+		//Create a ground box
+		b2BodyDef groundBodyDef;
+		groundBodyDef.position.Set(screenSize.width/PTM_RATIO/2, -1.0f);
+		b2Body* groundBody = world->CreateBody(&groundBodyDef);
+		b2PolygonDef groundShapeDef;
+		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO/2, 1.0f);
+		groundBody->CreateShape(&groundShapeDef);
+        
+		//Create ball body and shape
+		b2BodyDef ballBodyDef;
+		ballBodyDef.position.Set(150.0f/PTM_RATIO, 400.0f/PTM_RATIO);
+		ballBodyDef.userData = ball;
+        
+		body = world->CreateBody(&ballBodyDef);
+		b2CircleDef ballShapeDef;
+		ballShapeDef.radius = 20.0f/PTM_RATIO;
+		ballShapeDef.density = 1.0f;
+		ballShapeDef.friction = 0.3f;
+		ballShapeDef.restitution = 0.8f;
+		body->CreateShape(&ballShapeDef);
+		body->SetMassFromShapes();
+        
+		[self schedule:@selector(tick:)];
+		
     }
     return self;
+}
+
+-(void)tick:(ccTime) dt{
+	world->Step(dt, 10, 8);
+	for(b2Body* b = world->GetBodyList();b;b=b->GetNext())
+	{
+		if(b->GetUserData()!=NULL)
+		{
+			CCSprite* ballData = (CCSprite*)b->GetUserData();
+			ballData.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+		}
+	}
 }
 
 @end
@@ -117,7 +175,7 @@
         [rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:128]];
         isRightBeingTouched = NO;
     }
-
+    
 	return kEventHandled;
 }
 
@@ -156,7 +214,7 @@
         [menu setPosition:ccp(440, 10)];
         [self addChild:menu];
     }
-
+    
     return self;
 }
 

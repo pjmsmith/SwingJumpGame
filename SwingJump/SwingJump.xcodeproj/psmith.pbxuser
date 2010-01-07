@@ -257,7 +257,7 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 0;
+		breakpointsEnabled = 1;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
@@ -642,7 +642,7 @@
 		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.mm */;
 		name = "GameScene.mm: 77";
 		rLen = 0;
-		rLoc = 2169;
+		rLoc = 241;
 		rType = 0;
 		vrLen = 2066;
 		vrLoc = 1694;
