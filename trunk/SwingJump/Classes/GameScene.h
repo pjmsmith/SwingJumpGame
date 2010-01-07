@@ -14,6 +14,18 @@
 @end
 @interface GameLayer : CCLayer {}
 @end
+
+@interface ControlLayer : CCLayer {
+    CCSprite *leftArrow;
+    CCSprite *rightArrow;
+    GameLayer *gl;
+}
+@property (nonatomic, retain) CCSprite *leftArrow;
+@property (nonatomic, retain) CCSprite *rightArrow;
+@property (nonatomic, retain) GameLayer *gl;
+
+@end
+
 @interface HUDLayer : CCLayer {}
 -(void)gameSceneBtn: (id)sender;
 @end

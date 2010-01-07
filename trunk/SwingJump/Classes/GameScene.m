@@ -18,7 +18,8 @@
         CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"]; //change this to be the level background
         [bg setPosition:ccp(240, 165)];
         [self addChild:bg z:0];
-        [self addChild:[GameLayer node] z:1];
+        //[self addChild:[GameLayer node] z:1];
+        [self addChild:[ControlLayer node] z:1];
         [self addChild:[HUDLayer node] z:2];
     }
     return self;
@@ -38,6 +39,51 @@
 
 @end
 
+@implementation ControlLayer
+@synthesize leftArrow;
+@synthesize rightArrow;
+@synthesize gl;
+
+- (id) init {
+    self = [super init];
+    if (self != nil) {
+        self.isTouchEnabled = YES;
+        leftArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
+        [leftArrow setPosition:ccp(70,160)];
+        [leftArrow setOpacity:128];
+        leftArrow.rotation = 180;
+        [self addChild:leftArrow z:1];
+        rightArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
+        [rightArrow setPosition:ccp(410,160)];
+        [rightArrow setOpacity:128];
+        [self addChild:rightArrow z:1];
+        gl = [GameLayer node];
+        [self addChild:gl z:0]; //added as a child so touchesEnded can call a function contained in GameLayer
+        
+    }
+    return self;
+}
+
+- (BOOL)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	for( UITouch *touch in touches ) {
+		CGPoint location = [touch locationInView: [touch view]];
+        CGFloat tempX = location.x;
+        location.x = location.y;
+        location.y = tempX;
+		if (CGRectContainsPoint([leftArrow boundingBox], location)) {
+            NSLog(@"Left touched");
+        }
+        if (CGRectContainsPoint([rightArrow boundingBox], location)) {
+            NSLog(@"Right touched");
+        }        
+	}
+	return kEventHandled;
+}
+
+@end
+
+
 @implementation HUDLayer
 - (id) init {
     self = [super init];
@@ -51,17 +97,6 @@
         CCMenu *menu = [CCMenu menuWithItems:start, nil];
         [menu setPosition:ccp(450, 10)];
         [self addChild:menu];
-        CCSprite *leftArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
-        //[leftArrow setBlendFunc: (ccBlendFunc) {GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA}];
-        //[leftArrow setOpacityModifyRGB: NO];
-        [leftArrow setPosition:ccp(50,160)];
-        [leftArrow setOpacity:128];
-        leftArrow.rotation = 180;
-        [self addChild:leftArrow];
-        CCSprite *rightArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
-        [rightArrow setPosition:ccp(430,160)];
-        [rightArrow setOpacity:128];
-        [self addChild:rightArrow];
     }
 
     return self;
