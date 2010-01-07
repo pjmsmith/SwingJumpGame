@@ -12,7 +12,10 @@
 
 @interface GameScene  : CCScene {}
 @end
-@interface GameLayer : CCLayer {}
+@interface GameLayer : CCLayer {
+    CCSprite *swingChain;
+}
+@property (nonatomic, retain) CCSprite *swingChain;
 @end
 
 @interface ControlLayer : CCLayer {

@@ -27,12 +27,17 @@
 @end
 
 @implementation GameLayer
+@synthesize swingChain;
+
 - (id) init {
     self = [super init];
     if (self != nil) {
         CCSprite *swingSet = [CCSprite spriteWithFile:@"swingset_supports.png"];
         [swingSet setPosition:ccp(240,160)];
         [self addChild:swingSet];
+        swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
+        [swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-(swingChain.contentSize.height/2))];
+        [swingSet addChild:swingChain z:-1];
     }
     return self;
 }
