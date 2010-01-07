@@ -37,7 +37,7 @@
         [self addChild:swingSet];
         swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
         [swingChain setAnchorPoint:ccp(0.5,1)];
-        [swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height))];
+        [swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
         [swingSet addChild:swingChain z:-1];
         
     }
