@@ -265,16 +265,18 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>506EDAA3102F461B00A389B3</string>
+								<string>46C0C9DF10F5851700CE2AE1</string>
 								<string>2D500B1D0D5A766B00DBA0E3</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>50F4144210692EE7002A0D5E</string>
+								<string>1C37FBAC04509CD000000102</string>
 								<string>E2644B35053B69B200211256</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>12</integer>
-									<integer>11</integer>
+									<integer>4</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -316,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>HelloWorldScene.h</string>
+								<string>GameScene.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -324,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>HelloWorldScene.h</string>
+										<string>GameScene.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>46C0C99610F57D0500CE2AE1</string>
+										<string>46C0C9EA10F5853000CE2AE1</string>
 										<key>history</key>
 										<array>
 											<string>469D3DA510F46733002541FC</string>
@@ -352,13 +354,13 @@
 											<string>46C0C88610F56C5300CE2AE1</string>
 											<string>46C0C90210F576C100CE2AE1</string>
 											<string>46C0C90310F576C100CE2AE1</string>
-											<string>46C0C98F10F57D0500CE2AE1</string>
 											<string>46C0C99010F57D0500CE2AE1</string>
 											<string>46C0C99110F57D0500CE2AE1</string>
 											<string>46C0C99210F57D0500CE2AE1</string>
 											<string>46C0C99310F57D0500CE2AE1</string>
 											<string>46C0C99410F57D0500CE2AE1</string>
-											<string>46C0C99510F57D0500CE2AE1</string>
+											<string>46C0C99810F57F6A00CE2AE1</string>
+											<string>46C0C9C910F5835B00CE2AE1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -556,6 +558,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>46C0C9EB10F5853000CE2AE1</string>
 		<string>46C0C67410F4940700CE2AE1</string>
 		<string>46C0C67510F4940700CE2AE1</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
