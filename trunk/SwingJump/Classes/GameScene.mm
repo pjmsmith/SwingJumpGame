@@ -1,5 +1,5 @@
 //
-//  GameScene.m
+//  GameScene.mm
 //  SwingJump
 //
 //  Created by Sean Stavropoulos on 1/6/10.

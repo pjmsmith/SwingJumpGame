@@ -967,6 +967,10 @@ void b2World::DrawShape(b2Fixture* fixture, const b2Transform& xf, const b2Color
 {
 	switch (fixture->GetType())
 	{
+        case b2Shape::e_unknown:
+            break;
+        case b2Shape::e_typeCount:
+            break;
 	case b2Shape::e_circle:
 		{
 			b2CircleShape* circle = (b2CircleShape*)fixture->GetShape();
