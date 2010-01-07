@@ -9,7 +9,7 @@
 #import "MainMenuScene.h"
 #import "SimpleAudioEngine.h"
 #import "GameScene.h"
-
+#import "Box2D.h"
 
 @implementation GameScene
 - (id) init {
