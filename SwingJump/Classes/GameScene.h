@@ -16,16 +16,21 @@
     CCSprite *swingChain;
 }
 @property (nonatomic, retain) CCSprite *swingChain;
+
 @end
 
 @interface ControlLayer : CCLayer {
     CCSprite *leftArrow;
     CCSprite *rightArrow;
     GameLayer *gl;
+    BOOL isRightBeingTouched;
+    BOOL isLeftBeingTouched;
 }
 @property (nonatomic, retain) CCSprite *leftArrow;
 @property (nonatomic, retain) CCSprite *rightArrow;
 @property (nonatomic, retain) GameLayer *gl;
+@property (nonatomic) BOOL isRightBeingTouched;
+@property (nonatomic) BOOL isLeftBeingTouched;
 
 @end
 
