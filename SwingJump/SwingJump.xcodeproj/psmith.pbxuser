@@ -69,7 +69,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					756,
+					767,
 					60,
 					20,
 					48,
@@ -386,6 +386,22 @@
 			46C0C99410F57D0500CE2AE1 /* PBXTextBookmark */ = 46C0C99410F57D0500CE2AE1 /* PBXTextBookmark */;
 			46C0C99510F57D0500CE2AE1 /* PBXBookmark */ = 46C0C99510F57D0500CE2AE1 /* PBXBookmark */;
 			46C0C99610F57D0500CE2AE1 /* PBXTextBookmark */ = 46C0C99610F57D0500CE2AE1 /* PBXTextBookmark */;
+			46C0C99710F57D6400CE2AE1 /* PBXTextBookmark */ = 46C0C99710F57D6400CE2AE1 /* PBXTextBookmark */;
+			46C0C99810F57F6A00CE2AE1 /* PBXTextBookmark */ = 46C0C99810F57F6A00CE2AE1 /* PBXTextBookmark */;
+			46C0C99910F57F6A00CE2AE1 /* PBXTextBookmark */ = 46C0C99910F57F6A00CE2AE1 /* PBXTextBookmark */;
+			46C0C99A10F57F6A00CE2AE1 /* PBXTextBookmark */ = 46C0C99A10F57F6A00CE2AE1 /* PBXTextBookmark */;
+			46C0C99D10F5804C00CE2AE1 /* PBXTextBookmark */ = 46C0C99D10F5804C00CE2AE1 /* PBXTextBookmark */;
+			46C0C99E10F5804C00CE2AE1 /* PBXTextBookmark */ = 46C0C99E10F5804C00CE2AE1 /* PBXTextBookmark */;
+			46C0C99F10F5804C00CE2AE1 /* XCBuildMessageTextBookmark */ = 46C0C99F10F5804C00CE2AE1 /* XCBuildMessageTextBookmark */;
+			46C0C9A010F5804C00CE2AE1 /* PBXTextBookmark */ = 46C0C9A010F5804C00CE2AE1 /* PBXTextBookmark */;
+			46C0C9A110F5804C00CE2AE1 /* PBXTextBookmark */ = 46C0C9A110F5804C00CE2AE1 /* PBXTextBookmark */;
+			46C0C9A210F5805000CE2AE1 /* PBXTextBookmark */ = 46C0C9A210F5805000CE2AE1 /* PBXTextBookmark */;
+			46C0C9A310F5805000CE2AE1 /* XCBuildMessageTextBookmark */ = 46C0C9A310F5805000CE2AE1 /* XCBuildMessageTextBookmark */;
+			46C0C9A410F5805000CE2AE1 /* PBXTextBookmark */ = 46C0C9A410F5805000CE2AE1 /* PBXTextBookmark */;
+			46C0C9C910F5835B00CE2AE1 /* PBXTextBookmark */ = 46C0C9C910F5835B00CE2AE1 /* PBXTextBookmark */;
+			46C0C9CA10F5835B00CE2AE1 /* PBXTextBookmark */ = 46C0C9CA10F5835B00CE2AE1 /* PBXTextBookmark */;
+			46C0C9DD10F583C300CE2AE1 /* PBXTextBookmark */ = 46C0C9DD10F583C300CE2AE1 /* PBXTextBookmark */;
+			46C0C9EA10F5853000CE2AE1 /* PBXTextBookmark */ = 46C0C9EA10F5853000CE2AE1 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 4656F92310F45AF700DA3B14 /* Source Control */;
 		userBuildSettings = {
@@ -1304,9 +1320,9 @@
 	};
 	46C0C70810F5386600CE2AE1 /* GameScene.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {782, 1599}}";
-			sepNavSelRange = "{2328, 0}";
-			sepNavVisRange = "{875, 750}";
+			sepNavIntBoundsRect = "{{0, 0}, {985, 1547}}";
+			sepNavSelRange = "{666, 0}";
+			sepNavVisRange = "{0, 1578}";
 		};
 	};
 	46C0C70C10F5392000CE2AE1 /* PBXTextBookmark */ = {
@@ -3432,6 +3448,32 @@
 		vrLen = 1860;
 		vrLoc = 263;
 	};
+	46C0C92010F57BF100CE2AE1 /* b2BroadPhase.cpp */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = b2BroadPhase.cpp;
+		path = "/Users/psmith/Documents/iPhone Apps/pubmix/SwingJump/Box2D/Collision/b2BroadPhase.cpp";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {985, 1456}}";
+			sepNavSelRange = "{919, 43}";
+			sepNavVisRange = "{0, 1873}";
+		};
+	};
+	46C0C92D10F57BF100CE2AE1 /* b2CircleShape.cpp */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = b2CircleShape.cpp;
+		path = "/Users/psmith/Documents/iPhone Apps/pubmix/SwingJump/Box2D/Collision/Shapes/b2CircleShape.cpp";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {831, 1066}}";
+			sepNavSelRange = "{1204, 84}";
+			sepNavVisRange = "{785, 1056}";
+		};
+	};
 	46C0C98C10F57C1000CE2AE1 /* HelloWorldScene.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {985, 792}}";
@@ -3511,6 +3553,164 @@
 		rLoc = 368;
 		rType = 0;
 		vrLen = 368;
+		vrLoc = 0;
+	};
+	46C0C99710F57D6400CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C98C10F57C1000CE2AE1 /* HelloWorldScene.h */;
+		name = "HelloWorldScene.h: 20";
+		rLen = 0;
+		rLoc = 368;
+		rType = 0;
+		vrLen = 368;
+		vrLoc = 0;
+	};
+	46C0C99810F57F6A00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C98C10F57C1000CE2AE1 /* HelloWorldScene.h */;
+		name = "HelloWorldScene.h: 20";
+		rLen = 0;
+		rLoc = 368;
+		rType = 0;
+		vrLen = 368;
+		vrLoc = 0;
+	};
+	46C0C99910F57F6A00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 51";
+		rLen = 0;
+		rLoc = 1316;
+		rType = 0;
+		vrLen = 1612;
+		vrLoc = 0;
+	};
+	46C0C99A10F57F6A00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 28";
+		rLen = 0;
+		rLoc = 666;
+		rType = 0;
+		vrLen = 1612;
+		vrLoc = 0;
+	};
+	46C0C99D10F5804C00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 81";
+		rLen = 0;
+		rLoc = 2328;
+		rType = 0;
+		vrLen = 941;
+		vrLoc = 861;
+	};
+	46C0C99E10F5804C00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C92010F57BF100CE2AE1 /* b2BroadPhase.cpp */;
+		name = "b2BroadPhase.cpp: 19";
+		rLen = 43;
+		rLoc = 919;
+		rType = 0;
+		vrLen = 1174;
+		vrLoc = 0;
+	};
+	46C0C99F10F5804C00CE2AE1 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "ISO C++ forbids declaration of 'b2Transform' with no type";
+		fRef = 46C0C92D10F57BF100CE2AE1 /* b2CircleShape.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 29;
+		rType = 1;
+	};
+	46C0C9A010F5804C00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C92D10F57BF100CE2AE1 /* b2CircleShape.cpp */;
+		name = "b2CircleShape.cpp: 30";
+		rLen = 84;
+		rLoc = 1204;
+		rType = 0;
+		vrLen = 1056;
+		vrLoc = 785;
+	};
+	46C0C9A110F5804C00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4607DC8410F45EF2007BEA9F /* cpVect.h */;
+		name = "cpVect.h: 31";
+		rLen = 7;
+		rLoc = 1279;
+		rType = 0;
+		vrLen = 281;
+		vrLoc = 1020;
+	};
+	46C0C9A210F5805000CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 36";
+		rLen = 0;
+		rLoc = 900;
+		rType = 0;
+		vrLen = 1612;
+		vrLoc = 0;
+	};
+	46C0C9A310F5805000CE2AE1 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Box2D/Collision/b2BroadPhase.h: No such file or directory";
+		fRef = 46C0C92010F57BF100CE2AE1 /* b2BroadPhase.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 18;
+		rType = 1;
+	};
+	46C0C9A410F5805000CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C92010F57BF100CE2AE1 /* b2BroadPhase.cpp */;
+		name = "b2BroadPhase.cpp: 19";
+		rLen = 43;
+		rLoc = 919;
+		rType = 0;
+		vrLen = 1873;
+		vrLoc = 0;
+	};
+	46C0C9C910F5835B00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 36";
+		rLen = 0;
+		rLoc = 900;
+		rType = 0;
+		vrLen = 1612;
+		vrLoc = 0;
+	};
+	46C0C9CA10F5835B00CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 11";
+		rLen = 0;
+		rLoc = 220;
+		rType = 0;
+		vrLen = 1612;
+		vrLoc = 0;
+	};
+	46C0C9DD10F583C300CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 11";
+		rLen = 0;
+		rLoc = 220;
+		rType = 0;
+		vrLen = 1578;
+		vrLoc = 0;
+	};
+	46C0C9EA10F5853000CE2AE1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 46C0C70810F5386600CE2AE1 /* GameScene.m */;
+		name = "GameScene.m: 28";
+		rLen = 0;
+		rLoc = 666;
+		rType = 0;
+		vrLen = 1578;
 		vrLoc = 0;
 	};
 	504DFC8B10AF177C006D82FE /* LICENSE.cocosdenshion */ = {
