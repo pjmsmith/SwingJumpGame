@@ -24,7 +24,8 @@
 #ifdef TARGET_OS_IPHONE
 #include "math.h"
 #else
-#include <cmath>
+//#include <cmath>
+#include <math.h>
 #endif
 
 
@@ -73,7 +74,7 @@ inline bool b2IsValid(float32 x)
 #ifdef TARGET_OS_IPHONE
 	return isfinite(x);
 #else
-	return finite(x) != 0;
+    return isfinite(x) != 0;
 #endif
 	
 	

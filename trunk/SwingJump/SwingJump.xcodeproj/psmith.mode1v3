@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -272,7 +274,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>15</integer>
+									<integer>18</integer>
 									<integer>11</integer>
 									<integer>0</integer>
 								</array>
@@ -308,14 +310,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameScene.mm</string>
+								<string>MainMenuScene.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GameScene.mm</string>
+										<string>MainMenuScene.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>4632A18B10F7F77A0048CE31</string>
+										<string>4632A1F210F7FDEA0048CE31</string>
 										<key>history</key>
 										<array>
 											<string>469D3DA510F46733002541FC</string>
@@ -351,16 +351,11 @@
 											<string>46C0C88610F56C5300CE2AE1</string>
 											<string>46C0C90210F576C100CE2AE1</string>
 											<string>46C0C90310F576C100CE2AE1</string>
-											<string>46C0C99110F57D0500CE2AE1</string>
-											<string>46C0C99210F57D0500CE2AE1</string>
-											<string>46C0C99310F57D0500CE2AE1</string>
 											<string>46C0C99810F57F6A00CE2AE1</string>
 											<string>46C0C9EE10F5857000CE2AE1</string>
-											<string>46C0C9EF10F5857000CE2AE1</string>
 											<string>46C0CAEF10F5E09000CE2AE1</string>
 											<string>4632A16310F7EF830048CE31</string>
 											<string>4632A16410F7EF830048CE31</string>
-											<string>4632A16510F7EF830048CE31</string>
 											<string>4632A16610F7EF830048CE31</string>
 											<string>4632A16810F7EF830048CE31</string>
 											<string>4632A16910F7EF830048CE31</string>
@@ -372,9 +367,14 @@
 											<string>4632A17210F7EF830048CE31</string>
 											<string>4632A17410F7EF830048CE31</string>
 											<string>4632A17510F7EF830048CE31</string>
-											<string>4632A17710F7EF830048CE31</string>
-											<string>4632A18910F7F77A0048CE31</string>
-											<string>4632A18A10F7F77A0048CE31</string>
+											<string>4632A1BD10F7FB610048CE31</string>
+											<string>4632A1D010F7FBFC0048CE31</string>
+											<string>4632A1D110F7FBFC0048CE31</string>
+											<string>4632A1D210F7FBFC0048CE31</string>
+											<string>4632A1D310F7FBFC0048CE31</string>
+											<string>4632A1D410F7FBFC0048CE31</string>
+											<string>4632A1D510F7FBFC0048CE31</string>
+											<string>4632A1D610F7FBFC0048CE31</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -572,14 +572,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>4632A18C10F7F77A0048CE31</string>
+		<string>4632A1F310F7FDEA0048CE31</string>
 		<string>4632A18D10F7F77A0048CE31</string>
 		<string>4632A17F10F7EF830048CE31</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>/Users/psmith/Documents/iPhone Apps/pubmix/SwingJump/SwingJump.xcodeproj</string>
 		<string>4656F92110F45AF700DA3B14</string>
+		<string>/Users/psmith/Documents/iPhone Apps/pubmix/SwingJump/SwingJump.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 59 1280 719 0 0 1280 778 </string>
@@ -605,7 +605,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameScene.mm</string>
+								<string>b2Math.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -674,7 +674,7 @@
 			<key>WindowToolGUID</key>
 			<string>4656F92110F45AF700DA3B14</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

@@ -6,10 +6,9 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "MainMenuScene.h"
+#import "MainMenuScene.hh"
 #import "SimpleAudioEngine.h"
 #import "GameScene.hh"
-#import "GLES-Render.h"
 
 #define PTM_RATIO 32
 

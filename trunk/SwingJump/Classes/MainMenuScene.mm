@@ -6,9 +6,9 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "MainMenuScene.h"
+#import "MainMenuScene.hh"
 #import "SimpleAudioEngine.h"
-#import "GameScene.h"
+#import "GameScene.hh"
 
 @implementation MainMenuScene
 - (id) init {
