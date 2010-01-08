@@ -203,7 +203,7 @@ public:
 	/// Get the global gravity vector.
 	b2Vec2 GetGravity() const;
 
-private:
+//private:
 
 	friend class b2Body;
 	friend class b2ContactManager;
