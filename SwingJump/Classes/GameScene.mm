@@ -8,8 +8,7 @@
 
 #import "MainMenuScene.h"
 #import "SimpleAudioEngine.h"
-#import "GameScene.h"
-#import "Box2D.h"
+#import "GameScene.hh"
 #import "GLES-Render.h"
 
 #define PTM_RATIO 32
