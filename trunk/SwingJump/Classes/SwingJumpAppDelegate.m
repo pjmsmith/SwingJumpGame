@@ -8,7 +8,7 @@
 
 #import "SwingJumpAppDelegate.h"
 #import "cocos2d.h"
-#import "MainMenuScene.h"
+#import "MainMenuScene.hh"
 #import "SimpleAudioEngine.h"
 
 @implementation SwingJumpAppDelegate
