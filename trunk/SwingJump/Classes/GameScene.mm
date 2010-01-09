@@ -94,12 +94,44 @@ CCSprite *ball;
 		pivotBodyShapeDef.SetAsBox(0.1f,.1f);
 		pivotBody->CreateShape(&pivotBodyShapeDef);
         
+        b2BodyDef bodyDef;
+        b2Body *body;
+        b2Body *link = pivotBody;
+        b2PolygonDef boxDef;
+        b2RevoluteJointDef revolute_joint;
+        for (int i = 1; i <= 10; i++) {
+            // rope segment
+            bodyDef.position.y=i;
+            boxDef.SetAsBox(0.1, 0.5);
+            boxDef.density=100;
+            boxDef.friction=0.5;
+            boxDef.restitution=0.2;
+            body = world->CreateBody(&bodyDef);
+            body->CreateShape(&boxDef);
+            // joint
+            revolute_joint.Initialize(&(*link), &(*body), *(new b2Vec2(8.5, i-0.5)));
+            world->CreateJoint(&revolute_joint);
+            body->SetMassFromShapes();
+            // saving the reference of the last placed link
+            link=body;
+        }
+        // final body
+        boxDef.SetAsBox(0.5,0.5);
+        boxDef.density=2;
+        boxDef.friction=0.5;
+        boxDef.restitution=0.2;
+        body=world->CreateBody(&bodyDef);
+        body->CreateShape(&boxDef);
+        revolute_joint.Initialize(&(*link), &(*body), *(new b2Vec2(8.5, 10.5)));
+        world->CreateJoint(&revolute_joint);
+        body->SetMassFromShapes();
+        
 		//Create chain body and shape
 		b2BodyDef chainBodyDef;
 		chainBodyDef.position.Set(7.5f,5.5f);
 		chainBody = world->CreateBody(&chainBodyDef);
-		b2PolygonDef chainShapeDef;
-		chainShapeDef.SetAsBox(.1f, 2.0f);
+		b2CircleDef chainShapeDef;
+		chainShapeDef.radius = (2.0f/PTM_RATIO);
 		chainShapeDef.density =  10.0f;
 		chainShapeDef.friction = 0.5f;
 		chainShapeDef.restitution = 0.0f;
