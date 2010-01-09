@@ -82,7 +82,7 @@ b2Body* links[numLinks];
 		b2PolygonDef groundShapeDef;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
 		groundBody->CreateShape(&groundShapeDef);
-		
+        
         [self createSwingChain:246.0f];
         
 		[self schedule:@selector(tick:)];
@@ -90,12 +90,13 @@ b2Body* links[numLinks];
     }
     return self;
 }
+
 -(void) createSwingChain:(float)yPos
 {
     CGSize screenSize = [CCDirector sharedDirector].winSize;
     //Create pivot point for swing
     b2BodyDef pivotBodyDef;
-    pivotBodyDef.position.Set(screenSize.width/PTM_RATIO/2, 247.0f/PTM_RATIO);
+    pivotBodyDef.position.Set(screenSize.width/PTM_RATIO/2, (yPos+1.0f)/PTM_RATIO);
     b2Body* pivotBody = world ->CreateBody(&pivotBodyDef);
     b2PolygonDef pivotBodyShapeDef;
     pivotBodyShapeDef.SetAsBox(0.1f,.1f);
@@ -132,7 +133,7 @@ b2Body* links[numLinks];
     chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
     chainBody = world->CreateBody(&chainBodyDef);
     swingSeat.SetAsBox(0.5f, 0.1f);
-    swingSeat.density =  300.0f;
+    swingSeat.density =  100.0f;
     swingSeat.friction = 0.5f;
     swingSeat.restitution = 0.0f;
     chainBody->CreateShape(&swingSeat);
@@ -143,6 +144,11 @@ b2Body* links[numLinks];
     jointDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(), link->GetPosition());
     jointDef.collideConnected = true;
     world->CreateJoint(&jointDef);   
+    Biped* b = new Biped(world, b2Vec2(460.0f/PTM_RATIO/2, 130.0f/PTM_RATIO));
+    b2RevoluteJointDef rj2;         
+    rj2.Initialize(b->LHand, &(*chainBody), link->GetPosition());
+    world->CreateJoint(&rj2);
+    
 }
 
 -(void) draw{
