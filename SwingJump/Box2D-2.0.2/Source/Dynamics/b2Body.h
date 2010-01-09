@@ -274,7 +274,6 @@ public:
 	/// Get the parent world of this body.
 	b2World* GetWorld();
 
-private:
 
 	friend class b2World;
 	friend class b2Island;
