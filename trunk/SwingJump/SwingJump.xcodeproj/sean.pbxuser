@@ -1,0 +1,62 @@
+// !$*UTF8*$!
+{
+	1412513C10F8012000A7C85E /* SwingJump */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = SwingJump;
+		sourceDirectories = (
+		);
+	};
+	1412513F10F8013E00A7C85E /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	1412514010F8013E00A7C85E /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	1D6058900D05DD3D006BFB54 /* SwingJump */ = {
+		activeExec = 0;
+		executables = (
+			1412513C10F8012000A7C85E /* SwingJump */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 1412513C10F8012000A7C85E /* SwingJump */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* SwingJump */;
+		codeSenseManager = 1412514010F8013E00A7C85E /* Code sense */;
+		executables = (
+			1412513C10F8012000A7C85E /* SwingJump */,
+		);
+		perUserDictionary = {
+			PBXPerProjectTemplateStateSaveDate = 284688672;
+			PBXWorkspaceStateSaveDate = 284688672;
+		};
+		sourceControlManager = 1412513F10F8013E00A7C85E /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	506EE05D10304ED200A389B3 /* cocos2d libraries */ = {
+		activeExec = 0;
+	};
+}

@@ -41,10 +41,10 @@ CCSprite *ball;
         CCSprite *swingSet = [CCSprite spriteWithFile:@"swingset_supports.png"];
         [swingSet setPosition:ccp(240,160)];
         [self addChild:swingSet z:4];
-        swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
-        [swingChain setAnchorPoint:ccp(0.5,1)];
+        //swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
+        //[swingChain setAnchorPoint:ccp(0.5,1)];
         //[swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
-        [self addChild:swingChain z:1];
+        //[self addChild:swingChain z:1];
 		
 		
 		//PHYSICS STARTS HERE
@@ -96,54 +96,25 @@ CCSprite *ball;
         
 		//Create chain body and shape
 		b2BodyDef chainBodyDef;
-		//chainBodyDef.position.Set(screenSize.width/PTM_RATIO/2, screenSize.height/PTM_RATIO/2);
 		chainBodyDef.position.Set(7.5f,5.5f);
-		//chainBodyDef.userData = swingChain;
-		
 		chainBody = world->CreateBody(&chainBodyDef);
 		b2PolygonDef chainShapeDef;
 		chainShapeDef.SetAsBox(.1f, 2.0f);
-		chainShapeDef.density =  100.0f;
+		chainShapeDef.density =  10.0f;
 		chainShapeDef.friction = 0.5f;
 		chainShapeDef.restitution = 0.0f;
 		chainBody->CreateShape(&chainShapeDef);
 		chainBody->SetMassFromShapes();
-		
-		//link
-		//b2RevoluteJointDef chainJoint;
-		//chainJoint.Initialize(&(*pivotBody),&(*chainBody), *(new b2Vec2(1.0f, 0.1f)));
-		//world->CreateJoint(&chainJoint);
-
+		chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
 		
 		b2RevoluteJointDef rj;
 		rj.Initialize(&(*chainBody), &(*pivotBody), pivotBody->GetPosition());
-		//rj.collideConnected = true;
 		rj.motorSpeed = 0.0f;
-		rj.maxMotorTorque = 100.0f;
+		rj.maxMotorTorque = 3.0f;
 		rj.enableMotor = true;
 		world->CreateJoint(&rj);
 		
-		
-		//Create ball body and shape
-		b2BodyDef ballBodyDef;
-		ballBodyDef.position.Set(10.0f/PTM_RATIO, 400.0f/PTM_RATIO);
-		//ballBodyDef.userData = ball;
-        
-		body = world->CreateBody(&ballBodyDef);
-		b2CircleDef ballShapeDef;
-		ballShapeDef.radius = 50.0f/PTM_RATIO;
-		ballShapeDef.density = 1000.0f;
-		ballShapeDef.friction = 0.3f;
-		ballShapeDef.restitution = 0.6f;
-		body->CreateShape(&ballShapeDef);
-		body->SetMassFromShapes();
-		
-		b2Vec2 force = b2Vec2(3.0f,0.0f);
-		body->SetLinearVelocity(force);
-		
-		
-		
-		
+
 		[self schedule:@selector(tick:)];
 		
     }
@@ -249,9 +220,8 @@ CCSprite *ball;
 {
     if(isLeftBeingTouched) 
     {
-        [self.gl.swingChain runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:5],
-                                       [CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)],nil]];
-    chainBody->ApplyTorque(-2000.0f);
+		chainBody->ApplyTorque(-200.0f);
+		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
 
@@ -259,9 +229,8 @@ CCSprite *ball;
 {
     if(isRightBeingTouched) 
     {
-        [self.gl.swingChain runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:-5],
-                                       [CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)],nil]];
-    chainBody->ApplyTorque(2000.0f);
+        chainBody->ApplyTorque(200.0f);
+		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
 
