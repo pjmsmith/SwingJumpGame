@@ -94,59 +94,48 @@ CCSprite *ball;
 		pivotBodyShapeDef.SetAsBox(0.1f,.1f);
 		pivotBody->CreateShape(&pivotBodyShapeDef);
         
-        b2BodyDef bodyDef;
-        b2Body *body;
-        b2Body *link = pivotBody;
-        b2PolygonDef boxDef;
-        b2RevoluteJointDef revolute_joint;
-        for (int i = 1; i <= 10; i++) {
-            // rope segment
-            bodyDef.position.y=i;
-            boxDef.SetAsBox(0.1, 0.5);
-            boxDef.density=100;
-            boxDef.friction=0.5;
-            boxDef.restitution=0.2;
-            body = world->CreateBody(&bodyDef);
-            body->CreateShape(&boxDef);
-            // joint
-            revolute_joint.Initialize(&(*link), &(*body), *(new b2Vec2(8.5, i-0.5)));
-            world->CreateJoint(&revolute_joint);
-            body->SetMassFromShapes();
-            // saving the reference of the last placed link
-            link=body;
-        }
-        // final body
-        boxDef.SetAsBox(0.5,0.5);
-        boxDef.density=2;
-        boxDef.friction=0.5;
-        boxDef.restitution=0.2;
-        body=world->CreateBody(&bodyDef);
-        body->CreateShape(&boxDef);
-        revolute_joint.Initialize(&(*link), &(*body), *(new b2Vec2(8.5, 10.5)));
-        world->CreateJoint(&revolute_joint);
-        body->SetMassFromShapes();
-        
 		//Create chain body and shape
 		b2BodyDef chainBodyDef;
-		chainBodyDef.position.Set(7.5f,5.5f);
-		chainBody = world->CreateBody(&chainBodyDef);
-		b2CircleDef chainShapeDef;
-		chainShapeDef.radius = (2.0f/PTM_RATIO);
-		chainShapeDef.density =  10.0f;
-		chainShapeDef.friction = 0.5f;
-		chainShapeDef.restitution = 0.0f;
-		chainBody->CreateShape(&chainShapeDef);
-		chainBody->SetMassFromShapes();
-		chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
-		
-		b2RevoluteJointDef rj;
-		rj.Initialize(&(*chainBody), &(*pivotBody), pivotBody->GetPosition());
-		rj.motorSpeed = 0.0f;
-		rj.maxMotorTorque = 3.0f;
-		rj.enableMotor = true;
-		world->CreateJoint(&rj);
-		
-
+        b2CircleDef chainShapeDef;
+        b2RevoluteJointDef rj;
+        b2Body *link = pivotBody;
+        float yPos = 246.0f;
+        int numLinks = 25;
+        int i;
+		for(i = 0; i < numLinks; i++)
+        {
+            chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
+            chainBody = world->CreateBody(&chainBodyDef);
+            chainShapeDef.radius = (4.0f/PTM_RATIO);
+            chainShapeDef.density =  100.0f;
+            chainShapeDef.friction = 0.5f;
+            chainShapeDef.restitution = 0.0f;
+            chainBody->CreateShape(&chainShapeDef);
+            chainBody->SetMassFromShapes();
+            chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
+            
+            rj.Initialize(&(*chainBody), &(*link), link->GetPosition());
+            rj.motorSpeed = 0.0f;
+            rj.maxMotorTorque = 3.0f;
+            rj.enableMotor = true;
+            world->CreateJoint(&rj);
+            link = chainBody;
+        }
+        b2PolygonDef swingSeat;
+        chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
+        chainBody = world->CreateBody(&chainBodyDef);
+        swingSeat.SetAsBox(0.5f, 0.1f);
+        swingSeat.density =  300.0f;
+        swingSeat.friction = 0.5f;
+        swingSeat.restitution = 0.0f;
+        chainBody->CreateShape(&swingSeat);
+        chainBody->SetMassFromShapes();
+        chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
+        b2DistanceJointDef jointDef;
+        jointDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(), link->GetPosition());
+        jointDef.collideConnected = true;
+        world->CreateJoint(&jointDef);
+        
 		[self schedule:@selector(tick:)];
 		
     }
@@ -252,7 +241,7 @@ CCSprite *ball;
 {
     if(isLeftBeingTouched) 
     {
-		chainBody->ApplyTorque(-200.0f);
+		chainBody->ApplyForce(b2Vec2(-300.0f, 0.0f),chainBody->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
@@ -261,7 +250,7 @@ CCSprite *ball;
 {
     if(isRightBeingTouched) 
     {
-        chainBody->ApplyTorque(200.0f);
+		chainBody->ApplyForce(b2Vec2(300.0f, 0.0f),chainBody->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
