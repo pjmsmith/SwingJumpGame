@@ -112,6 +112,8 @@
 		4607DCF710F45FA4007BEA9F /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4607DCF410F45FA4007BEA9F /* SimpleAudioEngine.m */; };
 		4632A19D10F7F9E40048CE31 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4632A19C10F7F9E40048CE31 /* GLES-Render.mm */; };
 		469D3DC110F47838002541FC /* swingicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 469D3DC010F47838002541FC /* swingicon.png */; };
+		46A53CA710F93B0D00BABE05 /* Biped.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46A53CA310F93B0D00BABE05 /* Biped.cpp */; };
+		46A53CA810F93B0D00BABE05 /* BipedDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46A53CA510F93B0D00BABE05 /* BipedDef.cpp */; };
 		46C0C62210F486A000CE2AE1 /* MainMenuScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46C0C62110F486A000CE2AE1 /* MainMenuScene.mm */; };
 		46C0C63610F489E400CE2AE1 /* mainmenu_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C0C63510F489E400CE2AE1 /* mainmenu_bg.png */; };
 		46C0C65410F48FEB00CE2AE1 /* hz_t_menumusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 46C0C65310F48FEB00CE2AE1 /* hz_t_menumusic.mp3 */; };
@@ -421,6 +423,10 @@
 		4632A19C10F7F9E40048CE31 /* GLES-Render.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = SOURCE_ROOT; };
 		465F82C810F478580090BEB2 /* libcocos2d libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d libraries.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		469D3DC010F47838002541FC /* swingicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingicon.png; sourceTree = "<group>"; };
+		46A53CA310F93B0D00BABE05 /* Biped.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Biped.cpp; sourceTree = "<group>"; };
+		46A53CA410F93B0D00BABE05 /* Biped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Biped.h; sourceTree = "<group>"; };
+		46A53CA510F93B0D00BABE05 /* BipedDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BipedDef.cpp; sourceTree = "<group>"; };
+		46A53CA610F93B0D00BABE05 /* BipedDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BipedDef.h; sourceTree = "<group>"; };
 		46C0C5EA10F47C4E00CE2AE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46C0C62010F486A000CE2AE1 /* MainMenuScene.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainMenuScene.hh; sourceTree = "<group>"; };
 		46C0C62110F486A000CE2AE1 /* MainMenuScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainMenuScene.mm; sourceTree = "<group>"; };
@@ -619,6 +625,10 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				46A53CA310F93B0D00BABE05 /* Biped.cpp */,
+				46A53CA410F93B0D00BABE05 /* Biped.h */,
+				46A53CA510F93B0D00BABE05 /* BipedDef.cpp */,
+				46A53CA610F93B0D00BABE05 /* BipedDef.h */,
 				4632A19B10F7F9E40048CE31 /* GLES-Render.h */,
 				4632A19C10F7F9E40048CE31 /* GLES-Render.mm */,
 				46C0C98C10F57C1000CE2AE1 /* HelloWorldScene.h */,
@@ -1366,6 +1376,8 @@
 				46C0CD2D10F66CEF00CE2AE1 /* b2PulleyJoint.cpp in Sources */,
 				46C0CD2E10F66CEF00CE2AE1 /* b2RevoluteJoint.cpp in Sources */,
 				4632A19D10F7F9E40048CE31 /* GLES-Render.mm in Sources */,
+				46A53CA710F93B0D00BABE05 /* Biped.cpp in Sources */,
+				46A53CA810F93B0D00BABE05 /* BipedDef.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
