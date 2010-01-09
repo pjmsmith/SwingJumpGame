@@ -272,7 +272,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>17</integer>
+									<integer>14</integer>
 									<integer>11</integer>
 									<integer>0</integer>
 								</array>
@@ -315,7 +315,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameScene.mm</string>
+								<string>BipedDef.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GameScene.mm</string>
+										<string>BipedDef.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>46A53C6810F8504500BABE05</string>
+										<string>46A53DB210F946FD00BABE05</string>
 										<key>history</key>
 										<array>
 											<string>469D3DA510F46733002541FC</string>
@@ -375,12 +375,23 @@
 											<string>4632A41C10F83CC70048CE31</string>
 											<string>4632A4BC10F8482F0048CE31</string>
 											<string>4632A4C610F8488E0048CE31</string>
-											<string>4632A4CE10F8495B0048CE31</string>
 											<string>4632A4CF10F8495B0048CE31</string>
 											<string>46A53C3D10F84F6A00BABE05</string>
 											<string>46A53C3E10F84F6A00BABE05</string>
-											<string>46A53C6610F8504500BABE05</string>
-											<string>46A53C6710F8504500BABE05</string>
+											<string>46A53CCB10F93E6700BABE05</string>
+											<string>46A53D0F10F9416100BABE05</string>
+											<string>46A53D2610F9423F00BABE05</string>
+											<string>46A53D2710F9423F00BABE05</string>
+											<string>46A53D2810F9423F00BABE05</string>
+											<string>46A53D2910F9423F00BABE05</string>
+											<string>46A53D2B10F9423F00BABE05</string>
+											<string>46A53D4910F942E500BABE05</string>
+											<string>46A53D6610F943C300BABE05</string>
+											<string>46A53D6710F943C300BABE05</string>
+											<string>46A53DA410F946D000BABE05</string>
+											<string>46A53DB010F946FD00BABE05</string>
+											<string>46A53DB110F946FD00BABE05</string>
+											<string>46A53D8E10F945CB00BABE05</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -578,7 +589,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>46A53C6910F8504500BABE05</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>46A53C5410F84F9D00BABE05</string>
 		<string>46A53C4A10F84F6A00BABE05</string>
 		<string>1C78EAAD065D492600B07095</string>
@@ -603,12 +614,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameScene.mm</string>
+								<string>Biped.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -625,8 +638,6 @@
 							<string>386pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -710,8 +721,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {316, 203}}</string>
-											<string>{{316, 0}, {378, 203}}</string>
+											<string>{{0, 0}, {583, 361}}</string>
+											<string>{{583, 0}, {697, 361}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -726,8 +737,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {694, 203}}</string>
-											<string>{{0, 203}, {694, 178}}</string>
+											<string>{{0, 0}, {1280, 361}}</string>
+											<string>{{0, 361}, {1280, 316}}</string>
 										</array>
 									</dict>
 								</dict>
@@ -747,7 +758,7 @@
 								<key>DebugSTDIOWindowFrame</key>
 								<string>{{200, 200}, {500, 300}}</string>
 								<key>Frame</key>
-								<string>{{0, 0}, {694, 381}}</string>
+								<string>{{0, 0}, {1280, 677}}</string>
 								<key>PBXDebugSessionStackFrameViewKey</key>
 								<dict>
 									<key>DebugVariablesTableConfiguration</key>
@@ -757,24 +768,24 @@
 										<string>Value</string>
 										<real>85</real>
 										<string>Summary</string>
-										<real>148</real>
+										<real>467</real>
 									</array>
 									<key>Frame</key>
-									<string>{{316, 0}, {378, 203}}</string>
+									<string>{{583, 0}, {697, 361}}</string>
 									<key>RubberWindowFrame</key>
-									<string>288 267 694 422 0 0 1280 778 </string>
+									<string>0 60 1280 718 0 0 1280 778 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>288 267 694 422 0 0 1280 778 </string>
+								<string>0 60 1280 718 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
 							<key>Proportion</key>
-							<string>381pt</string>
+							<string>677pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>381pt</string>
+					<string>677pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -799,7 +810,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>288 267 694 422 0 0 1280 778 </string>
+			<string>0 60 1280 718 0 0 1280 778 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
@@ -826,7 +837,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string></string>
+										<string>Biped.cpp</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -884,8 +895,8 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>4632A11A10F7E1DD0048CE31</string>
-				<string>4632A11B10F7E1DD0048CE31</string>
+				<string>46A53D0210F9410200BABE05</string>
+				<string>46A53D0310F9410200BABE05</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
@@ -913,6 +924,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
