@@ -327,7 +327,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>4632A1F210F7FDEA0048CE31</string>
+										<string>4632A1FF10F7FF7A0048CE31</string>
 										<key>history</key>
 										<array>
 											<string>469D3DA510F46733002541FC</string>
@@ -572,7 +572,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>4632A1F310F7FDEA0048CE31</string>
+		<string>4632A20010F7FF7A0048CE31</string>
 		<string>4632A18D10F7F77A0048CE31</string>
 		<string>4632A17F10F7EF830048CE31</string>
 		<string>1C78EAAD065D492600B07095</string>
@@ -598,14 +598,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>b2Math.h</string>
+								<string>SwingJumpAppDelegate.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -622,6 +620,8 @@
 							<string>414pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
