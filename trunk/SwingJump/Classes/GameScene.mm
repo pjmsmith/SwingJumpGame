@@ -13,9 +13,7 @@
 #define PTM_RATIO 32
 
 b2World *world;
-b2Body* body;
-b2Body *chainBody;
-CCSprite *ball;
+b2Body* links[numLinks];
 
 @implementation GameScene
 - (id) init {
@@ -33,7 +31,6 @@ CCSprite *ball;
 @end
 
 @implementation GameLayer
-@synthesize swingChain;
 
 - (id) init {
     self = [super init];
@@ -48,7 +45,7 @@ CCSprite *ball;
 		
 		
 		//PHYSICS STARTS HERE
-		ball = [CCSprite spriteWithFile:@"ball.png"];
+		CCSprite *ball = [CCSprite spriteWithFile:@"ball.png"];
 		[ball setPosition:CGPointMake(150, 400)];
 		[self addChild:ball z:0];
         
@@ -86,61 +83,68 @@ CCSprite *ball;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
 		groundBody->CreateShape(&groundShapeDef);
 		
-		//Create pivot point for swing
-		b2BodyDef pivotBodyDef;
-		pivotBodyDef.position.Set(screenSize.width/PTM_RATIO/2, 247.0f/PTM_RATIO);
-		b2Body* pivotBody = world ->CreateBody(&pivotBodyDef);
-		b2PolygonDef pivotBodyShapeDef;
-		pivotBodyShapeDef.SetAsBox(0.1f,.1f);
-		pivotBody->CreateShape(&pivotBodyShapeDef);
-        
-		//Create chain body and shape
-		b2BodyDef chainBodyDef;
-        b2CircleDef chainShapeDef;
-        b2RevoluteJointDef rj;
-        b2Body *link = pivotBody;
-        float yPos = 246.0f;
-        int numLinks = 25;
-        int i;
-		for(i = 0; i < numLinks; i++)
-        {
-            chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
-            chainBody = world->CreateBody(&chainBodyDef);
-            chainShapeDef.radius = (4.0f/PTM_RATIO);
-            chainShapeDef.density =  100.0f;
-            chainShapeDef.friction = 0.5f;
-            chainShapeDef.restitution = 0.0f;
-            chainBody->CreateShape(&chainShapeDef);
-            chainBody->SetMassFromShapes();
-            chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
-            
-            rj.Initialize(&(*chainBody), &(*link), link->GetPosition());
-            rj.motorSpeed = 0.0f;
-            rj.maxMotorTorque = 3.0f;
-            rj.enableMotor = true;
-            world->CreateJoint(&rj);
-            link = chainBody;
-        }
-        b2PolygonDef swingSeat;
-        chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
-        chainBody = world->CreateBody(&chainBodyDef);
-        swingSeat.SetAsBox(0.5f, 0.1f);
-        swingSeat.density =  300.0f;
-        swingSeat.friction = 0.5f;
-        swingSeat.restitution = 0.0f;
-        chainBody->CreateShape(&swingSeat);
-        chainBody->SetMassFromShapes();
-        chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
-        b2DistanceJointDef jointDef;
-        jointDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(), link->GetPosition());
-        jointDef.collideConnected = true;
-        world->CreateJoint(&jointDef);
+        [self createSwingChain:246.0f];
         
 		[self schedule:@selector(tick:)];
 		
     }
     return self;
 }
+-(void) createSwingChain:(float)yPos
+{
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    //Create pivot point for swing
+    b2BodyDef pivotBodyDef;
+    pivotBodyDef.position.Set(screenSize.width/PTM_RATIO/2, 247.0f/PTM_RATIO);
+    b2Body* pivotBody = world ->CreateBody(&pivotBodyDef);
+    b2PolygonDef pivotBodyShapeDef;
+    pivotBodyShapeDef.SetAsBox(0.1f,.1f);
+    pivotBody->CreateShape(&pivotBodyShapeDef);
+    
+    b2Body *chainBody;
+    //Create chain body and shape
+    b2BodyDef chainBodyDef;
+    b2CircleDef chainShapeDef;
+    b2RevoluteJointDef rj;
+    b2Body *link = pivotBody;
+    int i;
+    for(i = 0; i < numLinks; i++)
+    {
+        chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
+        chainBody = world->CreateBody(&chainBodyDef);
+        chainShapeDef.radius = (4.0f/PTM_RATIO);
+        chainShapeDef.density =  100.0f;
+        chainShapeDef.friction = 0.5f;
+        chainShapeDef.restitution = 0.0f;
+        chainBody->CreateShape(&chainShapeDef);
+        chainBody->SetMassFromShapes();
+        chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
+        
+        rj.Initialize(&(*chainBody), &(*link), link->GetPosition());
+        rj.motorSpeed = 0.0f;
+        rj.maxMotorTorque = 3.0f;
+        rj.enableMotor = true;
+        world->CreateJoint(&rj);
+        link = chainBody;
+        links[i] = link;
+    }
+    b2PolygonDef swingSeat;
+    chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
+    chainBody = world->CreateBody(&chainBodyDef);
+    swingSeat.SetAsBox(0.5f, 0.1f);
+    swingSeat.density =  300.0f;
+    swingSeat.friction = 0.5f;
+    swingSeat.restitution = 0.0f;
+    chainBody->CreateShape(&swingSeat);
+    chainBody->SetMassFromShapes();
+    chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
+    links[numLinks-1] = chainBody;
+    b2DistanceJointDef jointDef;
+    jointDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(), link->GetPosition());
+    jointDef.collideConnected = true;
+    world->CreateJoint(&jointDef);   
+}
+
 -(void) draw{
 	[super draw];
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -241,7 +245,7 @@ CCSprite *ball;
 {
     if(isLeftBeingTouched) 
     {
-		chainBody->ApplyForce(b2Vec2(-300.0f, 0.0f),chainBody->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(-300.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
@@ -250,7 +254,7 @@ CCSprite *ball;
 {
     if(isRightBeingTouched) 
     {
-		chainBody->ApplyForce(b2Vec2(300.0f, 0.0f),chainBody->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(300.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
