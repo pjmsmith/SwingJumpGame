@@ -1,12 +1,15 @@
 #include "Biped.h"
 #include "BipedDef.h"
 
+
+#define PI 3.14159
+
+BipedDef* def = new BipedDef();
+b2BodyDef bd;
+
 Biped::Biped(b2World* w, const b2Vec2& position)				
 {
 	m_world = w;
-
-	BipedDef* def = new BipedDef();
-	b2BodyDef bd;
 
 	// create body parts
 	bd = def->LFootDef;
@@ -164,7 +167,45 @@ Biped::Biped(b2World* w, const b2Vec2& position)
 	RWrist		= (b2RevoluteJoint*)w->CreateJoint(&(def->RWristDef));
 }
 
-
+void Biped::SetSittingPosition()
+{
+	//LAnkle->SetLimits(1.0f,1.0f);
+	//RAnkle->SetLimits(1.0f,1.0f);
+	//LKnee->SetLimits(1.0f,1.0f);
+	//RKnee->SetLimits(1.0f,1.0f);
+	LHip->SetLimits(-45*PI/100,-45*PI/100);
+	RHip->SetLimits(-45*PI/100,-45*PI/100);
+	LowerAbs->SetLimits(0.0f,0.0f);
+	UpperAbs->SetLimits(0.0f,0.0f);
+	LowerNeck->SetLimits(0.0f,0.0f);
+	UpperNeck->SetLimits(0.0f,0.0f);
+	//LShoulder->SetLimits(0.0f,0.0f);
+	//RShoulder->SetLimits(0.0f,0.0f);
+	//LElbow->SetLimits(1.0f,1.0f);
+	//RElbow->SetLimits(1.0f,1.0f);
+	//LWrist->SetLimits(1.0f,1.0f);
+	//RWrist->SetLimits(1.0f,1.0f);	
+	
+	LAnkle->EnableMotor(false);
+	RAnkle->EnableMotor(false);
+	LKnee->EnableMotor(false);
+	RKnee->EnableMotor(false);
+	LHip->EnableMotor(false);
+	RHip->EnableMotor(false);
+	LowerAbs->EnableMotor(false);
+	UpperAbs->EnableMotor(false);
+	LowerNeck->EnableMotor(false);
+	UpperNeck->EnableMotor(false);
+	LShoulder->EnableMotor(false);
+	RShoulder->EnableMotor(false);
+	LElbow->EnableMotor(false);
+	RElbow->EnableMotor(false);
+	LWrist->EnableMotor(false);
+	RWrist->EnableMotor(false);	
+	
+	
+	
+}
 Biped::~Biped(void)
 {
 	m_world->DestroyBody(LFoot);

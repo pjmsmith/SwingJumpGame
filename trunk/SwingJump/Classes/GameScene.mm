@@ -82,10 +82,12 @@ b2Body* groundBody;
 		b2PolygonDef groundShapeDef;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
 		groundBody->CreateShape(&groundShapeDef);
-        
+		
         [self createSwingChain:246.0f];
-        
+		
 		[self schedule:@selector(tick:)];
+		
+		
 		
     }
     return self;
@@ -117,6 +119,7 @@ b2Body* groundBody;
         chainShapeDef.density =  100.0f;
         chainShapeDef.friction = 0.5f;
         chainShapeDef.restitution = 0.0f;
+		chainShapeDef.filter.categoryBits = 0x0000;
         chainBody->CreateShape(&chainShapeDef);
         chainBody->SetMassFromShapes();
         chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
@@ -136,6 +139,7 @@ b2Body* groundBody;
     swingSeat.density =  100.0f;
     swingSeat.friction = 0.5f;
     swingSeat.restitution = 0.0f;
+	//swingSeat.filter.categoryBits = 0x0000;
     chainBody->CreateShape(&swingSeat);
     chainBody->SetMassFromShapes();
     chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
@@ -146,9 +150,17 @@ b2Body* groundBody;
     world->CreateJoint(&jointDef);   
     ragdoll = new Biped(world, b2Vec2(460.0f/PTM_RATIO/2, 130.0f/PTM_RATIO));
     b2RevoluteJointDef rj2;         
-    rj2.Initialize(ragdoll->LHand, &(*chainBody), link->GetPosition());
-    world->CreateJoint(&rj2);
-    
+    rj2.Initialize(ragdoll->LHand, &(*links[21]), links[21]->GetPosition());
+	world->CreateJoint(&rj2);
+	rj2.Initialize(ragdoll->RHand, &(*links[21]), links[21]->GetPosition());
+	world->CreateJoint(&rj2);
+	b2Vec2 seatPos = links[numLinks-1]->GetPosition();
+	seatPos.x = seatPos.x-.015f;
+	rj2.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), seatPos);
+	world->CreateJoint(&rj2);
+	rj2.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), seatPos);
+	world->CreateJoint(&rj2);
+    ragdoll->SetSittingPosition();
 }
 
 -(void) draw{
@@ -261,7 +273,7 @@ b2Body* groundBody;
 {
     if(isLeftBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(-30000.0f, 0.0f),links[numLinks-1]->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(-3000.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
@@ -270,7 +282,7 @@ b2Body* groundBody;
 {
     if(isRightBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(30000.0f, 0.0f),links[numLinks-1]->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(3000.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
