@@ -291,6 +291,8 @@ b2Body* groundBody;
 
 
 @implementation HUDLayer
+@synthesize scoreDisplay;
+
 - (id) init {
     self = [super init];
     if (self != nil) {
@@ -303,6 +305,9 @@ b2Body* groundBody;
         CCMenu *menu = [CCMenu menuWithItems:start, nil];
         [menu setPosition:ccp(440, 10)];
         [self addChild:menu];
+        scoreDisplay = [[CCLabelAtlas labelAtlasWithString:@"00004958" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
+        [scoreDisplay setPosition:ccp(320, 290)];
+        [self addChild:scoreDisplay];
     }
     
     return self;
