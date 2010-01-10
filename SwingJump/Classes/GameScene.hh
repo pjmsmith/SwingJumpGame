@@ -38,6 +38,10 @@
 
 @end
 
-@interface HUDLayer : CCLayer {}
+@interface HUDLayer : CCLayer {
+    CCLabelAtlas *scoreDisplay;
+}
+@property (nonatomic, retain) CCLabelAtlas *scoreDisplay;
+
 -(void)gameSceneBtn: (id)sender;
 @end
