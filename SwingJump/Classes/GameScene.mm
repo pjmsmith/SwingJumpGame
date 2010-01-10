@@ -14,6 +14,11 @@
 
 b2World *world;
 b2Body* links[numLinks];
+float camX;
+float camY;
+Biped* ragdoll;
+b2Body *chainBody;
+b2Body* groundBody;
 
 @implementation GameScene
 - (id) init {
@@ -43,11 +48,6 @@ b2Body* links[numLinks];
         //[swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
         //[self addChild:swingChain z:1];
 		
-		
-		//PHYSICS STARTS HERE
-		CCSprite *ball = [CCSprite spriteWithFile:@"ball.png"];
-		[ball setPosition:CGPointMake(150, 400)];
-		[self addChild:ball z:0];
         
 		//Create a world
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -78,7 +78,7 @@ b2Body* links[numLinks];
 		//Create a ground box
 		b2BodyDef groundBodyDef;
 		groundBodyDef.position.Set(screenSize.width/PTM_RATIO/2, 1.3f);
-		b2Body* groundBody = world->CreateBody(&groundBodyDef);
+		groundBody = world->CreateBody(&groundBodyDef);
 		b2PolygonDef groundShapeDef;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
 		groundBody->CreateShape(&groundShapeDef);
@@ -102,7 +102,7 @@ b2Body* links[numLinks];
     pivotBodyShapeDef.SetAsBox(0.1f,.1f);
     pivotBody->CreateShape(&pivotBodyShapeDef);
     
-    b2Body *chainBody;
+
     //Create chain body and shape
     b2BodyDef chainBodyDef;
     b2CircleDef chainShapeDef;
@@ -144,9 +144,9 @@ b2Body* links[numLinks];
     jointDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(), link->GetPosition());
     jointDef.collideConnected = true;
     world->CreateJoint(&jointDef);   
-    Biped* b = new Biped(world, b2Vec2(460.0f/PTM_RATIO/2, 130.0f/PTM_RATIO));
+    ragdoll = new Biped(world, b2Vec2(460.0f/PTM_RATIO/2, 130.0f/PTM_RATIO));
     b2RevoluteJointDef rj2;         
-    rj2.Initialize(b->LHand, &(*chainBody), link->GetPosition());
+    rj2.Initialize(ragdoll->LHand, &(*chainBody), link->GetPosition());
     world->CreateJoint(&rj2);
     
 }
@@ -168,6 +168,15 @@ b2Body* links[numLinks];
 			ballData.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
 		}
 	}
+	b2Vec2 camPos;
+	camPos = links[numLinks-1]->GetPosition();
+	camX = camPos.x;
+	camY = camPos.y;
+	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
+	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:500];
+	b2XForm groundPos = groundBody->GetXForm();
+
+	groundBody->SetXForm(b2Vec2((camX*PTM_RATIO-80.0f)/PTM_RATIO,groundPos.position.y), 0.0f);
 }
 
 @end
@@ -216,6 +225,7 @@ b2Body* links[numLinks];
                 isLeftBeingTouched = YES;
                 [leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
                 [self performSelectorInBackground:@selector(rotateChainLeft) withObject:nil];
+			
             }
         }
         if (CGRectContainsPoint([rightArrow boundingBox], location)) {
@@ -251,7 +261,7 @@ b2Body* links[numLinks];
 {
     if(isLeftBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(-300.0f, 0.0f),links[numLinks-1]->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(-30000.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
@@ -260,7 +270,7 @@ b2Body* links[numLinks];
 {
     if(isRightBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(300.0f, 0.0f),links[numLinks-1]->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(30000.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
