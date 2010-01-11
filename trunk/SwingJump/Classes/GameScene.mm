@@ -178,7 +178,7 @@ b2Joint *headJoint;
     world->CreateJoint(&prismaticJoint);  
     
     ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
-  
+
 	jointDef.Initialize(ragdoll->RHand, &(*links[13]), ragdoll->RHand->GetPosition(), links[13]->GetPosition());
     jointDef.collideConnected = false;
 	jointDef.length = 0.0f;
@@ -233,6 +233,9 @@ b2Joint *headJoint;
     headJoint = world->CreateJoint(&jointDef); 
     
     ragdoll->SetSittingLimits();
+	
+	//b2ContactListener *contactListener;
+	//world->SetContactListener(contactListener);
 }
 
 -(void) draw{
@@ -290,7 +293,7 @@ b2Joint *headJoint;
         [rightArrow setPosition:ccp(430,160)];
         [rightArrow setOpacity:128];
         [self addChild:rightArrow z:1];
-		jumpButton = [CCSprite spriteWithFile:@"blueBtn.png"];
+		jumpButton = [CCSprite spriteWithFile:@"jumpBtn.png"];
 		[jumpButton setPosition:ccp(240,270)];
         [jumpButton setOpacity:128];
         [self addChild:jumpButton z:1];
@@ -363,7 +366,7 @@ b2Joint *headJoint;
 {
     if(isLeftBeingTouched) 
     {
-		ragdoll->Chest->ApplyForce(b2Vec2(-150.0f, 0.0f),ragdoll->Chest->GetPosition());
+		ragdoll->Chest->ApplyForce(b2Vec2(-225.0f, 0.0f),ragdoll->Chest->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
@@ -372,7 +375,7 @@ b2Joint *headJoint;
 {
     if(isRightBeingTouched) 
     {
-		ragdoll->Chest->ApplyForce(b2Vec2(150.0f, 0.0f),ragdoll->Chest->GetPosition());
+		ragdoll->Chest->ApplyForce(b2Vec2(225.0f, 0.0f),ragdoll->Chest->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
@@ -414,6 +417,7 @@ b2Joint *headJoint;
         scoreDisplay = [[CCLabelAtlas labelAtlasWithString:@"00004958" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
         [scoreDisplay setPosition:ccp(320, 290)];
         [self addChild:scoreDisplay];
+		[self schedule:@selector(tick:)];
     }
     
     return self;
@@ -421,11 +425,15 @@ b2Joint *headJoint;
 
 -(void)gameSceneBtn: (id)sender {
     MainMenuScene * ms = [MainMenuScene node];
-	 
 	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
-
 }
 
 
-
+-(void)tick:(ccTime) dt{
+	b2Vec2 headPos = ragdoll->Head->GetPosition();
+	NSString *strHeadPos = [NSString stringWithFormat:@"%8.0f",headPos.x];
+	//scoreDisplay = [[CCLabelAtlas labelAtlasWithString:strHeadPos charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
+	[scoreDisplay setString:strHeadPos];
+	[scoreDisplay updateAtlasValues];
+}
 @end
