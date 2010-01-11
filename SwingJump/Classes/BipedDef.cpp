@@ -6,10 +6,10 @@ const float32 k_scale = 1.8f;
 
 BipedDef::BipedDef()
 {
-	SetMotorTorque(2.0f);
+	SetMotorTorque(10.0f);
 	SetMotorSpeed(0.0f);
 	SetDensity(10.0f);
-	SetRestitution(0.4f);
+	SetRestitution(0.2f);
 	SetLinearDamping(0.0f);
 	SetAngularDamping(0.005f);
 	SetGroupIndex(--count);
@@ -20,8 +20,11 @@ BipedDef::BipedDef()
 	DefaultPositions();
 	DefaultJoints();
 
-	LFootPoly.friction = RFootPoly.friction = 0.85f;
-	HeadCirc.friction = 1.0f;
+	LFootPoly.friction = RFootPoly.friction = 300.0f;
+	HeadCirc.friction = 300.0f;
+	ChestPoly.friction = 200.0f;
+	StomachPoly.friction = 200.0f;
+
 }
 
 void BipedDef::IsFast(bool b)

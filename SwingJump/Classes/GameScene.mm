@@ -208,12 +208,12 @@ b2Joint *headJoint;
 
     jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), lseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 0.02f;
+	jointDef.length = 0.01f;
     assJoint1 = world->CreateJoint(&jointDef);
 	
 	jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), rseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 0.02f;
+	jointDef.length = 0.01f;
 	assJoint2 = world->CreateJoint(&jointDef);
     
     /*jointDef.Initialize(ragdoll->LThigh, &(*links[numLinks-1]), ragdoll->LThigh->GetPosition(), seatPos);
@@ -366,7 +366,7 @@ b2Joint *headJoint;
 {
     if(isLeftBeingTouched) 
     {
-		ragdoll->Chest->ApplyForce(b2Vec2(-225.0f, 0.0f),ragdoll->Chest->GetPosition());
+		ragdoll->Chest->ApplyForce(b2Vec2(-275.0f, 0.0f),ragdoll->Chest->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
@@ -375,7 +375,7 @@ b2Joint *headJoint;
 {
     if(isRightBeingTouched) 
     {
-		ragdoll->Chest->ApplyForce(b2Vec2(225.0f, 0.0f),ragdoll->Chest->GetPosition());
+		ragdoll->Chest->ApplyForce(b2Vec2(275.0f, 0.0f),ragdoll->Chest->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
