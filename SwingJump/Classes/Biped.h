@@ -19,7 +19,8 @@ public:
 	b2RevoluteJoint		*LAnkle, *RAnkle, *LKnee, *RKnee, *LHip, *RHip, 
 						*LowerAbs, *UpperAbs, *LowerNeck, *UpperNeck,
 						*LShoulder, *RShoulder, *LElbow, *RElbow, *LWrist, *RWrist;
-	void SetSittingPosition();
+	void SetSittingLimits();
+	void SetDefaultLimits();
 };
 
 #endif

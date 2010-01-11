@@ -26,15 +26,19 @@
 @interface ControlLayer : CCLayer {
     CCSprite *leftArrow;
     CCSprite *rightArrow;
+	CCSprite *jumpButton;
     GameLayer *gl;
     BOOL isRightBeingTouched;
     BOOL isLeftBeingTouched;
+	BOOL hasJumped;
 }
 @property (nonatomic, retain) CCSprite *leftArrow;
 @property (nonatomic, retain) CCSprite *rightArrow;
+@property (nonatomic, retain) CCSprite *jumpButton;
 @property (nonatomic, retain) GameLayer *gl;
 @property (nonatomic) BOOL isRightBeingTouched;
 @property (nonatomic) BOOL isLeftBeingTouched;
+@property (nonatomic) BOOL hasJumped;
 
 @end
 

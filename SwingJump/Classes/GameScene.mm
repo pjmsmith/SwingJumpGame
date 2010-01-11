@@ -19,6 +19,13 @@ float camY;
 Biped* ragdoll;
 b2Body *chainBody;
 b2Body* groundBody;
+b2DistanceJointDef jointDef;
+b2Joint *assJoint1;
+b2Joint *assJoint2;
+b2Joint *handJoint1;
+b2Joint *handJoint2;
+b2Joint *headJoint;
+
 
 @implementation GameScene
 - (id) init {
@@ -53,8 +60,8 @@ b2Body* groundBody;
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		b2AABB worldAABB;
 		float borderSize = 96/PTM_RATIO;
-		worldAABB.lowerBound.Set(-borderSize, -borderSize);
-		worldAABB.upperBound.Set(screenSize.width/PTM_RATIO+borderSize, screenSize.height/PTM_RATIO+borderSize);
+		worldAABB.lowerBound.Set(-10*borderSize, -10*borderSize);
+		worldAABB.upperBound.Set(10*screenSize.width/PTM_RATIO+borderSize, 10*screenSize.height/PTM_RATIO+borderSize);
 		b2Vec2 gravity(0.0f, -10.0f);
 		bool doSleep = true;
 		world = new b2World(worldAABB, gravity, doSleep);
@@ -115,7 +122,7 @@ b2Body* groundBody;
     {
         chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
         chainBody = world->CreateBody(&chainBodyDef);
-        chainShapeDef.radius = (4.0f/PTM_RATIO);
+        chainShapeDef.radius = (2.0f/PTM_RATIO);
         chainShapeDef.density =  100.0f;
         chainShapeDef.friction = 0.5f;
         chainShapeDef.restitution = 0.0f;
@@ -135,18 +142,17 @@ b2Body* groundBody;
     b2PolygonDef swingSeat;
     chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
     chainBody = world->CreateBody(&chainBodyDef);
-    swingSeat.SetAsBox(0.5f, 0.1f);
+    swingSeat.SetAsBox(0.3f, 0.1f);
     swingSeat.density =  100.0f;
     swingSeat.friction = 0.5f;
     swingSeat.restitution = 0.0f;
 	//swingSeat.filter.categoryBits = 0x0000;
     chainBody->CreateShape(&swingSeat);
     chainBody->SetMassFromShapes();
-    chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
+    //chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
     links[numLinks-1] = chainBody;
     
     b2RevoluteJointDef revDef;
-    b2DistanceJointDef jointDef;
     b2PrismaticJointDef prismaticJoint;
     revDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition());
     revDef.lowerAngle= -0.125f * b2_pi;
@@ -171,29 +177,62 @@ b2Body* groundBody;
     prismaticJoint.Initialize(&(*chainBody), &(*links[0]), stabilizerR, worldAxisR);
     world->CreateJoint(&prismaticJoint);  
     
-    ragdoll = new Biped(world, b2Vec2(460.0f/PTM_RATIO/2, 130.0f/PTM_RATIO));
-    
-    jointDef.Initialize(ragdoll->RHand, &(*links[10]), ragdoll->RHand->GetPosition(), links[10]->GetPosition());
-    //jointDef.collideConnected = true;
-    world->CreateJoint(&jointDef);  
+    ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
+  
+	jointDef.Initialize(ragdoll->RHand, &(*links[13]), ragdoll->RHand->GetPosition(), links[13]->GetPosition());
+    jointDef.collideConnected = false;
+	jointDef.length = 0.0f;
+	jointDef.dampingRatio = 0.7f;
+	jointDef.frequencyHz = 5.0f;
+	handJoint1 = world->CreateJoint(&jointDef);  
 	
-    jointDef.Initialize(ragdoll->LHand, &(*links[10]), ragdoll->LHand->GetPosition(), links[10]->GetPosition());
-    //jointDef.collideConnected = true;
-    world->CreateJoint(&jointDef); 
+    jointDef.Initialize(ragdoll->LHand, &(*links[14]), ragdoll->LHand->GetPosition(), links[14]->GetPosition());
+    jointDef.collideConnected = false;
+	jointDef.length = 0.0f;
+	jointDef.dampingRatio = 0.7f;
+	jointDef.frequencyHz = 5.0f;
+    handJoint2 = world->CreateJoint(&jointDef); 
+	
+	jointDef.dampingRatio = 0.0f;
+	jointDef.frequencyHz = 0.0f;
 	
     b2Vec2 seatPos = links[numLinks-1]->GetPosition();
-	/*seatPos.x = seatPos.x-.015f;
+	b2Vec2 rseatPos = seatPos;
+	b2Vec2 lseatPos = seatPos;
+	lseatPos.x = seatPos.x - 0.5f;
+	rseatPos.x = seatPos.x + 0.5f;
+	seatPos.x = seatPos.x-.2f;
     seatPos.y = seatPos.y+.01f;
+	
+	
 
-    jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), seatPos);
-    jointDef.collideConnected = true;
-    world->CreateJoint(&jointDef);
+    jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), lseatPos);
+    jointDef.collideConnected = false;
+	jointDef.length = 0.02f;
+    assJoint1 = world->CreateJoint(&jointDef);
+	
+	jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), rseatPos);
+    jointDef.collideConnected = false;
+	jointDef.length = 0.02f;
+	assJoint2 = world->CreateJoint(&jointDef);
     
     /*jointDef.Initialize(ragdoll->LThigh, &(*links[numLinks-1]), ragdoll->LThigh->GetPosition(), seatPos);
     jointDef.collideConnected = true;
-    world->CreateJoint(&jointDef); */
+	jointDef.length = 0.2f;
+    world->CreateJoint(&jointDef); 
+	*/
+	/*
+	jointDef.Initialize(ragdoll->Chest, &(*links[14]), ragdoll->Chest->GetPosition(), links[14]->GetPosition() );
+    jointDef.collideConnected = true;
+	jointDef.length = 1.2f;
+    world->CreateJoint(&jointDef); 
+	*/
+	jointDef.Initialize(ragdoll->Head, &(*links[0]), ragdoll->Head->GetPosition(), links[0]->GetPosition() );
+    jointDef.collideConnected = true;
+	jointDef.length = 2.2f;
+    headJoint = world->CreateJoint(&jointDef); 
     
-    ragdoll->SetSittingPosition();
+    ragdoll->SetSittingLimits();
 }
 
 -(void) draw{
@@ -214,7 +253,7 @@ b2Body* groundBody;
 		}
 	}
 	b2Vec2 camPos;
-	camPos = links[numLinks-1]->GetPosition();
+	camPos = ragdoll->Head->GetPosition();
 	camX = camPos.x;
 	camY = camPos.y;
 	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
@@ -229,9 +268,11 @@ b2Body* groundBody;
 @implementation ControlLayer
 @synthesize leftArrow;
 @synthesize rightArrow;
+@synthesize jumpButton;
 @synthesize gl;
 @synthesize isRightBeingTouched;
 @synthesize isLeftBeingTouched;
+@synthesize hasJumped;
 
 - (id) init {
     self = [super init];
@@ -239,6 +280,7 @@ b2Body* groundBody;
         self.isTouchEnabled = YES;
         isRightBeingTouched = NO;
         isLeftBeingTouched = NO;
+		hasJumped = NO;
         leftArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
         [leftArrow setPosition:ccp(50,160)];
         [leftArrow setOpacity:128];
@@ -248,9 +290,13 @@ b2Body* groundBody;
         [rightArrow setPosition:ccp(430,160)];
         [rightArrow setOpacity:128];
         [self addChild:rightArrow z:1];
+		jumpButton = [CCSprite spriteWithFile:@"blueBtn.png"];
+		[jumpButton setPosition:ccp(240,270)];
+        [jumpButton setOpacity:128];
+        [self addChild:jumpButton z:1];
         gl = [GameLayer node];
         [self addChild:gl z:0]; //added as a child so touchesEnded can call a function contained in GameLayer
-        
+        //gl = [GameLayer node];
     }
     return self;
 }
@@ -265,7 +311,7 @@ b2Body* groundBody;
         
 		if (CGRectContainsPoint([leftArrow boundingBox], location)) {
             //NSLog(@"Left touched");
-            if(!isRightBeingTouched)
+            if(!isRightBeingTouched && !hasJumped)
             {
                 isLeftBeingTouched = YES;
                 [leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
@@ -273,9 +319,20 @@ b2Body* groundBody;
 			
             }
         }
+		if (CGRectContainsPoint([jumpButton boundingBox], location)) {
+            //NSLog(@"Left touched");
+			if(!hasJumped)
+			{
+				hasJumped = YES;
+				[jumpButton runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
+				[leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
+				[rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
+				[self performSelectorInBackground:@selector(launch) withObject:nil];
+			}
+		}
         if (CGRectContainsPoint([rightArrow boundingBox], location)) {
             //NSLog(@"Right touched");
-            if(!isLeftBeingTouched)
+            if(!isLeftBeingTouched && !hasJumped)
             {
                 isRightBeingTouched = YES;
                 [rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
@@ -306,7 +363,7 @@ b2Body* groundBody;
 {
     if(isLeftBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(-3000.0f, 0.0f),links[numLinks-1]->GetPosition());
+		ragdoll->Chest->ApplyForce(b2Vec2(-150.0f, 0.0f),ragdoll->Chest->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	}    
 }
@@ -315,9 +372,24 @@ b2Body* groundBody;
 {
     if(isRightBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(3000.0f, 0.0f),links[numLinks-1]->GetPosition());
+		ragdoll->Chest->ApplyForce(b2Vec2(150.0f, 0.0f),ragdoll->Chest->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
+}
+-(void)launch{
+    //MainMenuScene * ms = [MainMenuScene node];
+	//[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
+	ragdoll->SetDefaultLimits();
+	world->DestroyJoint(headJoint);
+	world->DestroyJoint(handJoint1);
+	world->DestroyJoint(handJoint2);
+	world->DestroyJoint(assJoint1);
+	world->DestroyJoint(assJoint2);
+	b2Vec2 vel;
+	vel = links[numLinks-1]->GetLinearVelocity();
+	vel.x = 50*vel.x;
+	vel.y = 50*vel.y;
+	ragdoll->Chest->SetLinearVelocity(vel);
 }
 
 @end
@@ -349,7 +421,11 @@ b2Body* groundBody;
 
 -(void)gameSceneBtn: (id)sender {
     MainMenuScene * ms = [MainMenuScene node];
+	 
 	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
+
 }
+
+
 
 @end
