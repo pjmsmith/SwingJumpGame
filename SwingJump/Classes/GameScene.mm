@@ -144,22 +144,55 @@ b2Body* groundBody;
     chainBody->SetMassFromShapes();
     chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
     links[numLinks-1] = chainBody;
+    
+    b2RevoluteJointDef revDef;
     b2DistanceJointDef jointDef;
-    jointDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(), link->GetPosition());
-    jointDef.collideConnected = true;
-    world->CreateJoint(&jointDef);   
+    b2PrismaticJointDef prismaticJoint;
+    revDef.Initialize(&(*chainBody), &(*link), chainBody->GetPosition());
+    revDef.lowerAngle= -0.125f * b2_pi;
+    revDef.upperAngle= 0.125f * b2_pi;
+    revDef.enableLimit = true;
+    world->CreateJoint(&revDef); 
+    
+    b2Vec2 stabilizerL = chainBody->GetPosition();
+    stabilizerL.x = stabilizerL.x-0.015f;
+    b2Vec2 stabilizerR = chainBody->GetPosition();
+    stabilizerR.x = stabilizerR.x+0.015f;
+    
+    b2Vec2 worldAxisL(-0.015f, 1.0f);
+    b2Vec2 worldAxisR(0.015f, 1.0f);
+
+    prismaticJoint.Initialize(&(*chainBody), &(*links[0]), stabilizerL, worldAxisL);
+    prismaticJoint.collideConnected = true;
+    prismaticJoint.lowerTranslation = -15.0f;
+    prismaticJoint.upperTranslation = 0.5f;
+    prismaticJoint.enableLimit = true;
+    world->CreateJoint(&prismaticJoint);  
+    prismaticJoint.Initialize(&(*chainBody), &(*links[0]), stabilizerR, worldAxisR);
+    world->CreateJoint(&prismaticJoint);  
+    
     ragdoll = new Biped(world, b2Vec2(460.0f/PTM_RATIO/2, 130.0f/PTM_RATIO));
-    b2RevoluteJointDef rj2;         
-    rj2.Initialize(ragdoll->LHand, &(*links[21]), links[21]->GetPosition());
-	world->CreateJoint(&rj2);
-	rj2.Initialize(ragdoll->RHand, &(*links[21]), links[21]->GetPosition());
-	world->CreateJoint(&rj2);
-	b2Vec2 seatPos = links[numLinks-1]->GetPosition();
-	seatPos.x = seatPos.x-.015f;
-	rj2.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), seatPos);
-	world->CreateJoint(&rj2);
-	rj2.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), seatPos);
-	world->CreateJoint(&rj2);
+    
+    jointDef.Initialize(ragdoll->RHand, &(*links[10]), ragdoll->RHand->GetPosition(), links[10]->GetPosition());
+    //jointDef.collideConnected = true;
+    world->CreateJoint(&jointDef);  
+	
+    jointDef.Initialize(ragdoll->LHand, &(*links[10]), ragdoll->LHand->GetPosition(), links[10]->GetPosition());
+    //jointDef.collideConnected = true;
+    world->CreateJoint(&jointDef); 
+	
+    b2Vec2 seatPos = links[numLinks-1]->GetPosition();
+	/*seatPos.x = seatPos.x-.015f;
+    seatPos.y = seatPos.y+.01f;
+
+    jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), seatPos);
+    jointDef.collideConnected = true;
+    world->CreateJoint(&jointDef);
+    
+    /*jointDef.Initialize(ragdoll->LThigh, &(*links[numLinks-1]), ragdoll->LThigh->GetPosition(), seatPos);
+    jointDef.collideConnected = true;
+    world->CreateJoint(&jointDef); */
+    
     ragdoll->SetSittingPosition();
 }
 
@@ -288,6 +321,7 @@ b2Body* groundBody;
 }
 
 @end
+
 
 
 @implementation HUDLayer
