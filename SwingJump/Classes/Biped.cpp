@@ -179,8 +179,8 @@ void Biped::SetSittingLimits()
 	UpperAbs->SetLimits(0.0f,0.0f);
 	LowerNeck->SetLimits(0.0f,0.0f);
 	UpperNeck->SetLimits(0.0f,0.0f);
-	LShoulder->SetLimits(1.6f,1.6f);
-	RShoulder->SetLimits(1.6f,1.6f);
+	LShoulder->SetLimits(-20.0*PI/180.0f, 10.0*PI/180.0f);
+	RShoulder->SetLimits(-20.0*PI/180.0f, 10.0*PI/180.0f);
 	LElbow->SetLimits(-1.6f,-1.6f);
 	RElbow->SetLimits(-1.6f,-1.6f);
 	LWrist->SetLimits(-1.0f,-1.0f);

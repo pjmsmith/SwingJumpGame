@@ -48,7 +48,8 @@ b2Joint *headJoint;
     self = [super init];
     if (self != nil) {
         CCSprite *swingSet = [CCSprite spriteWithFile:@"swingset_supports.png"];
-        [swingSet setPosition:ccp(240,160)];
+        [swingSet setScaleY:1.6];
+        [swingSet setPosition:ccp(240,210)];
         [self addChild:swingSet z:4];
         //swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
         //[swingChain setAnchorPoint:ccp(0.5,1)];
@@ -90,7 +91,7 @@ b2Joint *headJoint;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
 		groundBody->CreateShape(&groundShapeDef);
 		
-        [self createSwingChain:246.0f];
+        [self createSwingChain:350.0f];
 		
 		[self schedule:@selector(tick:)];
 		
@@ -179,14 +180,14 @@ b2Joint *headJoint;
     
     ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
 
-	jointDef.Initialize(ragdoll->RHand, &(*links[13]), ragdoll->RHand->GetPosition(), links[13]->GetPosition());
+	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
 	jointDef.length = 0.0f;
 	jointDef.dampingRatio = 0.7f;
 	jointDef.frequencyHz = 5.0f;
 	handJoint1 = world->CreateJoint(&jointDef);  
 	
-    jointDef.Initialize(ragdoll->LHand, &(*links[14]), ragdoll->LHand->GetPosition(), links[14]->GetPosition());
+    jointDef.Initialize(ragdoll->LHand, &(*links[handLink]), ragdoll->LHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
 	jointDef.length = 0.0f;
 	jointDef.dampingRatio = 0.7f;
@@ -203,8 +204,6 @@ b2Joint *headJoint;
 	rseatPos.x = seatPos.x + 0.5f;
 	seatPos.x = seatPos.x-.2f;
     seatPos.y = seatPos.y+.01f;
-	
-	
 
     jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), lseatPos);
     jointDef.collideConnected = false;
@@ -216,20 +215,9 @@ b2Joint *headJoint;
 	jointDef.length = 0.01f;
 	assJoint2 = world->CreateJoint(&jointDef);
     
-    /*jointDef.Initialize(ragdoll->LThigh, &(*links[numLinks-1]), ragdoll->LThigh->GetPosition(), seatPos);
-    jointDef.collideConnected = true;
-	jointDef.length = 0.2f;
-    world->CreateJoint(&jointDef); 
-	*/
-	/*
-	jointDef.Initialize(ragdoll->Chest, &(*links[14]), ragdoll->Chest->GetPosition(), links[14]->GetPosition() );
-    jointDef.collideConnected = true;
-	jointDef.length = 1.2f;
-    world->CreateJoint(&jointDef); 
-	*/
 	jointDef.Initialize(ragdoll->Head, &(*links[0]), ragdoll->Head->GetPosition(), links[0]->GetPosition() );
     jointDef.collideConnected = true;
-	jointDef.length = 2.2f;
+	jointDef.length = headLinkLength;
     headJoint = world->CreateJoint(&jointDef); 
     
     ragdoll->SetSittingLimits();
@@ -293,10 +281,12 @@ b2Joint *headJoint;
         [rightArrow setPosition:ccp(430,160)];
         [rightArrow setOpacity:128];
         [self addChild:rightArrow z:1];
+        
 		jumpButton = [CCSprite spriteWithFile:@"jumpBtn.png"];
 		[jumpButton setPosition:ccp(240,270)];
         [jumpButton setOpacity:128];
         [self addChild:jumpButton z:1];
+        
         gl = [GameLayer node];
         [self addChild:gl z:0]; //added as a child so touchesEnded can call a function contained in GameLayer
         //gl = [GameLayer node];
@@ -407,14 +397,18 @@ b2Joint *headJoint;
     if (self != nil) {
         [CCMenuItemFont setFontSize:14];
         [CCMenuItemFont setFontName:@"Marker Felt"];
-        CCMenuItem *start = [CCMenuItemFont itemFromString:@"Main Menu"
+        CCMenuItem *mainmenu = [CCMenuItemFont itemFromString:@"Main Menu"
 													target:self
 												  selector:@selector(gameSceneBtn:)];
+        CCMenuItem *reset = [CCMenuItemFont itemFromString:@"Reset"
+                                                       target:self
+                                                     selector:@selector(resetBtn:)];
 		
-        CCMenu *menu = [CCMenu menuWithItems:start, nil];
-        [menu setPosition:ccp(440, 10)];
+        CCMenu *menu = [CCMenu menuWithItems:mainmenu, reset, nil];
+        [menu setPosition:ccp(440, 20)];
+        [menu alignItemsVerticallyWithPadding:10];
         [self addChild:menu];
-        scoreDisplay = [[CCLabelAtlas labelAtlasWithString:@"00004958" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
+        scoreDisplay = [[CCLabelAtlas labelAtlasWithString:@"0" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
         [scoreDisplay setPosition:ccp(320, 290)];
         [self addChild:scoreDisplay];
 		[self schedule:@selector(tick:)];
@@ -426,6 +420,11 @@ b2Joint *headJoint;
 -(void)gameSceneBtn: (id)sender {
     MainMenuScene * ms = [MainMenuScene node];
 	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
+}
+
+-(void)resetBtn: (id)sender {
+    GameScene *gs = [GameScene node];
+	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: gs]];
 }
 
 
