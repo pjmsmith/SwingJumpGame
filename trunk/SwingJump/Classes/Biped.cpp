@@ -167,24 +167,24 @@ Biped::Biped(b2World* w, const b2Vec2& position)
 	RWrist		= (b2RevoluteJoint*)w->CreateJoint(&(def->RWristDef));
 }
 
-void Biped::SetSittingPosition()
+void Biped::SetSittingLimits()
 {
 	//LAnkle->SetLimits(1.0f,1.0f);
 	//RAnkle->SetLimits(1.0f,1.0f);
 	//LKnee->SetLimits(1.0f,1.0f);
 	//RKnee->SetLimits(1.0f,1.0f);
-	LHip->SetLimits(-45*PI/100,-45*PI/100);
-	RHip->SetLimits(-45*PI/100,-45*PI/100);
+	LHip->SetLimits(-80.0*PI/180.0f,-80.0*PI/180.0);
+	RHip->SetLimits(-80.0*PI/180.0f,-80.0*PI/180.0);
 	LowerAbs->SetLimits(0.0f,0.0f);
 	UpperAbs->SetLimits(0.0f,0.0f);
 	LowerNeck->SetLimits(0.0f,0.0f);
 	UpperNeck->SetLimits(0.0f,0.0f);
-	//LShoulder->SetLimits(0.0f,0.0f);
-	//RShoulder->SetLimits(0.0f,0.0f);
-	//LElbow->SetLimits(1.0f,1.0f);
-	//RElbow->SetLimits(1.0f,1.0f);
-	//LWrist->SetLimits(1.0f,1.0f);
-	//RWrist->SetLimits(1.0f,1.0f);	
+	LShoulder->SetLimits(1.6f,1.6f);
+	RShoulder->SetLimits(1.6f,1.6f);
+	LElbow->SetLimits(-1.6f,-1.6f);
+	RElbow->SetLimits(-1.6f,-1.6f);
+	LWrist->SetLimits(-1.0f,-1.0f);
+	RWrist->SetLimits(-1.0f,-1.0f);	
 	
 	LAnkle->EnableMotor(false);
 	RAnkle->EnableMotor(false);
@@ -202,10 +202,44 @@ void Biped::SetSittingPosition()
 	RElbow->EnableMotor(false);
 	LWrist->EnableMotor(false);
 	RWrist->EnableMotor(false);	
-	
-	
-	
 }
+void Biped::SetDefaultLimits()
+{
+	LAnkle->SetLimits(-0.523598776f,0.523598776f);
+	RAnkle->SetLimits(-0.523598776f,0.523598776f);
+	LKnee->SetLimits(0.0f,2.61799388f);
+	RKnee->SetLimits(0.0f,2.61799388f);
+	LHip->SetLimits(-2.26892803f,0.0f);
+	RHip->SetLimits(-2.26892803f,0.0f);
+	LowerAbs->SetLimits(-0.523598776f,0.523598776f);
+	UpperAbs->SetLimits(-0.523598776f,0.174532925f);
+	LowerNeck->SetLimits(-0.174532925f,0.174532925f);
+	UpperNeck->SetLimits(-0.610865238f,0.785398163f);
+	LShoulder->SetLimits(-1.04719755f,3.14159265f);
+	RShoulder->SetLimits(-1.04719755f,3.14159265f);
+	LElbow->SetLimits(-2.7925268f,0);
+	RElbow->SetLimits(-2.7925268f,0);
+	LWrist->SetLimits(-0.174532925f,0.174532925f);
+	RWrist->SetLimits(-0.174532925f,0.174532925f);	
+	
+	LAnkle->EnableMotor(true);
+	RAnkle->EnableMotor(true);
+	LKnee->EnableMotor(true);
+	RKnee->EnableMotor(true);
+	LHip->EnableMotor(true);
+	RHip->EnableMotor(true);
+	LowerAbs->EnableMotor(true);
+	UpperAbs->EnableMotor(true);
+	LowerNeck->EnableMotor(true);
+	UpperNeck->EnableMotor(true);
+	LShoulder->EnableMotor(true);
+	RShoulder->EnableMotor(true);
+	LElbow->EnableMotor(true);
+	RElbow->EnableMotor(true);
+	LWrist->EnableMotor(true);
+	RWrist->EnableMotor(true);	
+}
+
 Biped::~Biped(void)
 {
 	m_world->DestroyBody(LFoot);
