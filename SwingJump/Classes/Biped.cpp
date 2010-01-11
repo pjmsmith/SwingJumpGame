@@ -239,6 +239,25 @@ void Biped::SetDefaultLimits()
 	LWrist->EnableMotor(true);
 	RWrist->EnableMotor(true);	
 }
+void Biped::DestroyAllJoints()
+{
+	m_world->DestroyJoint(LAnkle);
+	m_world->DestroyJoint(RAnkle);
+	m_world->DestroyJoint(LKnee);
+	m_world->DestroyJoint(RKnee);
+	m_world->DestroyJoint(LHip);
+	m_world->DestroyJoint(RHip);
+	m_world->DestroyJoint(LowerAbs);
+	m_world->DestroyJoint(UpperAbs);
+	m_world->DestroyJoint(LowerNeck);
+	m_world->DestroyJoint(UpperNeck);
+	m_world->DestroyJoint(LShoulder);
+	m_world->DestroyJoint(RShoulder);
+	m_world->DestroyJoint(LElbow);
+	m_world->DestroyJoint(RElbow);
+	m_world->DestroyJoint(LWrist);
+	m_world->DestroyJoint(RWrist);
+}
 
 Biped::~Biped(void)
 {

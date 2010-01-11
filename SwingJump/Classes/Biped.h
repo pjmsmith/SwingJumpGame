@@ -21,6 +21,7 @@ public:
 						*LShoulder, *RShoulder, *LElbow, *RElbow, *LWrist, *RWrist;
 	void SetSittingLimits();
 	void SetDefaultLimits();
+	void DestroyAllJoints();
 };
 
 #endif

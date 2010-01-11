@@ -9,7 +9,7 @@ BipedDef::BipedDef()
 	SetMotorTorque(2.0f);
 	SetMotorSpeed(0.0f);
 	SetDensity(10.0f);
-	SetRestitution(0.0f);
+	SetRestitution(0.4f);
 	SetLinearDamping(0.0f);
 	SetAngularDamping(0.005f);
 	SetGroupIndex(--count);
@@ -21,6 +21,7 @@ BipedDef::BipedDef()
 	DefaultJoints();
 
 	LFootPoly.friction = RFootPoly.friction = 0.85f;
+	HeadCirc.friction = 1.0f;
 }
 
 void BipedDef::IsFast(bool b)
