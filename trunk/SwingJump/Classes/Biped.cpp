@@ -166,17 +166,43 @@ Biped::Biped(b2World* w, const b2Vec2& position)
 	LWrist		= (b2RevoluteJoint*)w->CreateJoint(&(def->LWristDef));
 	RWrist		= (b2RevoluteJoint*)w->CreateJoint(&(def->RWristDef));
 }
+void Biped::PumpFwdLimits()
+{
+	//LHip->SetLimits(-45.0*PI/180.0f,-45.0*PI/180.0);
+	//RHip->SetLimits(-45.0*PI/180.0f,-45.0*PI/180.0);
+	LowerAbs->SetLimits(-60.0*PI/180.0f,-60.0*PI/180.0);
+	UpperAbs->SetLimits(-45.0*PI/180.0f,-45.0*PI/180.0);
+	LKnee->SetLimits(0.0f,0.0f);
+	RKnee->SetLimits(0.0f,0.0f);
+	LAnkle->SetLimits(0.523598776f,0.523598776f);
+	RAnkle->SetLimits(0.523598776f,0.523598776f);
+	//LowerNeck->SetLimits(0.0f,0.0f);
+	//UpperNeck->SetLimits(0.0f,0.0f);
+}
 
+void Biped::PumpBckwdLimits()
+{
+	LHip->SetLimits(-60.0f*PI/180.0f,-60.0f*PI/180.0);
+	RHip->SetLimits(-60.0f*PI/180.0f,-60.0f*PI/180.0);
+	LowerAbs->SetLimits(-25.0f*PI/180.0f,-25.0f*PI/180.0);
+	UpperAbs->SetLimits(-30.0f*PI/180.0f,-30.0f*PI/180.0);
+	LKnee->SetLimits(2.61799388f,2.61799388f);
+	RKnee->SetLimits(2.61799388f,2.61799388f);
+	LAnkle->SetLimits(-0.523598776f,-0.523598776f);
+	RAnkle->SetLimits(-0.523598776f,-0.523598776f);
+	//LowerNeck->SetLimits(0.0f,0.0f);
+	//UpperNeck->SetLimits(0.0f,0.0f);
+}	
 void Biped::SetSittingLimits()
 {
-	//LAnkle->SetLimits(1.0f,1.0f);
-	//RAnkle->SetLimits(1.0f,1.0f);
-	//LKnee->SetLimits(1.0f,1.0f);
-	//RKnee->SetLimits(1.0f,1.0f);
-	LHip->SetLimits(-80.0*PI/180.0f,-80.0*PI/180.0);
-	RHip->SetLimits(-80.0*PI/180.0f,-80.0*PI/180.0);
-	LowerAbs->SetLimits(0.0f,0.0f);
-	UpperAbs->SetLimits(0.0f,0.0f);
+	LAnkle->SetLimits(-0.523598776f,0.523598776f);
+	RAnkle->SetLimits(-0.523598776f,0.523598776f);
+	LKnee->SetLimits(0.0f,2.61799388f);
+	RKnee->SetLimits(0.0f,2.61799388f);
+	LHip->SetLimits(-45.0*PI/180.0f,-45.0*PI/180.0);
+	RHip->SetLimits(-45.0*PI/180.0f,-45.0*PI/180.0);
+	LowerAbs->SetLimits(-45.0*PI/180.0f,-45.0*PI/180.0);
+	UpperAbs->SetLimits(-45.0*PI/180.0f,-45.0*PI/180.0);
 	LowerNeck->SetLimits(0.0f,0.0f);
 	UpperNeck->SetLimits(0.0f,0.0f);
 	LShoulder->SetLimits(-20.0*PI/180.0f, 10.0*PI/180.0f);

@@ -22,6 +22,8 @@ public:
 	void SetSittingLimits();
 	void SetDefaultLimits();
 	void DestroyAllJoints();
+	void PumpFwdLimits();
+	void PumpBckwdLimits();
 };
 
 #endif

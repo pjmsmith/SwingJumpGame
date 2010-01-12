@@ -22,6 +22,7 @@ b2Body* groundBody;
 b2DistanceJointDef jointDef;
 b2Joint *assJoint1;
 b2Joint *assJoint2;
+b2Joint *assJoint3;
 b2Joint *handJoint1;
 b2Joint *handJoint2;
 b2Joint *headJoint;
@@ -117,6 +118,7 @@ b2Joint *headJoint;
     b2BodyDef chainBodyDef;
     b2CircleDef chainShapeDef;
     b2RevoluteJointDef rj;
+	b2DistanceJointDef dj;
     b2Body *link = pivotBody;
     int i;
     for(i = 0; i < numLinks; i++)
@@ -124,7 +126,7 @@ b2Joint *headJoint;
         chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
         chainBody = world->CreateBody(&chainBodyDef);
         chainShapeDef.radius = (2.0f/PTM_RATIO);
-        chainShapeDef.density =  100.0f;
+        chainShapeDef.density =  50.0f;
         chainShapeDef.friction = 0.5f;
         chainShapeDef.restitution = 0.0f;
 		chainShapeDef.filter.categoryBits = 0x0000;
@@ -132,11 +134,17 @@ b2Joint *headJoint;
         chainBody->SetMassFromShapes();
         chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
         
-        rj.Initialize(&(*chainBody), &(*link), link->GetPosition());
+        /*rj.Initialize(&(*chainBody), &(*link), link->GetPosition());
         rj.motorSpeed = 0.0f;
         rj.maxMotorTorque = 3.0f;
         rj.enableMotor = true;
         world->CreateJoint(&rj);
+		 */
+		dj.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(),link->GetPosition());
+		dj.length = 5.0f/PTM_RATIO;
+		world->CreateJoint(&dj);
+		 
+		
         link = chainBody;
         links[i] = link;
     }
@@ -160,7 +168,7 @@ b2Joint *headJoint;
     revDef.upperAngle= 0.125f * b2_pi;
     revDef.enableLimit = true;
     world->CreateJoint(&revDef); 
-    
+    /*
     b2Vec2 stabilizerL = chainBody->GetPosition();
     stabilizerL.x = stabilizerL.x-0.015f;
     b2Vec2 stabilizerR = chainBody->GetPosition();
@@ -177,21 +185,22 @@ b2Joint *headJoint;
     world->CreateJoint(&prismaticJoint);  
     prismaticJoint.Initialize(&(*chainBody), &(*links[0]), stabilizerR, worldAxisR);
     world->CreateJoint(&prismaticJoint);  
-    
-    ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
+    */
 
+    ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
+	
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
-	jointDef.length = 0.0f;
-	jointDef.dampingRatio = 0.7f;
-	jointDef.frequencyHz = 5.0f;
+	jointDef.length = 0.1f;
+	jointDef.dampingRatio = 1.0f;
+	//jointDef.frequencyHz = 1000.0f;
 	handJoint1 = world->CreateJoint(&jointDef);  
 	
     jointDef.Initialize(ragdoll->LHand, &(*links[handLink]), ragdoll->LHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
-	jointDef.length = 0.0f;
-	jointDef.dampingRatio = 0.7f;
-	jointDef.frequencyHz = 5.0f;
+	jointDef.length = 0.1f;
+	jointDef.dampingRatio = 1.0f;
+	//jointDef.frequencyHz = 100.0f;
     handJoint2 = world->CreateJoint(&jointDef); 
 	
 	jointDef.dampingRatio = 0.0f;
@@ -205,19 +214,36 @@ b2Joint *headJoint;
 	seatPos.x = seatPos.x-.2f;
     seatPos.y = seatPos.y+.01f;
 
+	jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), lseatPos);
+    jointDef.collideConnected = false;
+	jointDef.length = 5.0*(numLinks+4)/PTM_RATIO;
+    world->CreateJoint(&jointDef);
+	
+	jointDef.Initialize(&(*links[0]),&(*links[numLinks-1]), links[0]->GetPosition(), rseatPos);
+    jointDef.collideConnected = false;
+	jointDef.length = 5.0*(numLinks+4)/PTM_RATIO;
+    world->CreateJoint(&jointDef);
+	
+	
     jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), lseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 0.01f;
+	jointDef.length = 0.023f;
     assJoint1 = world->CreateJoint(&jointDef);
 	
-	jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), rseatPos);
+	jointDef.Initialize(ragdoll->RThigh, &(*links[numLinks-1]), ragdoll->RThigh->GetPosition(), rseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 0.01f;
+	jointDef.length = 0.05f;
 	assJoint2 = world->CreateJoint(&jointDef);
+	
+	jointDef.Initialize(ragdoll->LThigh, &(*links[numLinks-1]), ragdoll->LThigh->GetPosition(), rseatPos);
+    jointDef.collideConnected = false;
+	jointDef.length = 0.05f;
+	assJoint3 = world->CreateJoint(&jointDef);
     
 	jointDef.Initialize(ragdoll->Head, &(*links[0]), ragdoll->Head->GetPosition(), links[0]->GetPosition() );
     jointDef.collideConnected = true;
 	jointDef.length = headLinkLength;
+	//jointDef.frequencyHz = 2.0f;
     headJoint = world->CreateJoint(&jointDef); 
     
     ragdoll->SetSittingLimits();
@@ -248,7 +274,7 @@ b2Joint *headJoint;
 	camX = camPos.x;
 	camY = camPos.y;
 	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
-	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:500];
+	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415];
 	b2XForm groundPos = groundBody->GetXForm();
 
 	groundBody->SetXForm(b2Vec2((camX*PTM_RATIO-80.0f)/PTM_RATIO,groundPos.position.y), 0.0f);
@@ -309,6 +335,7 @@ b2Joint *headJoint;
                 isLeftBeingTouched = YES;
                 [leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
                 [self performSelectorInBackground:@selector(rotateChainLeft) withObject:nil];
+				ragdoll->PumpBckwdLimits();
 			
             }
         }
@@ -330,6 +357,8 @@ b2Joint *headJoint;
                 isRightBeingTouched = YES;
                 [rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
                 [self performSelectorInBackground:@selector(rotateChainRight) withObject:nil];
+				
+				ragdoll->PumpFwdLimits();
             } 
         }
 	}
@@ -342,11 +371,13 @@ b2Joint *headJoint;
     {
         [leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:128]];
         isLeftBeingTouched = NO;
+		ragdoll->SetSittingLimits();
     }
     if(isRightBeingTouched)
     {
         [rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:128]];
         isRightBeingTouched = NO;
+		ragdoll->SetSittingLimits();
     }
     
 	return kEventHandled;
@@ -356,8 +387,9 @@ b2Joint *headJoint;
 {
     if(isLeftBeingTouched) 
     {
-		ragdoll->Chest->ApplyForce(b2Vec2(-275.0f, 0.0f),ragdoll->Chest->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(-125.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
+	
 	}    
 }
 
@@ -365,7 +397,7 @@ b2Joint *headJoint;
 {
     if(isRightBeingTouched) 
     {
-		ragdoll->Chest->ApplyForce(b2Vec2(275.0f, 0.0f),ragdoll->Chest->GetPosition());
+		links[numLinks-1]->ApplyForce(b2Vec2(125.0f, 0.0f),links[numLinks-1]->GetPosition());
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
@@ -378,6 +410,7 @@ b2Joint *headJoint;
 	world->DestroyJoint(handJoint2);
 	world->DestroyJoint(assJoint1);
 	world->DestroyJoint(assJoint2);
+	world->DestroyJoint(assJoint3);
 	b2Vec2 vel;
 	vel = links[numLinks-1]->GetLinearVelocity();
 	vel.x = 50*vel.x;
