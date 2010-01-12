@@ -6,7 +6,7 @@ const float32 k_scale = 1.8f;
 
 BipedDef::BipedDef()
 {
-	SetMotorTorque(10.0f);
+	SetMotorTorque(0.0f);
 	SetMotorSpeed(0.0f);
 	SetDensity(1.0f);
 	SetRestitution(0.2f);

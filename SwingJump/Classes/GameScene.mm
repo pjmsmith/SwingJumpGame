@@ -413,9 +413,16 @@ b2Joint *headJoint;
 	world->DestroyJoint(assJoint3);
 	b2Vec2 vel;
 	vel = links[numLinks-1]->GetLinearVelocity();
-	vel.x = 50*vel.x;
-	vel.y = 50*vel.y;
+	vel.x = 5*vel.x;
+	vel.y = 5*vel.y;
 	ragdoll->Chest->SetLinearVelocity(vel);
+	ragdoll->LFoot->SetLinearVelocity(vel);
+	ragdoll->RFoot->SetLinearVelocity(vel);
+	ragdoll->Pelvis->SetLinearVelocity(vel);
+	ragdoll->Head->SetLinearVelocity(vel);
+	ragdoll->LHand->SetAngularVelocity(0.0f);
+	ragdoll->RHand->SetAngularVelocity(0.0f);
+	
 }
 
 @end
