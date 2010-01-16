@@ -42,8 +42,8 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 		RepeatableLayer *bg = [RepeatableLayer layerWithFile:@"mainmenu_bg.png"];
 		[parallaxNode addChild:bg z:0 parallaxRatio:0.0f];
 		RepeatableLayer *clouds = [RepeatableLayer layerWithFile:@"cloud.png"];
-		[clouds setPosition:ccp(0,150)];
-		[parallaxNode addChild:clouds z:0 parallaxRatio:0.1f];
+		[clouds setPosition:ccp(0,120)];
+		[parallaxNode addChild:clouds z:0 parallaxRatio:0.5f];
 		[self addChild:parallaxNode z:0];
 		
         [self addChild:[ControlLayer node] z:1];
@@ -62,6 +62,7 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
         [swingSet setScaleY:1.6];
         [swingSet setPosition:ccp(240,210)];
         [self addChild:swingSet z:4];
+		
         //swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
         //[swingChain setAnchorPoint:ccp(0.5,1)];
         //[swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
@@ -133,42 +134,40 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
     int i;
     for(i = 0; i < numLinks; i++)
     {
-        chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
+        chainBodyDef.position.Set(7.5f,(yPos-(10*i))/PTM_RATIO);
         chainBody = world->CreateBody(&chainBodyDef);
-        chainShapeDef.radius = (2.0f/PTM_RATIO);
-        chainShapeDef.density =  50.0f;
+        chainShapeDef.radius = (2.5f/PTM_RATIO);
+        chainShapeDef.density =  25.0f;
         chainShapeDef.friction = 0.5f;
         chainShapeDef.restitution = 0.0f;
 		chainShapeDef.filter.categoryBits = 0x0000;
         chainBody->CreateShape(&chainShapeDef);
         chainBody->SetMassFromShapes();
-        chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
         
         /*rj.Initialize(&(*chainBody), &(*link), link->GetPosition());
-        rj.motorSpeed = 0.0f;
-        rj.maxMotorTorque = 3.0f;
         rj.enableMotor = true;
+		rj.maxMotorTorque = 0.0f;
+		rj.motorSpeed = 0.0f;
         world->CreateJoint(&rj);
-		 */
+		*/
 		dj.Initialize(&(*chainBody), &(*link), chainBody->GetPosition(),link->GetPosition());
-		dj.length = 5.0f/PTM_RATIO;
+		dj.length = 10.0f/PTM_RATIO;
 		world->CreateJoint(&dj);
-		 
 		
         link = chainBody;
         links[i] = link;
     }
     b2PolygonDef swingSeat;
-    chainBodyDef.position.Set(7.5f,(yPos-(5*i))/PTM_RATIO);
+    chainBodyDef.position.Set(7.5f,(yPos-(10*i))/PTM_RATIO);
     chainBody = world->CreateBody(&chainBodyDef);
     swingSeat.SetAsBox(0.3f, 0.1f);
-    swingSeat.density =  100.0f;
+    swingSeat.density =  10.0f;
     swingSeat.friction = 0.5f;
     swingSeat.restitution = 0.0f;
 	//swingSeat.filter.categoryBits = 0x0000;
     chainBody->CreateShape(&swingSeat);
     chainBody->SetMassFromShapes();
-    //chainBody->SetLinearVelocity(b2Vec2(0.5f,0.5f));
+    
     links[numLinks-1] = chainBody;
     
     b2RevoluteJointDef revDef;
@@ -221,17 +220,17 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 	b2Vec2 lseatPos = seatPos;
 	lseatPos.x = seatPos.x - 0.5f;
 	rseatPos.x = seatPos.x + 0.5f;
-	seatPos.x = seatPos.x-.2f;
-    seatPos.y = seatPos.y+.01f;
+	//seatPos.x = seatPos.x-.2f;
+    //seatPos.y = seatPos.y+.01f;
 
 	jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), lseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 5.0*(numLinks+4)/PTM_RATIO;
+	jointDef.length = 10.0*(numLinks)/PTM_RATIO;
     world->CreateJoint(&jointDef);
 	
 	jointDef.Initialize(&(*links[0]),&(*links[numLinks-1]), links[0]->GetPosition(), rseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 5.0*(numLinks+4)/PTM_RATIO;
+	jointDef.length = 10.0*(numLinks)/PTM_RATIO;
     world->CreateJoint(&jointDef);
 	
 	
@@ -284,8 +283,8 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 	camX = camPos.x;
 	camY = camPos.y;
 	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
-	[parallaxNode scroll:vel.x];
-	//[parallaxNode scrollY:vel.y];
+	[parallaxNode scrollX:vel.x scrollY:-2*vel.y];
+	
 	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
 	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415];
 	b2XForm groundPos = groundBody->GetXForm();
@@ -400,7 +399,10 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 {
     if(isLeftBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(-125.0f, 0.0f),links[numLinks-1]->GetPosition());
+		//for(int i = 0; i < numLinks; i++)
+		//{
+		ragdoll->Chest->ApplyForce(b2Vec2(-20.0f, 5.0f),ragdoll->Chest->GetPosition());
+		//}
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
 	
 	}    
@@ -410,7 +412,10 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 {
     if(isRightBeingTouched) 
     {
-		links[numLinks-1]->ApplyForce(b2Vec2(125.0f, 0.0f),links[numLinks-1]->GetPosition());
+		//for(int i = 0; i < numLinks; i++)
+		//{
+		ragdoll->Chest->ApplyForce(b2Vec2(20.0f, 5.0f),ragdoll->Chest->GetPosition());
+		//}
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
@@ -426,15 +431,9 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 	world->DestroyJoint(assJoint3);
 	b2Vec2 vel;
 	vel = links[numLinks-1]->GetLinearVelocity();
-	vel.x = 5*vel.x;
-	vel.y = 5*vel.y;
-	ragdoll->Chest->SetLinearVelocity(vel);
-	ragdoll->LFoot->SetLinearVelocity(vel);
-	ragdoll->RFoot->SetLinearVelocity(vel);
-	ragdoll->Pelvis->SetLinearVelocity(vel);
-	ragdoll->Head->SetLinearVelocity(vel);
-	ragdoll->LHand->SetAngularVelocity(0.0f);
-	ragdoll->RHand->SetAngularVelocity(0.0f);
+	vel.x = 2*vel.x;
+	vel.y = 2*vel.y;
+	ragdoll->SetLinearVelocity(vel);
 	
 }
 

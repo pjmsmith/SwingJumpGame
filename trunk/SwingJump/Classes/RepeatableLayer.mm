@@ -26,7 +26,7 @@
 	glPushMatrix();
 	glLoadIdentity();
 	//We are just doing horizontal scrolling here so only adjusting x
-	glTranslatef(texOffset.x/self.contentSize.width, 0, 0);
+	glTranslatef(texOffset.x/self.contentSize.width, texOffset.y/self.contentSize.width, 0);
 	//Draw the texture
 	[texture_ drawAtPoint:CGPointZero];
 	//Restore texture matrix and switch back to modelview matrix
@@ -44,26 +44,23 @@
 //
 // it only scrolls on x-axis
 //
-- (void)scroll:(float)offset {
-	texOffset = ccpAdd(texOffset, CGPointMake(offset, 0.0f));
+- (void)scrollX:(float)offsetX scrollY:(float)offsetY {
+	texOffset = ccpAdd(texOffset, CGPointMake(offsetX, offsetY));
 	CGSize contentSize = texture_.contentSize;
 	if (texOffset.x > contentSize.width) texOffset.x -= contentSize.width;
-	if (texOffset.y > contentSize.height) texOffset.y -= contentSize.height;
+	//if (texOffset.y > contentSize.height) texOffset.y -= contentSize.height;
 	if (texOffset.x < 0) texOffset.x += contentSize.width;
-	if (texOffset.y < 0) texOffset.y += contentSize.height;
+	//if (texOffset.y < 0) texOffset.y += contentSize.height;
 }
 
-- (void)scrollY:(float)offset {
+/*- (void)scrollY:(float)offset {
 	texOffset = ccpAdd(texOffset, CGPointMake(0.0f, offset));
 	CGSize contentSize = texture_.contentSize;
 	if (texOffset.x > contentSize.width) texOffset.x -= contentSize.width;
-	if (texOffset.y > contentSize.height) texOffset.y -= contentSize.height;
+	//if (texOffset.y > contentSize.height) texOffset.y -= contentSize.height;
 	if (texOffset.x < 0) texOffset.x += contentSize.width;
-	if (texOffset.y < 0) texOffset.y += contentSize.height;
+	//if (texOffset.y < 0) texOffset.y += contentSize.height;
 }
+ */
 
-
-- (void)scrollTest {
-	[self scroll:0.3f];
-}
 @end
