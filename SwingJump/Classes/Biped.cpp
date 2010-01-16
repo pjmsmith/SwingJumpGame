@@ -265,6 +265,28 @@ void Biped::SetDefaultLimits()
 	LWrist->EnableMotor(true);
 	RWrist->EnableMotor(true);	
 }
+void Biped::SetLinearVelocity(const b2Vec2& velocity)
+{
+	
+	LFoot->SetLinearVelocity(velocity);
+	RFoot->SetLinearVelocity(velocity);
+	LCalf->SetLinearVelocity(velocity);
+	RCalf->SetLinearVelocity(velocity);
+	LThigh->SetLinearVelocity(velocity);
+	RThigh->SetLinearVelocity(velocity);
+	Pelvis->SetLinearVelocity(velocity);
+	Stomach->SetLinearVelocity(velocity);
+	Chest->SetLinearVelocity(velocity);
+	Neck->SetLinearVelocity(velocity);
+	Head->SetLinearVelocity(velocity);
+	LUpperArm->SetLinearVelocity(velocity);
+	RUpperArm->SetLinearVelocity(velocity);
+	LForearm->SetLinearVelocity(velocity);
+	RForearm->SetLinearVelocity(velocity);
+	LHand->SetLinearVelocity(velocity);
+	RHand->SetLinearVelocity(velocity);
+}
+
 void Biped::DestroyAllJoints()
 {
 	m_world->DestroyJoint(LAnkle);

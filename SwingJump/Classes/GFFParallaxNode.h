@@ -14,6 +14,5 @@
 	int childrenNo;
 }
 - (void)addChild:(CCNode *)child z:(int)z parallaxRatio:(float)ratio;
-- (void)scroll:(float)offset;
-- (void)scrollY:(float)offset;
+- (void)scrollX:(float)offsetX scrollY:(float)offsetY;
 @end

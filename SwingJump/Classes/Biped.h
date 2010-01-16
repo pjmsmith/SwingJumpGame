@@ -24,6 +24,7 @@ public:
 	void DestroyAllJoints();
 	void PumpFwdLimits();
 	void PumpBckwdLimits();
+	void SetLinearVelocity(const b2Vec2& velocity);
 };
 
 #endif

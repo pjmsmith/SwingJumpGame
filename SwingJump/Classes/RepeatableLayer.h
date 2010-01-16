@@ -12,7 +12,6 @@
 	CGPoint firstOffset;
 }
 + (id)layerWithFile:(NSString *)file;
-- (void)scrollTest;
-- (void)scroll:(float)offset;
-- (void)scrollY:(float)offset;
+- (void)scrollX:(float)offsetX scrollY:(float)offsetY;
+//- (void)scrollY:(float)offset;
 @end

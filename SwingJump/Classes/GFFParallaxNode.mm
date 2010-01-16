@@ -22,21 +22,19 @@
 	[super addChild:child z:z];
 }
 
-- (void)scroll:(float)offset {
+- (void)scrollX:(float)offsetX scrollY:(float)offsetY{
 	int idx = 0;
 	for (RepeatableLayer *child in children) {
-		[child scroll:offset * ratios[idx++]];
+		[child scrollX:offsetX*ratios[idx] scrollY:offsetY*ratios[idx]];
+		idx++;
 	}
 }
 
-- (void)scrollY:(float)offset {
+/*- (void)scrollY:(float)offset {
 	int idx = 0;
 	for (RepeatableLayer *child in children) {
 		[child scrollY:offset * ratios[idx++]];
 	}
-}
+}*/
 
-- (void)scrollTest {
-	[self scroll:0.3f];
-}
 @end
