@@ -9,6 +9,8 @@
 #import "MainMenuScene.hh"
 #import "SimpleAudioEngine.h"
 #import "GameScene.hh"
+#import "GFFParallaxNode.h"
+#import "RepeatableLayer.h"
 
 #define PTM_RATIO 32
 
@@ -26,16 +28,24 @@ b2Joint *assJoint3;
 b2Joint *handJoint1;
 b2Joint *handJoint2;
 b2Joint *headJoint;
+GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 
 
 @implementation GameScene
 - (id) init {
     self = [super init];
     if (self != nil) {
-        CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"]; //change this to be the level background
-        [bg setPosition:ccp(240, 165)];
-        [self addChild:bg z:0];
+        //CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"]; //change this to be the level background
+        //[bg setPosition:ccp(240, 165)];
+        //[self addChild:bg z:0];
         //[self addChild:[GameLayer node] z:1];
+		RepeatableLayer *bg = [RepeatableLayer layerWithFile:@"mainmenu_bg.png"];
+		[parallaxNode addChild:bg z:0 parallaxRatio:0.0f];
+		RepeatableLayer *clouds = [RepeatableLayer layerWithFile:@"cloud.png"];
+		[clouds setPosition:ccp(0,150)];
+		[parallaxNode addChild:clouds z:0 parallaxRatio:0.1f];
+		[self addChild:parallaxNode z:0];
+		
         [self addChild:[ControlLayer node] z:1];
         [self addChild:[HUDLayer node] z:2];
     }
@@ -273,6 +283,9 @@ b2Joint *headJoint;
 	camPos = ragdoll->Head->GetPosition();
 	camX = camPos.x;
 	camY = camPos.y;
+	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
+	[parallaxNode scroll:vel.x];
+	//[parallaxNode scrollY:vel.y];
 	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
 	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415];
 	b2XForm groundPos = groundBody->GetXForm();
