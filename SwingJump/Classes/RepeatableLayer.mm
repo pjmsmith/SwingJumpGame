@@ -11,7 +11,7 @@
 + (id)layerWithFile:(NSString *)file {
 	RepeatableLayer *layer = [RepeatableLayer spriteWithFile:file];
 	layer.anchorPoint = CGPointZero;
-	ccTexParams params = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT };
+	ccTexParams params = { GL_REPEAT, GL_LINEAR, GL_REPEAT, GL_LINEAR };
 	[layer.texture setTexParameters:&params];
 	return layer;
 }
@@ -42,7 +42,6 @@
 // adapted from
 // http://www.codza.com/making-seamless-repeating-backgrounds-photoshop-cocos2d-iphone
 //
-// it only scrolls on x-axis
 //
 - (void)scrollX:(float)offsetX scrollY:(float)offsetY {
 	texOffset = ccpAdd(texOffset, CGPointMake(offsetX, offsetY));
@@ -52,15 +51,5 @@
 	if (texOffset.x < 0) texOffset.x += contentSize.width;
 	//if (texOffset.y < 0) texOffset.y += contentSize.height;
 }
-
-/*- (void)scrollY:(float)offset {
-	texOffset = ccpAdd(texOffset, CGPointMake(0.0f, offset));
-	CGSize contentSize = texture_.contentSize;
-	if (texOffset.x > contentSize.width) texOffset.x -= contentSize.width;
-	//if (texOffset.y > contentSize.height) texOffset.y -= contentSize.height;
-	if (texOffset.x < 0) texOffset.x += contentSize.width;
-	//if (texOffset.y < 0) texOffset.y += contentSize.height;
-}
- */
 
 @end

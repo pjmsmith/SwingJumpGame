@@ -28,6 +28,9 @@ b2Joint *assJoint3;
 b2Joint *handJoint1;
 b2Joint *handJoint2;
 b2Joint *headJoint;
+b2Vec2 lastCamPos;
+b2Vec2 camPos;
+bool firstTime = true;
 GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 
 
@@ -37,13 +40,35 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
     if (self != nil) {
         //CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"]; //change this to be the level background
         //[bg setPosition:ccp(240, 165)];
+		
         //[self addChild:bg z:0];
         //[self addChild:[GameLayer node] z:1];
-		RepeatableLayer *bg = [RepeatableLayer layerWithFile:@"mainmenu_bg.png"];
-		[parallaxNode addChild:bg z:0 parallaxRatio:0.0f];
-		RepeatableLayer *clouds = [RepeatableLayer layerWithFile:@"cloud.png"];
+		if (firstTime) {
+			RepeatableLayer *bg01 = [RepeatableLayer layerWithFile:@"bg01.png"];
+			[bg01 setScale:2.3f];
+			[bg01 setPosition:ccp(0,-50)];
+			[parallaxNode addChild:bg01 z:0 parallaxRatio:0.15f];
+			
+			RepeatableLayer *bg02 = [RepeatableLayer layerWithFile:@"bg02.png"];
+			[bg02 setScale:1.5f];
+			[parallaxNode addChild:bg02 z:1 parallaxRatio:0.6f];
+			
+			RepeatableLayer *fg = [RepeatableLayer layerWithFile:@"fg.png"];
+			[fg setPosition:ccp(0,-100)];
+			[parallaxNode addChild:fg z:2 parallaxRatio:1.0f];
+		}
+		/*
+		RepeatableLayer *bg01 = [RepeatableLayer layerWithFile:@"bg01.png"];
+		[parallaxNode addChild:bg01 z:0 parallaxRatio:0.05f];
+		RepeatableLayer *bg02 = [RepeatableLayer layerWithFile:@"bg02.png"];
+		[parallaxNode addChild:bg02 z:1 parallaxRatio:0.2f];
+		RepeatableLayer *fg01 = [RepeatableLayer layerWithFile:@"fg.png"];
+		[parallaxNode addChild:fg01 z:2 parallaxRatio:0.5f];
+		*/
+		/*RepeatableLayer *clouds = [RepeatableLayer layerWithFile:@"cloud.png"];
 		[clouds setPosition:ccp(0,120)];
 		[parallaxNode addChild:clouds z:0 parallaxRatio:0.5f];
+		 */
 		[self addChild:parallaxNode z:0];
 		
         [self addChild:[ControlLayer node] z:1];
@@ -68,7 +93,6 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
         //[swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
         //[self addChild:swingChain z:1];
 		
-        
 		//Create a world
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		b2AABB worldAABB;
@@ -269,7 +293,8 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
     headJoint = world->CreateJoint(&jointDef); 
     
     ragdoll->SetSittingLimits();
-	
+	camPos = ragdoll->Head->GetPosition();
+	lastCamPos = camPos;
 	//b2ContactListener *contactListener;
 	//world->SetContactListener(contactListener);
 }
@@ -295,8 +320,13 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 	camPos = ragdoll->Head->GetPosition();
 	camX = camPos.x;
 	camY = camPos.y;
-	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
-	[parallaxNode scrollX:vel.x scrollY:-2*vel.y];
+	if (camY<240/PTM_RATIO) {
+		camY = 240/PTM_RATIO;
+	}
+	//b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
+	b2Vec2 scrolldiff = b2Vec2((camX-lastCamPos.x)*PTM_RATIO,(camY-lastCamPos.y)*PTM_RATIO);
+	lastCamPos = b2Vec2(camX, camY);
+	[parallaxNode scrollX:scrolldiff.x scrollY:-scrolldiff.y];
 	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
 	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415.0f];
 	b2XForm groundPos = groundBody->GetXForm();
@@ -443,8 +473,8 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 	world->DestroyJoint(assJoint3);
 	b2Vec2 vel;
 	vel = links[numLinks-1]->GetLinearVelocity();
-	vel.x = 1.75*vel.x;
-	vel.y = 1.75*vel.y;
+	vel.x = 1.7*vel.x;
+	vel.y = 1.7*vel.y;
 	ragdoll->SetLinearVelocity(vel);
 	
 }
