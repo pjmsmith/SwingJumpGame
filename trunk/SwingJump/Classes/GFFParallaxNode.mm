@@ -30,11 +30,5 @@
 	}
 }
 
-/*- (void)scrollY:(float)offset {
-	int idx = 0;
-	for (RepeatableLayer *child in children) {
-		[child scrollY:offset * ratios[idx++]];
-	}
-}*/
 
 @end
