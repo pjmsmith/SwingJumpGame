@@ -30,46 +30,38 @@ b2Joint *handJoint2;
 b2Joint *headJoint;
 b2Vec2 lastCamPos;
 b2Vec2 camPos;
-bool firstTime = true;
-GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
+GFFParallaxNode *parallaxNode;
 
 
 @implementation GameScene
 - (id) init {
     self = [super init];
     if (self != nil) {
+		parallaxNode = [GFFParallaxNode node];
         //CCSprite * bg = [CCSprite spriteWithFile:@"mainmenu_bg.png"]; //change this to be the level background
         //[bg setPosition:ccp(240, 165)];
 		
         //[self addChild:bg z:0];
         //[self addChild:[GameLayer node] z:1];
-		if (firstTime) {
-			RepeatableLayer *bg01 = [RepeatableLayer layerWithFile:@"bg01.png"];
-			[bg01 setScale:2.3f];
-			[bg01 setPosition:ccp(0,-50)];
-			[parallaxNode addChild:bg01 z:0 parallaxRatio:0.15f];
-			
-			RepeatableLayer *bg02 = [RepeatableLayer layerWithFile:@"bg02.png"];
-			[bg02 setScale:1.5f];
-			[parallaxNode addChild:bg02 z:1 parallaxRatio:0.6f];
-			
-			RepeatableLayer *fg = [RepeatableLayer layerWithFile:@"fg.png"];
-			[fg setPosition:ccp(0,-100)];
-			[parallaxNode addChild:fg z:2 parallaxRatio:1.0f];
-			firstTime = false;
-		}
-		/*
 		RepeatableLayer *bg01 = [RepeatableLayer layerWithFile:@"bg01.png"];
-		[parallaxNode addChild:bg01 z:0 parallaxRatio:0.05f];
+		[bg01 setScale:2.3f];
+		[bg01 setPosition:ccp(0,-50)];
+		[parallaxNode addChild:bg01 z:0 parallaxRatio:0.15f];
+		
 		RepeatableLayer *bg02 = [RepeatableLayer layerWithFile:@"bg02.png"];
-		[parallaxNode addChild:bg02 z:1 parallaxRatio:0.2f];
-		RepeatableLayer *fg01 = [RepeatableLayer layerWithFile:@"fg.png"];
-		[parallaxNode addChild:fg01 z:2 parallaxRatio:0.5f];
-		*/
-		/*RepeatableLayer *clouds = [RepeatableLayer layerWithFile:@"cloud.png"];
-		[clouds setPosition:ccp(0,120)];
-		[parallaxNode addChild:clouds z:0 parallaxRatio:0.5f];
-		 */
+		[bg02 setScale:1.5f];
+		[parallaxNode addChild:bg02 z:1 parallaxRatio:0.6f];
+		
+		RepeatableLayer *fg = [RepeatableLayer layerWithFile:@"fg.png"];
+		[fg setPosition:ccp(0,-100)];
+		[parallaxNode addChild:fg z:2 parallaxRatio:1.0f];
+		
+		RepeatableLayer *clouds = [RepeatableLayer layerWithFile:@"cloud.png"];
+		[clouds setPosition:ccp(0,250)];
+		[clouds setScale:2.0f];
+		[parallaxNode addChild:clouds z:3 parallaxRatio:0.5f];
+		
+		
 		[self addChild:parallaxNode z:0];
 		
         [self addChild:[ControlLayer node] z:1];
@@ -106,13 +98,12 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
         
 		world->SetContinuousPhysics(true);
 		
-		
 		GLESDebugDraw *m_debugDraw = new GLESDebugDraw(PTM_RATIO);
 		uint32 flags = 0;
 		flags += 1	* b2DebugDraw::e_shapeBit;
 		//flags += 1	* b2DebugDraw::e_jointBit;
 		//flags += 1	* b2DebugDraw::e_controllerBit;
-		//flags += 1	* b2DebugDraw::e_coreShapeBit;
+		flags += 1	* b2DebugDraw::e_coreShapeBit;
 		//flags += 1	* b2DebugDraw::e_aabbBit;
 		//flags += 1	* b2DebugDraw::e_obbBit;
 		//flags += 1	* b2DebugDraw::e_pairBit;
@@ -127,6 +118,7 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 		b2PolygonDef groundShapeDef;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
 		groundBody->CreateShape(&groundShapeDef);
+		
 		
         [self createSwingChain:350.0f];
 		
@@ -476,6 +468,9 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 	vel = links[numLinks-1]->GetLinearVelocity();
 	vel.x = 1.7*vel.x;
 	vel.y = 1.7*vel.y;
+	if (vel.x<0) {
+		vel = b2Vec2(0.0f,0.0f);
+	}
 	ragdoll->SetLinearVelocity(vel);
 	
 }
