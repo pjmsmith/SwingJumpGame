@@ -57,7 +57,7 @@ GFFParallaxNode *parallaxNode;
 		[parallaxNode addChild:fg z:2 parallaxRatio:1.0f];
 		
 		RepeatableLayer *clouds = [RepeatableLayer layerWithFile:@"cloud.png"];
-		[clouds setPosition:ccp(0,250)];
+		[clouds setPosition:ccp(0,0)];
 		[clouds setScale:2.0f];
 		[parallaxNode addChild:clouds z:3 parallaxRatio:0.5f];
 		
