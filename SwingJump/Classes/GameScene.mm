@@ -56,6 +56,7 @@ GFFParallaxNode *parallaxNode = [GFFParallaxNode node];
 			RepeatableLayer *fg = [RepeatableLayer layerWithFile:@"fg.png"];
 			[fg setPosition:ccp(0,-100)];
 			[parallaxNode addChild:fg z:2 parallaxRatio:1.0f];
+			firstTime = false;
 		}
 		/*
 		RepeatableLayer *bg01 = [RepeatableLayer layerWithFile:@"bg01.png"];
