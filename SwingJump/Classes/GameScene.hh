@@ -27,29 +27,36 @@
 
 @end
 
+@interface HUDLayer : CCLayer {
+    CCLabelAtlas *scoreDisplay;
+	float launchX;
+}
+@property (nonatomic, retain) CCLabelAtlas *scoreDisplay;
+@property (nonatomic) float launchX;
+-(void)gameSceneBtn: (id)sender;
+-(void)enableScore;
+-(void)setLaunchX:(float)xpos;
+@end
+
 @interface ControlLayer : CCLayer {
     CCSprite *leftArrow;
     CCSprite *rightArrow;
 	CCSprite *jumpButton;
     GameLayer *gl;
+	HUDLayer *hl;
     BOOL isRightBeingTouched;
     BOOL isLeftBeingTouched;
 	BOOL hasJumped;
 }
+
 @property (nonatomic, retain) CCSprite *leftArrow;
 @property (nonatomic, retain) CCSprite *rightArrow;
 @property (nonatomic, retain) CCSprite *jumpButton;
 @property (nonatomic, retain) GameLayer *gl;
+@property (nonatomic, retain) HUDLayer *hl;
 @property (nonatomic) BOOL isRightBeingTouched;
 @property (nonatomic) BOOL isLeftBeingTouched;
 @property (nonatomic) BOOL hasJumped;
 
 @end
 
-@interface HUDLayer : CCLayer {
-    CCLabelAtlas *scoreDisplay;
-}
-@property (nonatomic, retain) CCLabelAtlas *scoreDisplay;
-
--(void)gameSceneBtn: (id)sender;
-@end

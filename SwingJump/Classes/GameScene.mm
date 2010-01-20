@@ -65,7 +65,6 @@ GFFParallaxNode *parallaxNode;
 		[self addChild:parallaxNode z:0];
 		
         [self addChild:[ControlLayer node] z:1];
-        [self addChild:[HUDLayer node] z:2];
     }
     return self;
 }
@@ -76,11 +75,15 @@ GFFParallaxNode *parallaxNode;
 - (id) init {
     self = [super init];
     if (self != nil) {
-
         CCSprite *swingSet = [CCSprite spriteWithFile:@"swingset_supports.png"];
         [swingSet setScaleY:1.6];
         [swingSet setPosition:ccp(240,210)];
         [self addChild:swingSet z:4];
+		
+        //swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
+        //[swingChain setAnchorPoint:ccp(0.5,1)];
+        //[swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
+        //[self addChild:swingChain z:1];
 		
 		//Create a world
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -117,8 +120,11 @@ GFFParallaxNode *parallaxNode;
 		
 		
         [self createSwingChain:350.0f];
-        [self schedule:@selector(tick:)];
-
+		
+		[self schedule:@selector(tick:)];
+		
+		
+		
     }
     return self;
 }
@@ -193,9 +199,8 @@ GFFParallaxNode *parallaxNode;
     revDef.enableLimit = true;
     world->CreateJoint(&revDef); 
 
-    ragdoll = new Biped(world, b2Vec2(470.0f/PTM_RATIO/2, 160.0f/PTM_RATIO));
-    ragdoll->SetSittingLimits();
-
+    ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
+	
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
 	jointDef.length = 0.1f;
@@ -259,6 +264,7 @@ GFFParallaxNode *parallaxNode;
 	//jointDef.frequencyHz = 2.0f;
     headJoint = world->CreateJoint(&jointDef); 
     
+    ragdoll->SetSittingLimits();
 	camPos = ragdoll->Head->GetPosition();
 	lastCamPos = camPos;
 	//b2ContactListener *contactListener;
@@ -273,8 +279,16 @@ GFFParallaxNode *parallaxNode;
 }
 
 -(void)tick:(ccTime) dt{
-    world->Step(dt, 10, 8);
-
+	world->Step(dt, 10, 8);
+	for(b2Body* b = world->GetBodyList();b;b=b->GetNext())
+	{
+		if(b->GetUserData()!=NULL)
+		{
+			CCSprite* ballData = (CCSprite*)b->GetUserData();
+			ballData.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+		}
+	}
+	
 	b2Vec2 camPos;
 	camPos = ragdoll->Head->GetPosition();
 	camX = camPos.x;
@@ -296,9 +310,9 @@ GFFParallaxNode *parallaxNode;
 	if(camX > 13.0f) {
 		[self performSelectorInBackground:@selector(CreateRandomObjects) withObject:nil];
 	}
-	float xz = (rand()%10-4);
 	//Delete Objects
 	[self performSelectorInBackground:@selector(RemovePastObjects) withObject:nil];
+
 	
 }
 
@@ -309,7 +323,6 @@ GFFParallaxNode *parallaxNode;
 	int randnum = (rand()%10000)+1;
 	if(randnum<randObjectPercentage*10000) {
 		b2BodyDef collisionObjectDef;
-		float xz = (rand()%10-4);
 		collisionObjectDef.position.Set(currPos.x+10.0f,currPos.y+(rand()%10-4));
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
@@ -338,6 +351,7 @@ GFFParallaxNode *parallaxNode;
 @synthesize rightArrow;
 @synthesize jumpButton;
 @synthesize gl;
+@synthesize hl;
 @synthesize isRightBeingTouched;
 @synthesize isLeftBeingTouched;
 @synthesize hasJumped;
@@ -366,6 +380,9 @@ GFFParallaxNode *parallaxNode;
         
         gl = [GameLayer node];
         [self addChild:gl z:0]; //added as a child so touchesEnded can call a function contained in GameLayer
+		hl = [HUDLayer node];
+		[self addChild:hl z:2];
+        //gl = [GameLayer node];
     }
     return self;
 }
@@ -437,8 +454,12 @@ GFFParallaxNode *parallaxNode;
 {
     if(isLeftBeingTouched) 
     {
+		//for(int i = 0; i < numLinks; i++)
+		//{
 		links[numLinks-1]->ApplyForce(b2Vec2(-20.0f, 5.0f),links[numLinks-1]->GetPosition());
+		//}
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
+	
 	}    
 }
 
@@ -446,13 +467,14 @@ GFFParallaxNode *parallaxNode;
 {
     if(isRightBeingTouched) 
     {
+		//for(int i = 0; i < numLinks; i++)
+		//{
 		links[numLinks-1]->ApplyForce(b2Vec2(20.0f, 5.0f),links[numLinks-1]->GetPosition());
+		//}
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
 -(void)launch{
-    //MainMenuScene * ms = [MainMenuScene node];
-	//[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
 	ragdoll->SetDefaultLimits();
 	world->DestroyJoint(headJoint);
 	world->DestroyJoint(handJoint1);
@@ -469,6 +491,9 @@ GFFParallaxNode *parallaxNode;
 	}
 	ragdoll->SetLinearVelocity(vel);
 	
+	[hl setLaunchX:ragdoll->Head->GetPosition().x];
+	[hl enableScore];
+	
 }
 
 @end
@@ -477,6 +502,7 @@ GFFParallaxNode *parallaxNode;
 
 @implementation HUDLayer
 @synthesize scoreDisplay;
+@synthesize launchX;
 
 - (id) init {
     self = [super init];
@@ -494,10 +520,14 @@ GFFParallaxNode *parallaxNode;
         [menu setPosition:ccp(440, 20)];
         [menu alignItemsVerticallyWithPadding:10];
         [self addChild:menu];
-        scoreDisplay = [[CCLabelAtlas labelAtlasWithString:@"0" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
-        [scoreDisplay setPosition:ccp(320, 290)];
-        [self addChild:scoreDisplay];
+		
+		scoreDisplay = [[CCLabelAtlas labelAtlasWithString:@"0" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
+		[scoreDisplay setPosition:ccp(320, 290)];
+		[scoreDisplay setVisible:false];
+		[self addChild:scoreDisplay z:2 tag:100];
 		[self schedule:@selector(tick:)];
+
+		launchX = 0.0f;
     }
     
     return self;
@@ -505,18 +535,26 @@ GFFParallaxNode *parallaxNode;
 
 -(void)gameSceneBtn: (id)sender {
     MainMenuScene * ms = [MainMenuScene node];
-	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: ms]];
+	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
 }
 
 -(void)resetBtn: (id)sender {
     GameScene *gs = [GameScene node];
-    [[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: gs]];
+	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: gs]];
+}
+
+-(void)enableScore {
+	[[self getChildByTag:100] setVisible:true];
+}
+
+-(void)setLaunchX:(float)xpos {
+	launchX = xpos;
 }
 
 
 -(void)tick:(ccTime) dt{
 	b2Vec2 headPos = ragdoll->Head->GetPosition();
-	NSString *strHeadPos = [NSString stringWithFormat:@"%8.0f",headPos.x];
+	NSString *strHeadPos = [NSString stringWithFormat:@"%8.0f",headPos.x-launchX];
 	//scoreDisplay = [[CCLabelAtlas labelAtlasWithString:strHeadPos charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
 	[scoreDisplay setString:strHeadPos];
 	[scoreDisplay updateAtlasValues];
