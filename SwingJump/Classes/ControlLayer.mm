@@ -155,7 +155,7 @@
 		vel = b2Vec2(0.0f,0.0f);
 	}
 	ragdoll->SetLinearVelocity(vel);
-	
+	ragdoll->setLaunched(TRUE);
 	[hl setLaunchX:ragdoll->Head->GetPosition().x];
 	[hl enableScore];
 	

@@ -15,6 +15,8 @@
 #define handLink numLinks-6
 #define headLinkLength 4.6f
 #define randObjectPercentage 0.08f
+#define timeStationaryToStop 1.0f //seconds
+#define speedStationaryToStop 1.0f //m/s
 
 @interface GameLayer : CCLayer {
     b2World *world;
@@ -22,6 +24,7 @@
 @property (nonatomic, readwrite) b2World *world;
 
 -(void) createSwingChain:(float)yPos;
+-(void)DetectStopped:(float)dt;
 
 @end
 
@@ -40,5 +43,6 @@ extern b2Joint *handJoint2;
 extern b2Joint *headJoint;
 extern b2Vec2 lastCamPos;
 extern b2Vec2 camPos;
+extern float timeStationary;
 
 

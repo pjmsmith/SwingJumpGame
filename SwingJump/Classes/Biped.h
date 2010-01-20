@@ -19,12 +19,16 @@ public:
 	b2RevoluteJoint		*LAnkle, *RAnkle, *LKnee, *RKnee, *LHip, *RHip, 
 						*LowerAbs, *UpperAbs, *LowerNeck, *UpperNeck,
 						*LShoulder, *RShoulder, *LElbow, *RElbow, *LWrist, *RWrist;
+	bool launchStatus;
 	void SetSittingLimits();
 	void SetDefaultLimits();
 	void DestroyAllJoints();
 	void PumpFwdLimits();
 	void PumpBckwdLimits();
 	void SetLinearVelocity(const b2Vec2& velocity);
+	void PutToSleep();
+	bool hasLaunched();
+	void setLaunched(bool);
 };
 
 #endif
