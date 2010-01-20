@@ -44,7 +44,7 @@
 -(void)startGame: (id)sender {
 	GameScene * gs = [GameScene node];
 	//[[CCDirector sharedDirector] runWithScene: gs];
-	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:1.0 scene: gs]];
+	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: gs]];
     NSLog(@"start game");
 }
 -(void)help: (id)sender {
