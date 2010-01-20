@@ -199,7 +199,7 @@ GFFParallaxNode *parallaxNode;
     revDef.enableLimit = true;
     world->CreateJoint(&revDef); 
 
-    ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
+    ragdoll = new Biped(world, b2Vec2(470.0f/PTM_RATIO/2, 160.0f/PTM_RATIO));
 	
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
@@ -535,12 +535,12 @@ GFFParallaxNode *parallaxNode;
 
 -(void)gameSceneBtn: (id)sender {
     MainMenuScene * ms = [MainMenuScene node];
-	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
+	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: ms]];
 }
 
 -(void)resetBtn: (id)sender {
     GameScene *gs = [GameScene node];
-	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: gs]];
+	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: gs]];
 }
 
 -(void)enableScore {
