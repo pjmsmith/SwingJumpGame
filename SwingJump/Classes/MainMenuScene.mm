@@ -42,9 +42,7 @@
     return self;
 }
 -(void)startGame: (id)sender {
-	GameScene * gs = [GameScene alloc];
-    [gs performSelectorOnMainThread:@selector(init) withObject:nil waitUntilDone:YES];
-    [gs autorelease];
+	GameScene * gs = [GameScene node];
 	//[[CCDirector sharedDirector] runWithScene: gs];
 	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:1.0 scene: gs]];
     NSLog(@"start game");
