@@ -53,7 +53,6 @@ float timeStationary;
 		b2Vec2 gravity(0.0f, -10.0f);
 		bool doSleep = true;
 		world = new b2World(worldAABB, gravity, doSleep);
-        
 		world->SetContinuousPhysics(true);
 		
 		GLESDebugDraw *m_debugDraw = new GLESDebugDraw(PTM_RATIO);
@@ -279,7 +278,8 @@ float timeStationary;
 	
 }
 -(void)DetectStopped:(float)dt{
-	float linearVel = ragdoll->Head->GetLinearVelocity().x;
+	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
+	float linearVel = b2Sqrt((vel.x*vel.x) + (vel.y*vel.y));
 	if (linearVel<speedStationaryToStop) {
 		timeStationary = timeStationary+dt;
 		if (timeStationary>timeStationaryToStop) {
@@ -291,6 +291,7 @@ float timeStationary;
 		timeStationary = 0.0f;
 	}
 }
+
 -(void)CreateRandomObjects{
 	b2Vec2 currPos = ragdoll->Head->GetPosition(); //Get Current Position
 	//b2Vec2 headVel = ragdoll->Head->GetVelocity();
