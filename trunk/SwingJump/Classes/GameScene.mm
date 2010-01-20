@@ -90,8 +90,8 @@ GFFParallaxNode *parallaxNode;
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		b2AABB worldAABB;
 		float borderSize = 96/PTM_RATIO;
-		worldAABB.lowerBound.Set(-10*borderSize, -10*borderSize);
-		worldAABB.upperBound.Set(10*screenSize.width/PTM_RATIO+borderSize, 10*screenSize.height/PTM_RATIO+borderSize);
+		worldAABB.lowerBound.Set(-20*borderSize, -20*borderSize);
+		worldAABB.upperBound.Set(20*screenSize.width/PTM_RATIO+borderSize, 20*screenSize.height/PTM_RATIO+borderSize);
 		b2Vec2 gravity(0.0f, -10.0f);
 		bool doSleep = true;
 		world = new b2World(worldAABB, gravity, doSleep);
@@ -227,33 +227,13 @@ GFFParallaxNode *parallaxNode;
 	//seatPos.x = seatPos.x-.2f;
     //seatPos.y = seatPos.y+.01f;
 
-	/*jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), lseatPos);
-    jointDef.collideConnected = false;
-	jointDef.length = 5.0*(numLinks*1.016)/PTM_RATIO;
-    world->CreateJoint(&jointDef);
-	
-	jointDef.Initialize(&(*links[0]),&(*links[numLinks-1]), links[0]->GetPosition(), rseatPos);
-    jointDef.collideConnected = false;
-	jointDef.length = 5.0*(numLinks*1.016)/PTM_RATIO;
-    world->CreateJoint(&jointDef);
-*/
 	jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), seatPos);
     jointDef.collideConnected = false;
 	jointDef.length = 5.0*(numLinks*1.013)/PTM_RATIO;
 	//jointDef.frequencyHz = 12.0f;
     world->CreateJoint(&jointDef);
 	//jointDef.frequencyHz = 0.0f;
-	
-	/*jointDef.Initialize(&(*links[numLinks-3]), &(*links[numLinks-1]), links[numLinks-3]->GetPosition(), lseatPos);
-    jointDef.collideConnected = false;
-	jointDef.length = 15.0f/PTM_RATIO;
-    world->CreateJoint(&jointDef);
-	
-	jointDef.Initialize(&(*links[numLinks-3]), &(*links[numLinks-1]), links[numLinks-3]->GetPosition(), rseatPos);
-    jointDef.collideConnected = false;
-	jointDef.length = 15.0f/PTM_RATIO;
-    world->CreateJoint(&jointDef);
-*/
+
 	jointDef.Initialize(&(*links[numLinks-20]), &(*links[numLinks-1]), links[numLinks-20]->GetPosition(), lseatPos);
     jointDef.collideConnected = false;
 	jointDef.length = 101.5f/PTM_RATIO;
@@ -309,6 +289,7 @@ GFFParallaxNode *parallaxNode;
 			ballData.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
 		}
 	}
+	
 	b2Vec2 camPos;
 	camPos = ragdoll->Head->GetPosition();
 	camX = camPos.x;
@@ -322,11 +303,51 @@ GFFParallaxNode *parallaxNode;
 	[parallaxNode scrollX:scrolldiff.x scrollY:-scrolldiff.y];
 	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
 	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415.0f];
-	b2XForm groundPos = groundBody->GetXForm();
+	
+	//Move Ground
+	groundBody->SetXForm(b2Vec2((camX*PTM_RATIO-80.0f)/PTM_RATIO,2.0f), 0.0f);
+	
+	//Create Objects
+	if(camX > 13.0f) {
+		[self performSelectorInBackground:@selector(CreateRandomObjects) withObject:nil];
+	}
+	float xz = (rand()%10-4);
+	NSLog(@"%f",xz);
+	//Delete Objects
+	[self performSelectorInBackground:@selector(RemovePastObjects) withObject:nil];
 
-	groundBody->SetXForm(b2Vec2((camX*PTM_RATIO-80.0f)/PTM_RATIO,groundPos.position.y), 0.0f);
+	
 }
 
+-(void)CreateRandomObjects{
+	b2Vec2 currPos = ragdoll->Head->GetPosition(); //Get Current Position
+	//b2Vec2 headVel = ragdoll->Head->GetVelocity();
+	
+	int randnum = (rand()%10000)+1;
+	if(randnum<randObjectPercentage*10000) {
+		b2BodyDef collisionObjectDef;
+		float xz = (rand()%10-4);
+		collisionObjectDef.position.Set(currPos.x+10.0f,currPos.y+(rand()%10-4));
+		b2Body *collisionObject;
+		collisionObject = world->CreateBody(&collisionObjectDef);
+		b2PolygonDef collisionObjectShapeDef;
+		collisionObjectShapeDef.SetAsBox(1.0f, 1.0f);
+		collisionObjectShapeDef.filter.categoryBits = 0x0000;
+		collisionObject->CreateShape(&collisionObjectShapeDef);
+	}
+}
+
+-(void)RemovePastObjects{
+	for(b2Body* b = world->GetBodyList();b;b=b->GetNext())
+	{
+		b2Vec2 pos = b->GetPosition();
+		b2Vec2 cam = ragdoll->Head->GetPosition();
+		if(pos.x<(cam.x-7.5f))
+		{
+			world->DestroyBody(b);
+		}
+	}
+}
 @end
 
 @implementation ControlLayer
