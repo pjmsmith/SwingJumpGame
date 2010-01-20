@@ -76,7 +76,6 @@ GFFParallaxNode *parallaxNode;
 - (id) init {
     self = [super init];
     if (self != nil) {
-        [self schedule:@selector(tick:)];
 
         CCSprite *swingSet = [CCSprite spriteWithFile:@"swingset_supports.png"];
         [swingSet setScaleY:1.6];
@@ -118,6 +117,7 @@ GFFParallaxNode *parallaxNode;
 		
 		
         [self createSwingChain:350.0f];
+        [self schedule:@selector(tick:)];
 
     }
     return self;
@@ -305,7 +305,6 @@ GFFParallaxNode *parallaxNode;
 		[self performSelectorInBackground:@selector(CreateRandomObjects) withObject:nil];
 	}
 	float xz = (rand()%10-4);
-	NSLog(@"%f",xz);
 	//Delete Objects
 	[self performSelectorInBackground:@selector(RemovePastObjects) withObject:nil];
 
@@ -376,7 +375,6 @@ GFFParallaxNode *parallaxNode;
         
         gl = [GameLayer node];
         [self addChild:gl z:0]; //added as a child so touchesEnded can call a function contained in GameLayer
-        //gl = [GameLayer node];
     }
     return self;
 }
@@ -448,12 +446,8 @@ GFFParallaxNode *parallaxNode;
 {
     if(isLeftBeingTouched) 
     {
-		//for(int i = 0; i < numLinks; i++)
-		//{
 		links[numLinks-1]->ApplyForce(b2Vec2(-20.0f, 5.0f),links[numLinks-1]->GetPosition());
-		//}
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
-	
 	}    
 }
 
@@ -461,10 +455,7 @@ GFFParallaxNode *parallaxNode;
 {
     if(isRightBeingTouched) 
     {
-		//for(int i = 0; i < numLinks; i++)
-		//{
 		links[numLinks-1]->ApplyForce(b2Vec2(20.0f, 5.0f),links[numLinks-1]->GetPosition());
-		//}
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
 	}
 }
@@ -523,12 +514,12 @@ GFFParallaxNode *parallaxNode;
 
 -(void)gameSceneBtn: (id)sender {
     MainMenuScene * ms = [MainMenuScene node];
-	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: ms]];
+	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: ms]];
 }
 
 -(void)resetBtn: (id)sender {
     GameScene *gs = [GameScene node];
-	[[CCDirector sharedDirector] replaceScene: [CCCrossFadeTransition transitionWithDuration:0.5 scene: gs]];
+    [[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: gs]];
 }
 
 
