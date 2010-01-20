@@ -193,8 +193,9 @@ GFFParallaxNode *parallaxNode;
     revDef.enableLimit = true;
     world->CreateJoint(&revDef); 
 
-    ragdoll = new Biped(world, b2Vec2(600.0f/PTM_RATIO/2, 220.0f/PTM_RATIO));
-	
+    ragdoll = new Biped(world, b2Vec2(500.0f/PTM_RATIO/2, 180.0f/PTM_RATIO));
+    ragdoll->SetSittingLimits();
+
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
 	jointDef.length = 0.1f;
@@ -258,7 +259,6 @@ GFFParallaxNode *parallaxNode;
 	//jointDef.frequencyHz = 2.0f;
     headJoint = world->CreateJoint(&jointDef); 
     
-    ragdoll->SetSittingLimits();
 	camPos = ragdoll->Head->GetPosition();
 	lastCamPos = camPos;
 	//b2ContactListener *contactListener;
