@@ -286,7 +286,27 @@ void Biped::SetLinearVelocity(const b2Vec2& velocity)
 	LHand->SetLinearVelocity(velocity);
 	RHand->SetLinearVelocity(velocity);
 }
-
+void Biped::PutToSleep()
+{
+	
+	LFoot->PutToSleep();
+	RFoot->PutToSleep();
+	LCalf->PutToSleep();
+	RCalf->PutToSleep();
+	LThigh->PutToSleep();
+	RThigh->PutToSleep();
+	Pelvis->PutToSleep();
+	Stomach->PutToSleep();
+	Chest->PutToSleep();
+	Neck->PutToSleep();
+	Head->PutToSleep();
+	LUpperArm->PutToSleep();
+	RUpperArm->PutToSleep();
+	LForearm->PutToSleep();
+	RForearm->PutToSleep();
+	LHand->PutToSleep();
+	RHand->PutToSleep();
+}
 void Biped::DestroyAllJoints()
 {
 	m_world->DestroyJoint(LAnkle);
@@ -326,4 +346,12 @@ Biped::~Biped(void)
 	m_world->DestroyBody(RForearm);
 	m_world->DestroyBody(LHand);
 	m_world->DestroyBody(RHand);
+}
+
+void Biped::setLaunched(bool z) {
+	launchStatus = z;
+}
+
+bool Biped::hasLaunched(){
+	return launchStatus;
 }

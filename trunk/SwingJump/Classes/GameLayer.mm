@@ -26,6 +26,7 @@ b2Joint *handJoint2;
 b2Joint *headJoint;
 b2Vec2 lastCamPos;
 b2Vec2 camPos;
+float timeStationary;
 
 @implementation GameLayer
 @synthesize world;
@@ -81,7 +82,7 @@ b2Vec2 camPos;
 		
 		[self schedule:@selector(tick:)];
 		
-		
+		timeStationary = 0;
 		
     }
     return self;
@@ -158,7 +159,7 @@ b2Vec2 camPos;
     world->CreateJoint(&revDef); 
     
     ragdoll = new Biped(world, b2Vec2(470.0f/PTM_RATIO/2, 160.0f/PTM_RATIO));
-	
+	ragdoll->setLaunched(false);
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
 	jointDef.length = 0.1f;
@@ -270,10 +271,26 @@ b2Vec2 camPos;
 	}
 	//Delete Objects
 	[self performSelectorInBackground:@selector(RemovePastObjects) withObject:nil];
-    
+	
+	//Detect Stopped
+	if (ragdoll->hasLaunched()) {
+		[self DetectStopped:dt];
+	}
 	
 }
-
+-(void)DetectStopped:(float)dt{
+	float linearVel = ragdoll->Head->GetLinearVelocity().x;
+	if (linearVel<speedStationaryToStop) {
+		timeStationary = timeStationary+dt;
+		if (timeStationary>timeStationaryToStop) {
+			ragdoll->PutToSleep();
+			[self unschedule:@selector(tick:)];
+		}
+	}
+	else {
+		timeStationary = 0.0f;
+	}
+}
 -(void)CreateRandomObjects{
 	b2Vec2 currPos = ragdoll->Head->GetPosition(); //Get Current Position
 	//b2Vec2 headVel = ragdoll->Head->GetVelocity();
