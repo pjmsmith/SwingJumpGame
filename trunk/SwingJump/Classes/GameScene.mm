@@ -193,7 +193,7 @@ GFFParallaxNode *parallaxNode;
     revDef.enableLimit = true;
     world->CreateJoint(&revDef); 
 
-    ragdoll = new Biped(world, b2Vec2(500.0f/PTM_RATIO/2, 180.0f/PTM_RATIO));
+    ragdoll = new Biped(world, b2Vec2(470.0f/PTM_RATIO/2, 160.0f/PTM_RATIO));
     ragdoll->SetSittingLimits();
 
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
@@ -273,16 +273,8 @@ GFFParallaxNode *parallaxNode;
 }
 
 -(void)tick:(ccTime) dt{
-	world->Step(dt, 10, 8);
-	for(b2Body* b = world->GetBodyList();b;b=b->GetNext())
-	{
-		if(b->GetUserData()!=NULL)
-		{
-			CCSprite* ballData = (CCSprite*)b->GetUserData();
-			ballData.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-		}
-	}
-	
+    world->Step(dt, 10, 8);
+
 	b2Vec2 camPos;
 	camPos = ragdoll->Head->GetPosition();
 	camX = camPos.x;
@@ -307,7 +299,6 @@ GFFParallaxNode *parallaxNode;
 	float xz = (rand()%10-4);
 	//Delete Objects
 	[self performSelectorInBackground:@selector(RemovePastObjects) withObject:nil];
-
 	
 }
 
