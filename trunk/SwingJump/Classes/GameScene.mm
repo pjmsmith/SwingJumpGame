@@ -76,15 +76,12 @@ GFFParallaxNode *parallaxNode;
 - (id) init {
     self = [super init];
     if (self != nil) {
+        [self schedule:@selector(tick:)];
+
         CCSprite *swingSet = [CCSprite spriteWithFile:@"swingset_supports.png"];
         [swingSet setScaleY:1.6];
         [swingSet setPosition:ccp(240,210)];
         [self addChild:swingSet z:4];
-		
-        //swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
-        //[swingChain setAnchorPoint:ccp(0.5,1)];
-        //[swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
-        //[self addChild:swingChain z:1];
 		
 		//Create a world
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -121,11 +118,7 @@ GFFParallaxNode *parallaxNode;
 		
 		
         [self createSwingChain:350.0f];
-		
-		[self schedule:@selector(tick:)];
-		
-		
-		
+
     }
     return self;
 }
