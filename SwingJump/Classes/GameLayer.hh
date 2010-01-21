@@ -18,6 +18,15 @@
 #define timeStationaryToStop 1.0f //seconds
 #define speedStationaryToStop 1.0f //m/s
 
+class ContactListener : public b2ContactListener
+{
+public:        
+	void Add(const b2ContactPoint* point);
+	void Persist(const b2ContactPoint* point);    
+	void Remove(const b2ContactPoint* point);    
+	void Result(const b2ContactResult* point);
+};
+
 @interface GameLayer : CCLayer {
     b2World *world;
 }
@@ -44,5 +53,6 @@ extern b2Joint *headJoint;
 extern b2Vec2 lastCamPos;
 extern b2Vec2 camPos;
 extern float timeStationary;
+extern ContactListener *contactListener;
 
 
