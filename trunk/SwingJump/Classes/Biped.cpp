@@ -307,6 +307,49 @@ void Biped::PutToSleep()
 	LHand->PutToSleep();
 	RHand->PutToSleep();
 }
+void Biped::SetLinearDamping(float damp)
+{
+	
+	LFoot->m_linearDamping = damp;
+	RFoot->m_linearDamping = damp;
+	LCalf->m_linearDamping = damp;
+	RCalf->m_linearDamping = damp;
+	LThigh->m_linearDamping = damp;
+	RThigh->m_linearDamping = damp;
+	Pelvis->m_linearDamping = damp;
+	Stomach->m_linearDamping = damp;
+	Chest->m_linearDamping = damp;
+	Neck->m_linearDamping = damp;
+	Head->m_linearDamping = damp;
+	LUpperArm->m_linearDamping = damp;
+	RUpperArm->m_linearDamping = damp;
+	LForearm->m_linearDamping = damp;
+	RForearm->m_linearDamping = damp;
+	LHand->m_linearDamping = damp;
+	RHand->m_linearDamping = damp;
+}
+void Biped::SetAngularDamping(float damp)
+{
+	
+	LFoot->m_angularDamping = damp;
+	RFoot->m_angularDamping = damp;
+	LCalf->m_angularDamping = damp;
+	RCalf->m_angularDamping = damp;
+	LThigh->m_angularDamping = damp;
+	RThigh->m_angularDamping = damp;
+	Pelvis->m_angularDamping = damp;
+	Stomach->m_angularDamping = damp;
+	Chest->m_angularDamping = damp;
+	Neck->m_angularDamping = damp;
+	Head->m_angularDamping = damp;
+	LUpperArm->m_angularDamping = damp;
+	RUpperArm->m_angularDamping = damp;
+	LForearm->m_angularDamping = damp;
+	RForearm->m_angularDamping = damp;
+	LHand->m_angularDamping = damp;
+	RHand->m_angularDamping = damp;
+}
+
 void Biped::DestroyAllJoints()
 {
 	m_world->DestroyJoint(LAnkle);
