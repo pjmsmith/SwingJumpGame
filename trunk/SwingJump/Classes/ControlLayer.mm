@@ -123,8 +123,9 @@
 		//{
 		links[numLinks-1]->ApplyForce(b2Vec2(-20.0f, 5.0f),links[numLinks-1]->GetPosition());
 		//}
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainLeft)], nil]];
-        
+        [pool release];
 	}    
 }
 
@@ -136,8 +137,10 @@
 		//{
 		links[numLinks-1]->ApplyForce(b2Vec2(20.0f, 5.0f),links[numLinks-1]->GetPosition());
 		//}
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		[self runAction:[CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0],[CCCallFunc actionWithTarget:self selector:@selector(rotateChainRight)], nil]];
-	}
+        [pool release];
+    }
 }
 -(void)launch{
 	ragdoll->SetDefaultLimits();
