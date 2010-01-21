@@ -30,7 +30,7 @@ float timeStationary;
 ContactListener *contactListener;
 
 void ContactListener::Add(const b2ContactPoint* point) {
-    print("Hello World");
+    printf("Hello World");
 }
 
 void ContactListener::Persist(const b2ContactPoint* point) {
