@@ -27,6 +27,22 @@ b2Joint *headJoint;
 b2Vec2 lastCamPos;
 b2Vec2 camPos;
 float timeStationary;
+ContactListener *contactListener;
+
+void ContactListener::Add(const b2ContactPoint* point) {
+    print("Hello World");
+}
+
+void ContactListener::Persist(const b2ContactPoint* point) {
+}
+
+void ContactListener::Remove(const b2ContactPoint* point) {
+    
+}
+
+void ContactListener::Result(const b2ContactResult* result) {
+    
+}
 
 @implementation GameLayer
 @synthesize world;
@@ -47,6 +63,7 @@ float timeStationary;
 		//Create a world
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		b2AABB worldAABB;
+        
 		float borderSize = 96/PTM_RATIO;
 		worldAABB.lowerBound.Set(-20*borderSize, -20*borderSize);
 		worldAABB.upperBound.Set(20*screenSize.width/PTM_RATIO+borderSize, 20*screenSize.height/PTM_RATIO+borderSize);
@@ -54,7 +71,10 @@ float timeStationary;
 		bool doSleep = true;
 		world = new b2World(worldAABB, gravity, doSleep);
 		world->SetContinuousPhysics(true);
-		
+        
+        contactListener = new ContactListener();
+        world->SetContactListener(contactListener);
+        
 		GLESDebugDraw *m_debugDraw = new GLESDebugDraw(PTM_RATIO);
 		uint32 flags = 0;
 		flags += 1	* b2DebugDraw::e_shapeBit;
@@ -277,6 +297,7 @@ float timeStationary;
 	}
 	
 }
+
 -(void)DetectStopped:(float)dt{
 	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
 	float linearVel = b2Sqrt((vel.x*vel.x) + (vel.y*vel.y));
