@@ -30,7 +30,7 @@ float timeStationary;
 ContactListener *contactListener;
 
 void ContactListener::Add(const b2ContactPoint* point) {
-    printf("Hello World");
+
 }
 
 void ContactListener::Persist(const b2ContactPoint* point) {
@@ -326,6 +326,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(1.0f, 1.0f);
 		collisionObjectShapeDef.filter.categoryBits = 0x0000;
+        collisionObjectShapeDef.userData 
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
