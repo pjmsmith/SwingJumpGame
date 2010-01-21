@@ -29,6 +29,8 @@ public:
 	void PutToSleep();
 	bool hasLaunched();
 	void setLaunched(bool);
+	void SetLinearDamping(float damp);
+	void SetAngularDamping(float damp);
 };
 
 #endif

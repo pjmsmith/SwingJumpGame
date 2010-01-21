@@ -94,6 +94,17 @@
             } 
         }
 	}
+	if (!ragdoll->hasLaunched())
+	{
+		for(int i = 0; i < numLinks; i++)
+		{
+			links[i]->m_linearDamping=0.0f;
+			links[i]->m_angularDamping=0.0f;
+		}
+		ragdoll->SetLinearDamping(0.0f);
+		ragdoll->SetAngularDamping(0.0f);
+	}
+
 	return kEventHandled;
 }
 
