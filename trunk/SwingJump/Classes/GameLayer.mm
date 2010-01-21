@@ -30,7 +30,7 @@ float timeStationary;
 ContactListener *contactListener;
 
 void ContactListener::Add(const b2ContactPoint* point) {
-
+    printf("Hello World");
 }
 
 void ContactListener::Persist(const b2ContactPoint* point) {
@@ -148,9 +148,10 @@ void ContactListener::Result(const b2ContactResult* result) {
 		dj.length = 5.0f/PTM_RATIO;
 		world->CreateJoint(&dj);
 		
-		if (i>2){
+		if (i>3){
 			dj.Initialize(&(*chainBody), &(*links[i-3]), chainBody->GetPosition(),links[i-3]->GetPosition());
 			dj.length = 15.0f/PTM_RATIO;
+			//dj.frequencyHz = 12.0f;
 			world->CreateJoint(&dj);
 		}
 		
@@ -177,7 +178,7 @@ void ContactListener::Result(const b2ContactResult* result) {
     revDef.enableLimit = true;
     world->CreateJoint(&revDef); 
     
-    ragdoll = new Biped(world, b2Vec2(470.0f/PTM_RATIO/2, 160.0f/PTM_RATIO));
+    ragdoll = new Biped(world, b2Vec2(470.0f/PTM_RATIO/2, 165.0f/PTM_RATIO));
 	ragdoll->setLaunched(false);
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
@@ -204,25 +205,28 @@ void ContactListener::Result(const b2ContactResult* result) {
 	//seatPos.x = seatPos.x-.2f;
     //seatPos.y = seatPos.y+.01f;
     
-	jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), seatPos);
-    jointDef.collideConnected = false;
-	jointDef.length = 5.0*(numLinks*1.013)/PTM_RATIO;
-	//jointDef.frequencyHz = 12.0f;
-    world->CreateJoint(&jointDef);
-	//jointDef.frequencyHz = 0.0f;
+	/*jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), seatPos);
+	 jointDef.collideConnected = false;
+	 jointDef.length = 5.2*(numLinks)/PTM_RATIO;
+	 //jointDef.frequencyHz = 12.0f;
+	 world->CreateJoint(&jointDef);
+	 //jointDef.frequencyHz = 0.0f;*/
     
-	jointDef.Initialize(&(*links[numLinks-20]), &(*links[numLinks-1]), links[numLinks-20]->GetPosition(), lseatPos);
+	jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), lseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 101.5f/PTM_RATIO;
+	//jointDef.frequencyHz = 12.0f;
+	jointDef.length = 5.1f*(numLinks)/PTM_RATIO;
     world->CreateJoint(&jointDef);
 	
-	jointDef.Initialize(&(*links[numLinks-20]), &(*links[numLinks-1]), links[numLinks-20]->GetPosition(), rseatPos);
+	jointDef.Initialize(&(*links[0]), &(*links[numLinks-1]), links[0]->GetPosition(), rseatPos);
     jointDef.collideConnected = false;
-	jointDef.length = 101.5f/PTM_RATIO;
+	//jointDef.frequencyHz = 12.0f;
+	jointDef.length = 5.1f*numLinks/PTM_RATIO;
     world->CreateJoint(&jointDef);
 	
     jointDef.Initialize(ragdoll->Pelvis, &(*links[numLinks-1]), ragdoll->Pelvis->GetPosition(), lseatPos);
     jointDef.collideConnected = false;
+	jointDef.frequencyHz = 0.0f;
 	jointDef.length = 0.023f;
     assJoint1 = world->CreateJoint(&jointDef);
 	
@@ -247,6 +251,13 @@ void ContactListener::Result(const b2ContactResult* result) {
 	lastCamPos = camPos;
 	//b2ContactListener *contactListener;
 	//world->SetContactListener(contactListener);
+	for(int i = 0; i < numLinks; i++)
+    {
+		links[i]->m_linearDamping=13.0f;
+		links[i]->m_angularDamping=13.0f;
+	}
+	ragdoll->SetLinearDamping(13.0f);
+	ragdoll->SetAngularDamping(13.0f);
 }
 
 -(void) draw{
@@ -257,15 +268,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 }
 
 -(void)tick:(ccTime) dt{
-	world->Step(dt, 10, 8);
-	for(b2Body* b = world->GetBodyList();b;b=b->GetNext())
-	{
-		if(b->GetUserData()!=NULL)
-		{
-			CCSprite* ballData = (CCSprite*)b->GetUserData();
-			ballData.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-		}
-	}
+	world->Step(dt, 20, 10);
 	
 	b2Vec2 camPos;
 	camPos = ragdoll->Head->GetPosition();
@@ -326,7 +329,6 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(1.0f, 1.0f);
 		collisionObjectShapeDef.filter.categoryBits = 0x0000;
-        collisionObjectShapeDef.userData 
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
