@@ -18,6 +18,13 @@
 #define timeStationaryToStop 1.0f //seconds
 #define speedStationaryToStop 1.0f //m/s
 
+@interface Actor : CCLayer {
+    NSInteger type;
+}
+@property (nonatomic, readwrite) NSInteger type;
+
+@end
+
 class ContactListener : public b2ContactListener
 {
 public:        

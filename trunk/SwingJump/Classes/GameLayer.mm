@@ -29,8 +29,30 @@ b2Vec2 camPos;
 float timeStationary;
 ContactListener *contactListener;
 
+@implementation Actor
+@synthesize type;
+
+- (id) init {
+    self = [super init];
+    if (self != nil) {
+        self.type = -1;
+    }
+    return self;
+}
+
+- (void)dealloc {
+	[super dealloc];
+}
+
+@end
+
+
 void ContactListener::Add(const b2ContactPoint* point) {
-    printf("Hello World");
+    if(((Actor*)point->shape1->GetBody()->GetUserData()).type > 0 || ((Actor*)point->shape2->GetBody()->GetUserData()).type > 0)
+    {
+        printf("%d\n", ((Actor*)point->shape1->GetBody()->GetUserData()).type);
+        printf("%d\n", ((Actor*)point->shape2->GetBody()->GetUserData()).type);
+    }
 }
 
 void ContactListener::Persist(const b2ContactPoint* point) {
@@ -91,6 +113,10 @@ void ContactListener::Result(const b2ContactResult* result) {
 		//Create a ground box
 		b2BodyDef groundBodyDef;
 		groundBodyDef.position.Set(screenSize.width/PTM_RATIO/2, 1.3f);
+        Actor* a = [[Actor alloc] init];
+        a.type = 2;
+        groundBodyDef.userData = a;
+        
 		groundBody = world->CreateBody(&groundBodyDef);
 		b2PolygonDef groundShapeDef;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
@@ -323,17 +349,20 @@ void ContactListener::Result(const b2ContactResult* result) {
 	int randnum = (rand()%10000)+1;
 	if(randnum<randObjectPercentage*10000) {
 		b2BodyDef collisionObjectDef;
+        Actor* a = [[Actor alloc] init];
+        a.type = 1;
+        collisionObjectDef.userData = a;
 		collisionObjectDef.position.Set(currPos.x+10.0f,currPos.y+(rand()%10-4));
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(1.0f, 1.0f);
-		collisionObjectShapeDef.filter.categoryBits = 0x0000;
+		//collisionObjectShapeDef.filter.categoryBits = 0x0000;
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
 
--(void)RemovePastObjects{
+-(void)RemovePastObjects {
 	for(b2Body* b = world->GetBodyList();b;b=b->GetNext())
 	{
 		b2Vec2 pos = b->GetPosition();
