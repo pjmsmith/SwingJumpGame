@@ -321,6 +321,11 @@ void ContactListener::Result(const b2ContactResult* result) {
 	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
 	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415.0f];
 	
+	//Nuke Bodies and Perform Actions
+	if (type1Count>0) {
+		[self CollisionHandler];
+	}
+	
 	//Move Ground
 	groundBody->SetXForm(b2Vec2((camX*PTM_RATIO-80.0f)/PTM_RATIO,2.0f), 0.0f);
 	
@@ -334,11 +339,6 @@ void ContactListener::Result(const b2ContactResult* result) {
 	//Detect Stopped
 	if (ragdoll->hasLaunched()) {
 		[self DetectStopped:dt];
-	}
-	
-	//Nuke Bodies and Perform Actions
-	if (type1Count>0) {
-		[self CollisionHandler];
 	}
 	
 }
