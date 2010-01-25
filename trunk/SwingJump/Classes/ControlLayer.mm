@@ -170,6 +170,7 @@
 	}
 	ragdoll->SetLinearVelocity(vel);
 	ragdoll->setLaunched(TRUE);
+	ragdoll->SetBullet();
 	[hl setLaunchX:ragdoll->Head->GetPosition().x];
 	[hl enableScore];
 	

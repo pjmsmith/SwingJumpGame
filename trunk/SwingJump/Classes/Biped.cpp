@@ -307,6 +307,28 @@ void Biped::PutToSleep()
 	LHand->PutToSleep();
 	RHand->PutToSleep();
 }
+void Biped::SetBullet()
+{
+	
+	LFoot->SetBullet(true);
+	RFoot->SetBullet(true);
+	LCalf->SetBullet(true);
+	RCalf->SetBullet(true);
+	LThigh->SetBullet(true);
+	RThigh->SetBullet(true);
+	Pelvis->SetBullet(true);
+	Stomach->SetBullet(true);
+	Chest->SetBullet(true);
+	Neck->SetBullet(true);
+	Head->SetBullet(true);
+	LUpperArm->SetBullet(true);
+	RUpperArm->SetBullet(true);
+	LForearm->SetBullet(true);
+	RForearm->SetBullet(true);
+	LHand->SetBullet(true);
+	RHand->SetBullet(true);
+}
+
 void Biped::SetLinearDamping(float damp)
 {
 	

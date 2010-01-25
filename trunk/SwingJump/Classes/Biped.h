@@ -28,6 +28,7 @@ public:
 	void SetLinearVelocity(const b2Vec2& velocity);
 	void PutToSleep();
 	bool hasLaunched();
+	void SetBullet();
 	void setLaunched(bool);
 	void SetLinearDamping(float damp);
 	void SetAngularDamping(float damp);
