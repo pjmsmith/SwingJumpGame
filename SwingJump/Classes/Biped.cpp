@@ -286,6 +286,28 @@ void Biped::SetLinearVelocity(const b2Vec2& velocity)
 	LHand->SetLinearVelocity(velocity);
 	RHand->SetLinearVelocity(velocity);
 }
+void Biped::ApplyImpulse(const b2Vec2& impulse, const b2Vec2& point)
+{
+	
+	LFoot->ApplyImpulse(impulse, point);
+	RFoot->ApplyImpulse(impulse, point);
+	LCalf->ApplyImpulse(impulse, point);
+	RCalf->ApplyImpulse(impulse, point);
+	LThigh->ApplyImpulse(impulse, point);
+	RThigh->ApplyImpulse(impulse, point);
+	Pelvis->ApplyImpulse(impulse, point);
+	Stomach->ApplyImpulse(impulse, point);
+	Chest->ApplyImpulse(impulse, point);
+	Neck->ApplyImpulse(impulse, point);
+	Head->ApplyImpulse(impulse, point);
+	LUpperArm->ApplyImpulse(impulse, point);
+	RUpperArm->ApplyImpulse(impulse, point);
+	LForearm->ApplyImpulse(impulse, point);
+	RForearm->ApplyImpulse(impulse, point);
+	LHand->ApplyImpulse(impulse, point);
+	RHand->ApplyImpulse(impulse, point);
+}
+
 void Biped::PutToSleep()
 {
 	

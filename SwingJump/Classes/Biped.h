@@ -26,6 +26,7 @@ public:
 	void PumpFwdLimits();
 	void PumpBckwdLimits();
 	void SetLinearVelocity(const b2Vec2& velocity);
+	void ApplyImpulse(const b2Vec2& impulse, const b2Vec2& point);
 	void PutToSleep();
 	bool hasLaunched();
 	void SetBullet();
