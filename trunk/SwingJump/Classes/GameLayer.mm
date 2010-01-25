@@ -30,9 +30,9 @@ b2Vec2 camPos;
 float timeStationary;
 ContactListener *contactListener;
 
-const int32 k_maxNuke = 100;
-b2Body* nuke[k_maxNuke];
-int32 nukeCount = 0;
+const int32 k_maxtype1 = 100;
+b2Body* type1[k_maxtype1];
+int32 type1Count = 0;
 
 @implementation Actor
 @synthesize type;
@@ -53,7 +53,19 @@ int32 nukeCount = 0;
 
 
 void ContactListener::Add(const b2ContactPoint* point) {
+	if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 1 || ((Actor*)point->shape2->GetBody()->GetUserData()).type == 1)
+    {
+        if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 1) {
+			type1[type1Count++] = point->shape1->GetBody();
+		}
+		else { 
+			type1[type1Count++] = point->shape2->GetBody();
+		}
+        printf("Collision with Type 1");
+	}
+	
 }
+
 void ContactListener::Persist(const b2ContactPoint* point) {
 
 }
@@ -61,19 +73,7 @@ void ContactListener::Remove(const b2ContactPoint* point) {
     
 }
 void ContactListener::Result(const b2ContactResult* result) {
-	if(((Actor*)result->shape1->GetBody()->GetUserData()).type == 1 || ((Actor*)result->shape2->GetBody()->GetUserData()).type == 1)
-    {
-        if(((Actor*)result->shape1->GetBody()->GetUserData()).type == 1) {
-			nuke[nukeCount] = result->shape1->GetBody();
-		}
-		else { 
-			nuke[nukeCount] = result->shape2->GetBody();
-		}
-		nukeCount++;
-        printf("Collision with Type 1");
-		
-	}
-	
+
 }
 
 @implementation GameLayer
@@ -337,30 +337,31 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	
 	//Nuke Bodies and Perform Actions
-	if (nukeCount>0) {
+	if (type1Count>0) {
 		[self CollisionHandler];
 	}
 	
 }
 -(void)CollisionHandler{
-	std::sort(nuke, nuke + nukeCount);
+	std::sort(type1, type1 + type1Count);
 	int i = 0;
-	while(i < nukeCount)
+	while(i < type1Count)
     {
-		b2Body* b = nuke[i++];
-		while (i < nukeCount && nuke[i] == b)
+		b2Body* b = type1[i++];
+		while (i < type1Count && type1[i] == b)
 		{
 			++i;
 		}
+		b2Vec2 point =  b->GetPosition();
 		world->DestroyBody(b);
-		b2Vec2 vel = ragdoll->Chest->GetLinearVelocity();
-		ragdoll->SetLinearVelocity(b2Vec2(vel.x+10.0f,vel.y+20.0f));
+		
+		ragdoll->ApplyImpulse(b2Vec2(2.0f,2.0f), point);
 	}
 	b2Body *null;
-	for(i = 0; i<nukeCount;i++){
-		nuke[i] = null;
+	for(i = 0; i<type1Count;i++){
+		type1[i] = null;
 	}
-	nukeCount = 0;
+	type1Count = 0;
 }
 -(void)DetectStopped:(float)dt{
 	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
@@ -394,7 +395,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(1.0f, 1.0f);
-		//collisionObjectShapeDef.filter.categoryBits = 0x0000;
+		//collisionObjectShapeDef.filter.categoryBits = 0x0002;
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
