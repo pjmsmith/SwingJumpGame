@@ -216,6 +216,7 @@ void ContactListener::Result(const b2ContactResult* result) {
     
     ragdoll = new Biped(world, b2Vec2(470.0f/PTM_RATIO/2, 165.0f/PTM_RATIO));
 	ragdoll->setLaunched(false);
+
 	jointDef.Initialize(ragdoll->RHand, &(*links[handLink]), ragdoll->RHand->GetPosition(), links[handLink]->GetPosition());
     jointDef.collideConnected = false;
 	jointDef.length = 0.1f;
@@ -352,7 +353,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 			++i;
 		}
 		world->DestroyBody(b);
-		b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
+		b2Vec2 vel = ragdoll->Chest->GetLinearVelocity();
 		ragdoll->SetLinearVelocity(b2Vec2(vel.x+10.0f,vel.y+20.0f));
 	}
 	b2Body *null;
