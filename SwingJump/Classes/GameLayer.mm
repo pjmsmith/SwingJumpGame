@@ -29,6 +29,10 @@ b2Vec2 camPos;
 float timeStationary;
 ContactListener *contactListener;
 
+const int32 k_maxNuke = 100;
+b2Body* nuke[k_maxNuke];
+int32 nukeCount = 0;
+
 @implementation Actor
 @synthesize type;
 
@@ -48,22 +52,27 @@ ContactListener *contactListener;
 
 
 void ContactListener::Add(const b2ContactPoint* point) {
-    if(((Actor*)point->shape1->GetBody()->GetUserData()).type > 0 || ((Actor*)point->shape2->GetBody()->GetUserData()).type > 0)
-    {
-        printf("%d\n", ((Actor*)point->shape1->GetBody()->GetUserData()).type);
-        printf("%d\n", ((Actor*)point->shape2->GetBody()->GetUserData()).type);
-    }
 }
-
 void ContactListener::Persist(const b2ContactPoint* point) {
-}
 
+}
 void ContactListener::Remove(const b2ContactPoint* point) {
     
 }
-
 void ContactListener::Result(const b2ContactResult* result) {
-    
+	if(((Actor*)result->shape1->GetBody()->GetUserData()).type == 1 || ((Actor*)result->shape2->GetBody()->GetUserData()).type == 1)
+    {
+        if(((Actor*)result->shape1->GetBody()->GetUserData()).type == 1) {
+			nuke[nukeCount] = result->shape1->GetBody();
+		}
+		else { 
+			nuke[nukeCount] = result->shape2->GetBody();
+		}
+		nukeCount++;
+        printf("Collision with Type 1");
+		
+	}
+	
 }
 
 @implementation GameLayer
@@ -87,13 +96,13 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2AABB worldAABB;
         
 		float borderSize = 96/PTM_RATIO;
-		worldAABB.lowerBound.Set(-20*borderSize, -20*borderSize);
-		worldAABB.upperBound.Set(20*screenSize.width/PTM_RATIO+borderSize, 20*screenSize.height/PTM_RATIO+borderSize);
+		worldAABB.lowerBound.Set(-borderSize, -borderSize);
+		worldAABB.upperBound.Set(200*screenSize.width/PTM_RATIO+borderSize, 200*screenSize.height/PTM_RATIO+borderSize);
 		b2Vec2 gravity(0.0f, -10.0f);
 		bool doSleep = true;
 		world = new b2World(worldAABB, gravity, doSleep);
 		world->SetContinuousPhysics(true);
-        
+		
         contactListener = new ContactListener();
         world->SetContactListener(contactListener);
         
@@ -314,7 +323,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	groundBody->SetXForm(b2Vec2((camX*PTM_RATIO-80.0f)/PTM_RATIO,2.0f), 0.0f);
 	
 	//Create Objects
-	if(camX > 13.0f) {
+	if(ragdoll->hasLaunched()) {
 		[self performSelectorInBackground:@selector(CreateRandomObjects) withObject:nil];
 	}
 	//Delete Objects
@@ -325,8 +334,28 @@ void ContactListener::Result(const b2ContactResult* result) {
 		[self DetectStopped:dt];
 	}
 	
+	//Nuke Bodies and Perform Actions
+	if (nukeCount>0) {
+		[self CollisionHandler];
+	}
+	
 }
-
+-(void)CollisionHandler{
+	int i = 0;
+	while(i < nukeCount-1)
+    {
+		b2Body* b = nuke[i++];
+		while (i < nukeCount && nuke[i] == b)
+		{
+			++i;
+		}
+		world->DestroyBody(b);
+		b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
+		ragdoll->SetLinearVelocity(b2Vec2(vel.x+10.0f,vel.y+20.0f));
+	}
+	nukeCount = 0;
+	
+}
 -(void)DetectStopped:(float)dt{
 	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
 	float linearVel = b2Sqrt((vel.x*vel.x) + (vel.y*vel.y));
@@ -345,7 +374,9 @@ void ContactListener::Result(const b2ContactResult* result) {
 -(void)CreateRandomObjects{
 	b2Vec2 currPos = ragdoll->Head->GetPosition(); //Get Current Position
 	//b2Vec2 headVel = ragdoll->Head->GetVelocity();
-	
+	if(currPos.y > 50) {
+		currPos.y = 50;
+	}
 	int randnum = (rand()%10000)+1;
 	if(randnum<randObjectPercentage*10000) {
 		b2BodyDef collisionObjectDef;

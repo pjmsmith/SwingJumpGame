@@ -41,6 +41,7 @@ public:
 
 -(void) createSwingChain:(float)yPos;
 -(void)DetectStopped:(float)dt;
+-(void)CollisionHandler;
 
 @end
 
