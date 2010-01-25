@@ -8,6 +8,7 @@
 
 #import "GameLayer.hh"
 #import "GameScene.hh"
+#include <algorithm>
 
 #define PTM_RATIO 32
 
@@ -341,8 +342,9 @@ void ContactListener::Result(const b2ContactResult* result) {
 	
 }
 -(void)CollisionHandler{
+	std::sort(nuke, nuke + nukeCount);
 	int i = 0;
-	while(i < nukeCount-1)
+	while(i < nukeCount)
     {
 		b2Body* b = nuke[i++];
 		while (i < nukeCount && nuke[i] == b)
@@ -353,8 +355,11 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
 		ragdoll->SetLinearVelocity(b2Vec2(vel.x+10.0f,vel.y+20.0f));
 	}
+	b2Body *null;
+	for(i = 0; i<nukeCount;i++){
+		nuke[i] = null;
+	}
 	nukeCount = 0;
-	
 }
 -(void)DetectStopped:(float)dt{
 	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
@@ -383,7 +388,7 @@ void ContactListener::Result(const b2ContactResult* result) {
         Actor* a = [[Actor alloc] init];
         a.type = 1;
         collisionObjectDef.userData = a;
-		collisionObjectDef.position.Set(currPos.x+10.0f,currPos.y+(rand()%10-4));
+		collisionObjectDef.position.Set(currPos.x+10.0f,currPos.y+2*(rand()%10-4));
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
