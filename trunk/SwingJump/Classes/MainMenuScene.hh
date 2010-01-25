@@ -11,7 +11,8 @@
 
 @interface MainMenuScene  : CCScene {}
 @end
-
+@interface SwingLayer : CCLayer{}
+@end
 @interface MenuLayer : CCLayer {}
 -(void)startGame: (id)sender;
 -(void)help: (id)sender;
