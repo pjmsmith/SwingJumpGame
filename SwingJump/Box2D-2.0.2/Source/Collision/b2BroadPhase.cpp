@@ -126,8 +126,12 @@ bool b2BroadPhase::TestOverlap(const b2BoundValues& b, b2Proxy* p)
 	{
 		b2Bound* bounds = m_bounds[axis];
 
-		b2Assert(p->lowerBounds[axis] < 2 * m_proxyCount);
-		b2Assert(p->upperBounds[axis] < 2 * m_proxyCount);
+		if ((p->lowerBounds[axis] < 2 * m_proxyCount)) {
+			b2Assert(p->lowerBounds[axis] < 2 * m_proxyCount);
+		}
+		if ((p->upperBounds[axis] < 2 * m_proxyCount)) {
+			b2Assert(p->upperBounds[axis] < 2 * m_proxyCount);
+		}
 
 		if (b.lowerValues[axis] > bounds[p->upperBounds[axis]].value)
 			return false;
@@ -217,7 +221,9 @@ void b2BroadPhase::Query(int32* lowerQueryOut, int32* upperQueryOut,
 		// Find the s overlaps.
 		while (s)
 		{
+			
 			b2Assert(i >= 0);
+
 
 			if (bounds[i].IsLower())
 			{

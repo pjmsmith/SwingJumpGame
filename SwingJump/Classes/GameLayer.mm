@@ -96,9 +96,8 @@ void ContactListener::Result(const b2ContactResult* result) {
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		b2AABB worldAABB;
         
-		float borderSize = 96/PTM_RATIO;
-		worldAABB.lowerBound.Set(-borderSize, -borderSize);
-		worldAABB.upperBound.Set(200*screenSize.width/PTM_RATIO+borderSize, 200*screenSize.height/PTM_RATIO+borderSize);
+		worldAABB.lowerBound.Set(-100.0, -100.0);
+		worldAABB.upperBound.Set(20000.0f, 20000.0f);
 		b2Vec2 gravity(0.0f, -10.0f);
 		bool doSleep = true;
 		world = new b2World(worldAABB, gravity, doSleep);
@@ -284,10 +283,9 @@ void ContactListener::Result(const b2ContactResult* result) {
     headJoint = world->CreateJoint(&jointDef); 
     
     ragdoll->SetSittingLimits();
-	camPos = ragdoll->Head->GetPosition();
+	camPos = ragdoll->Chest->GetPosition();
 	lastCamPos = camPos;
-	//b2ContactListener *contactListener;
-	//world->SetContactListener(contactListener);
+	
 	for(int i = 0; i < numLinks; i++)
     {
 		links[i]->m_linearDamping=13.0f;
@@ -308,7 +306,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	world->Step(dt, 20, 10);
 	
 	b2Vec2 camPos;
-	camPos = ragdoll->Head->GetPosition();
+	camPos = ragdoll->Chest->GetPosition();
 	camX = camPos.x;
 	camY = camPos.y;
 	if (camY<240/PTM_RATIO) {
@@ -322,7 +320,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415.0f];
 	
 	//Nuke Bodies and Perform Actions
-	if (type1Count>0) {
+	if (type1Count>(int32)0) {
 		[self CollisionHandler];
 	}
 	
@@ -342,9 +340,10 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	
 }
+
 -(void)CollisionHandler{
 	std::sort(type1, type1 + type1Count);
-	int i = 0;
+	int32 i = 0;
 	while(i < type1Count)
     {
 		b2Body* b = type1[i++];
@@ -355,7 +354,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2Vec2 point =  b->GetPosition();
 		world->DestroyBody(b);
 		
-		ragdoll->ApplyImpulse(b2Vec2(2.0f,2.0f), point);
+		ragdoll->ApplyImpulse(b2Vec2(1.0f,1.0f), point);
 	}
 	b2Body *null;
 	for(i = 0; i<type1Count;i++){
@@ -363,6 +362,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	type1Count = 0;
 }
+
 -(void)DetectStopped:(float)dt{
 	b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
 	float linearVel = b2Sqrt((vel.x*vel.x) + (vel.y*vel.y));
@@ -395,7 +395,6 @@ void ContactListener::Result(const b2ContactResult* result) {
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(1.0f, 1.0f);
-		//collisionObjectShapeDef.filter.categoryBits = 0x0002;
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
