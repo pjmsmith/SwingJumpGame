@@ -30,9 +30,12 @@ b2Vec2 camPos;
 float timeStationary;
 ContactListener *contactListener;
 
-const int32 k_maxtype1 = 100;
-b2Body* type1[k_maxtype1];
-int32 type1Count = 0;
+const int32 k_maxtype = 100;
+const int32 k_numTypes = 2;
+
+b2Body* type1[k_maxtype];
+b2Body* type2[k_maxtype];
+int32 typeCount[k_numTypes];
 
 @implementation Actor
 @synthesize type;
@@ -53,16 +56,29 @@ int32 type1Count = 0;
 
 
 void ContactListener::Add(const b2ContactPoint* point) {
-	if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 1 || ((Actor*)point->shape2->GetBody()->GetUserData()).type == 1)
+	if(((Actor*)point->shape1->GetBody()->GetUserData()).type > 0 || ((Actor*)point->shape2->GetBody()->GetUserData()).type > 0)
     {
         if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 1) {
-			type1[type1Count++] = point->shape1->GetBody();
+			type1[typeCount[0]++] = point->shape1->GetBody();
+			printf("Collision with Type 1");
 		}
-		else { 
-			type1[type1Count++] = point->shape2->GetBody();
+		else if (((Actor*)point->shape2->GetBody()->GetUserData()).type == 1){ 
+			type1[typeCount[0]++] = point->shape2->GetBody();
+			printf("Collision with Type 1");
 		}
-        printf("Collision with Type 1");
+		
+		if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 2) {
+			type2[typeCount[1]++] = point->shape1->GetBody();
+			printf("Collision with Type 2");
+		}
+		else if (((Actor*)point->shape2->GetBody()->GetUserData()).type == 2){ 
+			type2[typeCount[1]++] = point->shape2->GetBody();
+			printf("Collision with Type 2");
+		}
+        
 	}
+	
+	
 	
 }
 
@@ -122,15 +138,14 @@ void ContactListener::Result(const b2ContactResult* result) {
 		//Create a ground box
 		b2BodyDef groundBodyDef;
 		groundBodyDef.position.Set(screenSize.width/PTM_RATIO/2, 1.3f);
-        Actor* a = [[Actor alloc] init];
-        a.type = 2;
-        groundBodyDef.userData = a;
+        //Actor* a = [[Actor alloc] init];
+        //a.type = 2;
+        //groundBodyDef.userData = a;
         
 		groundBody = world->CreateBody(&groundBodyDef);
 		b2PolygonDef groundShapeDef;
 		groundShapeDef.SetAsBox(screenSize.width/PTM_RATIO, 1.0f);
 		groundBody->CreateShape(&groundShapeDef);
-		
 		
         [self createSwingChain:350.0f];
 		
@@ -320,7 +335,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415.0f];
 	
 	//Nuke Bodies and Perform Actions
-	if (type1Count>(int32)0) {
+	if (typeCount>(int32)0) {
 		[self CollisionHandler];
 	}
 	
@@ -342,25 +357,49 @@ void ContactListener::Result(const b2ContactResult* result) {
 }
 
 -(void)CollisionHandler{
-	std::sort(type1, type1 + type1Count);
-	int32 i = 0;
-	while(i < type1Count)
-    {
-		b2Body* b = type1[i++];
-		while (i < type1Count && type1[i] == b)
+	if (typeCount[0] > 0 ) {
+		std::sort(type1, type1 + typeCount[0]);
+		int32 i = 0;
+		while(i < typeCount[0])
 		{
-			++i;
+			b2Body* b = type1[i++];
+			while (i < typeCount[0] && type1[i] == b)
+			{
+				++i;
+			}
+			b2Vec2 point =  b->GetPosition();
+			world->DestroyBody(b);
+			
+			ragdoll->ApplyImpulse(b2Vec2(1.0f,1.0f), point);
 		}
-		b2Vec2 point =  b->GetPosition();
-		world->DestroyBody(b);
-		
-		ragdoll->ApplyImpulse(b2Vec2(1.0f,1.0f), point);
+		b2Body *null;
+		for(i = 0; i<typeCount[0];i++){
+			type1[i] = null;
+		}
+		typeCount[0] = 0;
 	}
-	b2Body *null;
-	for(i = 0; i<type1Count;i++){
-		type1[i] = null;
+	
+	else if (typeCount[1] > 0 ) {
+		std::sort(type2, type2 + typeCount[1]);
+		int32 i = 0;
+		while(i < typeCount[1])
+		{
+			b2Body* b = type2[i++];
+			while (i < typeCount[1] && type2[i] == b)
+			{
+				++i;
+			}
+			b2Vec2 point =  b->GetPosition();
+			world->DestroyBody(b);
+			
+			ragdoll->ApplyImpulse(b2Vec2(1.0f,-1.0f), point);
+		}
+		b2Body *null;
+		for(i = 0; i<typeCount[1];i++){
+			type2[i] = null;
+		}
+		typeCount[1] = 0;
 	}
-	type1Count = 0;
 }
 
 -(void)DetectStopped:(float)dt{
@@ -391,6 +430,20 @@ void ContactListener::Result(const b2ContactResult* result) {
         a.type = 1;
         collisionObjectDef.userData = a;
 		collisionObjectDef.position.Set(currPos.x+10.0f,3.2f);
+		b2Body *collisionObject;
+		collisionObject = world->CreateBody(&collisionObjectDef);
+		b2PolygonDef collisionObjectShapeDef;
+		collisionObjectShapeDef.SetAsBox(0.2f, 0.2f);
+		collisionObject->CreateShape(&collisionObjectShapeDef);
+	}
+	
+	randnum = (rand()%10000)+1;
+	if(randnum<randObjectPercentage*10000) {
+		b2BodyDef collisionObjectDef;
+        Actor* a = [[Actor alloc] init];
+        a.type = 2;
+        collisionObjectDef.userData = a;
+		collisionObjectDef.position.Set(currPos.x+10.0f,10.2f);
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;

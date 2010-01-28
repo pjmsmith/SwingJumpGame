@@ -14,7 +14,7 @@
 #define numLinks 40
 #define handLink numLinks-6
 #define headLinkLength 4.5f
-#define randObjectPercentage 0.5f
+#define randObjectPercentage 0.3f
 #define timeStationaryToStop 1.0f //seconds
 #define speedStationaryToStop 1.0f //m/s
 
