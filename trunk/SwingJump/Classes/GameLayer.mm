@@ -329,10 +329,10 @@ void ContactListener::Result(const b2ContactResult* result) {
 	
 	//Create Objects
 	if(ragdoll->hasLaunched()) {
-		[self performSelectorInBackground:@selector(CreateRandomObjects) withObject:nil];
+		[self CreateRandomObjects];
 	}
 	//Delete Objects
-	[self performSelectorInBackground:@selector(RemovePastObjects) withObject:nil];
+	[self RemovePastObjects];
 	
 	//Detect Stopped
 	if (ragdoll->hasLaunched()) {
@@ -390,11 +390,11 @@ void ContactListener::Result(const b2ContactResult* result) {
         Actor* a = [[Actor alloc] init];
         a.type = 1;
         collisionObjectDef.userData = a;
-		collisionObjectDef.position.Set(currPos.x+10.0f,currPos.y+2*(rand()%10-4));
+		collisionObjectDef.position.Set(currPos.x+10.0f,3.2f);
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
-		collisionObjectShapeDef.SetAsBox(1.0f, 1.0f);
+		collisionObjectShapeDef.SetAsBox(0.2f, 0.2f);
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
