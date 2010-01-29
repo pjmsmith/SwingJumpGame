@@ -8,6 +8,8 @@
 
 #import "GameLayer.hh"
 #import "GameScene.hh"
+#import "ControlLayer.hh"
+
 #include <algorithm>
 
 #define PTM_RATIO 32
@@ -391,14 +393,15 @@ void ContactListener::Result(const b2ContactResult* result) {
 			}
 			b2Vec2 point =  b->GetPosition();
 			world->DestroyBody(b);
-			
-			ragdoll->ApplyImpulse(b2Vec2(1.0f,-1.0f), point);
 		}
 		b2Body *null;
 		for(i = 0; i<typeCount[1];i++){
 			type2[i] = null;
 		}
 		typeCount[1] = 0;
+		
+		[self unschedule:@selector(tick:)];
+		[(ControlLayer *)parent handleType2];
 	}
 }
 
@@ -438,7 +441,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	
 	randnum = (rand()%10000)+1;
-	if(randnum<randObjectPercentage*10000) {
+	if(randnum<(randObjectPercentage/10)*10000) {
 		b2BodyDef collisionObjectDef;
         Actor* a = [[Actor alloc] init];
         a.type = 2;
@@ -462,5 +465,10 @@ void ContactListener::Result(const b2ContactResult* result) {
 			world->DestroyBody(b);
 		}
 	}
+}
+
+-(void)ResumeWithImpulse:(b2Vec2)impulse {
+	ragdoll->ApplyImpulse(impulse,ragdoll->Chest->GetPosition());
+	[self schedule:@selector(tick:)];
 }
 @end
