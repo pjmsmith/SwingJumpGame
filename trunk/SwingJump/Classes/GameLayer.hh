@@ -39,12 +39,12 @@ public:
 }
 @property (nonatomic, readwrite) b2World *world;
 
--(void) createSwingChain:(float)yPos;
+-(void)createSwingChain:(float)yPos;
 -(void)DetectStopped:(float)dt;
 -(void)CreateRandomObjects;
 -(void)RemovePastObjects;
-
 -(void)CollisionHandler;
+-(void)ResumeWithImpulse:(b2Vec2)impulse;
 
 @end
 

@@ -18,6 +18,10 @@
     BOOL isRightBeingTouched;
     BOOL isLeftBeingTouched;
 	BOOL hasJumped;
+	BOOL type2Enabled;
+	BOOL arrowVisible; //left = 0, right = 1
+	int hitCounter;
+	float timeCounter;
 }
 
 @property (nonatomic, retain) CCSprite *leftArrow;
@@ -28,5 +32,12 @@
 @property (nonatomic) BOOL isRightBeingTouched;
 @property (nonatomic) BOOL isLeftBeingTouched;
 @property (nonatomic) BOOL hasJumped;
+@property (nonatomic) BOOL type2Enabled;
+@property (nonatomic) BOOL arrowVisible;
+@property (nonatomic) int hitCounter;
+@property (nonatomic) float timeCounter;
+
+- (void)rotateChainLeft;
+- (void)handleType2;
 
 @end
