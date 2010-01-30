@@ -192,7 +192,7 @@ b2World *world;
 }
 
 -(void)tick:(ccTime) dt{
-	world->Step(dt, 40, 10);
+	world->Step(1.0f/30.0f, 40, 10);
 }
 
 @end
