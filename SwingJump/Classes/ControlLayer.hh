@@ -38,6 +38,8 @@
 @property (nonatomic) float timeCounter;
 
 - (void)rotateChainLeft;
+- (void)rotateChainRight;
 - (void)handleType2;
+- (void)launch;
 
 @end
