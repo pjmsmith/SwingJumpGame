@@ -70,6 +70,6 @@
 	NSString *strHeadPos = [NSString stringWithFormat:@"%8.0f",headPos.x-launchX];
 	//scoreDisplay = [[CCLabelAtlas labelAtlasWithString:strHeadPos charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'] retain];
 	[scoreDisplay setString:strHeadPos];
-	[scoreDisplay updateAtlasValues];
+	//[scoreDisplay updateAtlasValues];
 }
 @end
