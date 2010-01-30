@@ -25,8 +25,8 @@ GFFParallaxNode *parallaxNode;
 
 		RepeatableLayer *bg01 = [RepeatableLayer layerWithFile:@"bg01.png"];
 		[bg01 setScale:2.3f];
-		[bg01 setPosition:ccp(0,-50)];
-		[parallaxNode addChild:bg01 z:0 parallaxRatio:0.15f];
+		[bg01 setPosition:ccp(0,-100)];
+		[parallaxNode addChild:bg01 z:0 parallaxRatio:0.03f];
 		
 		RepeatableLayer *bg02 = [RepeatableLayer layerWithFile:@"bg02.png"];
 		[bg02 setScale:1.5f];

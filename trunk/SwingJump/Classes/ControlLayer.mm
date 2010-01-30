@@ -77,7 +77,7 @@
 				{
 					isLeftBeingTouched = YES;
 					[leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
-					[self performSelectorInBackground:@selector(rotateChainLeft) withObject:nil];
+					[self rotateChainLeft];
 					ragdoll->PumpBckwdLimits();
 					
 				}
@@ -88,7 +88,7 @@
 					[jumpButton runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
 					[leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
 					[rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
-					[self performSelectorInBackground:@selector(launch) withObject:nil];
+					[self launch];
 			}
 			if (CGRectContainsPoint([rightArrow boundingBox], location)) {
 				//NSLog(@"Right touched");
@@ -96,7 +96,7 @@
 				{
 					isRightBeingTouched = YES;
 					[rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:255]];
-					[self performSelectorInBackground:@selector(rotateChainRight) withObject:nil];
+					[self rotateChainRight];
 					
 					ragdoll->PumpFwdLimits();
 				} 
