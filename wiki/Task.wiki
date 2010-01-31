@@ -1,11 +1,15 @@
-#summary One-sentence summary of this page.
+#summary Action items for SwingJump game.
 
 = Task List =
 
+The following is a list of currently active action items.
+
 ==System Level==
   # Save and Load Preferences, high scores, and options
+----
 ==Main Menu==
   # Create Scenes for options, help, and instructions
+----
 ==Game Scene==
   # Create a third type of collision object and associated user input
   # Create the end game scene showing stats
@@ -15,6 +19,8 @@
     * Number of collisions with each object type
     * Maximum Monkey Bars hit
   # Display tap counter after ragdoll launches from monkey bars
+----
 ==Media==
   # Create background images
   # Attach sprites to physics objects such that they get acted on accordingly
+----
