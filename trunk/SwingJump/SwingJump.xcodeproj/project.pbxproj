@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		143ECC131117615000A57A52 /* EndGameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143ECC121117615000A57A52 /* EndGameLayer.mm */; };
+		143ECC2C111776ED00A57A52 /* Merry-Go-Round.png in Resources */ = {isa = PBXBuildFile; fileRef = 143ECC2B111776ED00A57A52 /* Merry-Go-Round.png */; };
 		146F433311126C3100B7F3D8 /* monkeybars.png in Resources */ = {isa = PBXBuildFile; fileRef = 146F433211126C3100B7F3D8 /* monkeybars.png */; };
+		146F44151116554500B7F3D8 /* OptionScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146F44131116554500B7F3D8 /* OptionScene.mm */; };
+		146F44181116554C00B7F3D8 /* InstructionScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146F44161116554C00B7F3D8 /* InstructionScene.mm */; };
+		146F441B1116555500B7F3D8 /* HighScoreScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146F44191116555500B7F3D8 /* HighScoreScene.mm */; };
 		14B6AFDE1106B659003CDE72 /* GFFParallaxNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14B6AFDC1106B659003CDE72 /* GFFParallaxNode.mm */; };
 		14B6AFE11106B65F003CDE72 /* RepeatableLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14B6AFDF1106B65F003CDE72 /* RepeatableLayer.mm */; };
 		14B6AFE61106B6D4003CDE72 /* bg01.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B6AFE41106B6D4003CDE72 /* bg01.png */; };
@@ -210,7 +215,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		143ECC111117615000A57A52 /* EndGameLayer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EndGameLayer.hh; sourceTree = "<group>"; };
+		143ECC121117615000A57A52 /* EndGameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EndGameLayer.mm; sourceTree = "<group>"; };
+		143ECC2B111776ED00A57A52 /* Merry-Go-Round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Merry-Go-Round.png"; sourceTree = "<group>"; };
 		146F433211126C3100B7F3D8 /* monkeybars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monkeybars.png; sourceTree = "<group>"; };
+		146F44131116554500B7F3D8 /* OptionScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OptionScene.mm; sourceTree = "<group>"; };
+		146F44141116554500B7F3D8 /* OptionScene.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OptionScene.hh; sourceTree = "<group>"; };
+		146F44161116554C00B7F3D8 /* InstructionScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InstructionScene.mm; sourceTree = "<group>"; };
+		146F44171116554C00B7F3D8 /* InstructionScene.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstructionScene.hh; sourceTree = "<group>"; };
+		146F44191116555500B7F3D8 /* HighScoreScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HighScoreScene.mm; sourceTree = "<group>"; };
+		146F441A1116555500B7F3D8 /* HighScoreScene.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HighScoreScene.hh; sourceTree = "<group>"; };
 		14B6AFDC1106B659003CDE72 /* GFFParallaxNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GFFParallaxNode.mm; sourceTree = "<group>"; };
 		14B6AFDD1106B659003CDE72 /* GFFParallaxNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFFParallaxNode.h; sourceTree = "<group>"; };
 		14B6AFDF1106B65F003CDE72 /* RepeatableLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RepeatableLayer.mm; sourceTree = "<group>"; };
@@ -655,6 +669,14 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				143ECC111117615000A57A52 /* EndGameLayer.hh */,
+				143ECC121117615000A57A52 /* EndGameLayer.mm */,
+				146F44191116555500B7F3D8 /* HighScoreScene.mm */,
+				146F441A1116555500B7F3D8 /* HighScoreScene.hh */,
+				146F44161116554C00B7F3D8 /* InstructionScene.mm */,
+				146F44171116554C00B7F3D8 /* InstructionScene.hh */,
+				146F44131116554500B7F3D8 /* OptionScene.mm */,
+				146F44141116554500B7F3D8 /* OptionScene.hh */,
 				14B6B0981106C899003CDE72 /* ControlLayer.hh */,
 				14B6B0991106C899003CDE72 /* ControlLayer.mm */,
 				14B6B09A1106C899003CDE72 /* GameLayer.hh */,
@@ -1159,6 +1181,7 @@
 		50F4144210692EE7002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				143ECC2B111776ED00A57A52 /* Merry-Go-Round.png */,
 				146F433211126C3100B7F3D8 /* monkeybars.png */,
 				14B6B67C110D1F2A003CDE72 /* title.png */,
 				14B6B4A6110CF935003CDE72 /* soundOFF.png */,
@@ -1273,6 +1296,7 @@
 				14B6B4A9110CF936003CDE72 /* soundON.png in Resources */,
 				14B6B67D110D1F2A003CDE72 /* title.png in Resources */,
 				146F433311126C3100B7F3D8 /* monkeybars.png in Resources */,
+				143ECC2C111776ED00A57A52 /* Merry-Go-Round.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1438,6 +1462,10 @@
 				14B6B09E1106C899003CDE72 /* ControlLayer.mm in Sources */,
 				14B6B09F1106C899003CDE72 /* GameLayer.mm in Sources */,
 				14B6B0A01106C899003CDE72 /* HUDLayer.mm in Sources */,
+				146F44151116554500B7F3D8 /* OptionScene.mm in Sources */,
+				146F44181116554C00B7F3D8 /* InstructionScene.mm in Sources */,
+				146F441B1116555500B7F3D8 /* HighScoreScene.mm in Sources */,
+				143ECC131117615000A57A52 /* EndGameLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1558,7 +1586,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};
@@ -1573,6 +1601,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};
