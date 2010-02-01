@@ -16,4 +16,6 @@
 @interface MenuLayer : CCLayer {}
 -(void)startGame: (id)sender;
 -(void)help: (id)sender;
+-(void)options: (id)sender;
+-(void)scoreboard: (id)sender;
 @end

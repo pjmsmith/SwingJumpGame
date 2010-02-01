@@ -17,6 +17,7 @@
 #define randObjectPercentage 0.3f
 #define timeStationaryToStop 1.0f //seconds
 #define speedStationaryToStop 1.0f //m/s
+#define MB_WIDTH 2.6f
 
 @interface Actor : CCLayer {
     NSInteger type;
