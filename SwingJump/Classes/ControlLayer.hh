@@ -13,12 +13,14 @@
     CCSprite *leftArrow;
     CCSprite *rightArrow;
 	CCSprite *jumpButton;
+	CCSprite * merryGoRound;
     GameLayer *gl;
 	HUDLayer *hl;
     BOOL isRightBeingTouched;
     BOOL isLeftBeingTouched;
 	BOOL hasJumped;
 	BOOL type2Enabled;
+	BOOL type3Enabled;
 	BOOL arrowVisible; //left = 0, right = 1
 	int hitCounter;
 	float timeCounter;
@@ -27,12 +29,14 @@
 @property (nonatomic, retain) CCSprite *leftArrow;
 @property (nonatomic, retain) CCSprite *rightArrow;
 @property (nonatomic, retain) CCSprite *jumpButton;
+@property (nonatomic, retain) CCSprite * merryGoRound;
 @property (nonatomic, retain) GameLayer *gl;
 @property (nonatomic, retain) HUDLayer *hl;
 @property (nonatomic) BOOL isRightBeingTouched;
 @property (nonatomic) BOOL isLeftBeingTouched;
 @property (nonatomic) BOOL hasJumped;
 @property (nonatomic) BOOL type2Enabled;
+@property (nonatomic) BOOL type3Enabled;
 @property (nonatomic) BOOL arrowVisible;
 @property (nonatomic) int hitCounter;
 @property (nonatomic) float timeCounter;
@@ -40,6 +44,7 @@
 - (void)rotateChainLeft;
 - (void)rotateChainRight;
 - (void)handleType2;
+- (void)handleType3;
 - (void)launch;
 
 @end

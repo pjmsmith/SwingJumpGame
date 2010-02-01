@@ -21,9 +21,11 @@
 @synthesize isLeftBeingTouched;
 @synthesize hasJumped;
 @synthesize type2Enabled;
+@synthesize type3Enabled;
 @synthesize arrowVisible;
 @synthesize hitCounter;
 @synthesize timeCounter;
+@synthesize merryGoRound;
 
 - (id) init {
     self = [super init];
@@ -33,6 +35,7 @@
         isLeftBeingTouched = NO;
 		hasJumped = NO;
 		type2Enabled = NO;
+		type3Enabled = NO;
 		arrowVisible = NO;
 		hitCounter = 0;
 		timeCounter = 0.0f;
@@ -127,8 +130,25 @@
 				arrowVisible = NO;
 			}
 		}
+		
+		if (type3Enabled) {
+		//start position
+		}
 	}
 
+	return kEventHandled;
+}
+-(BOOL)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [[event allTouches] anyObject];
+	CGPoint location = [touch locationInView: [touch view]];
+	if (type3Enabled) {
+		if (CGRectContainsPoint([merryGoRound boundingBox], location)) {
+			
+			[merryGoRound setRotation:timeCounter*10];
+			
+		}
+	}
+	
 	return kEventHandled;
 }
 
@@ -204,19 +224,32 @@
 	CCSprite * monkeyBars = [CCSprite spriteWithFile:@"monkeybars.png"];
 	[monkeyBars setPosition:ccp(240, 250)];
 	[self addChild:monkeyBars z:3 tag:100];
-
+	
 	timeCounter = 0.0f;
 	hitCounter = 0;
 	type2Enabled = YES;
 	arrowVisible = NO; // NO = left, YES = right
 	[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:255]];
 	[self schedule:@selector(tictoc:)];
-	
-	
 }
+
+- (void) handleType3 {
+	merryGoRound = [CCSprite spriteWithFile:@"Merry-Go-Round.png"];
+	[merryGoRound setOpacity:128];
+	[merryGoRound setPosition:ccp(240, 150)];
+	[self addChild:merryGoRound z:3 tag:101];
+	
+	timeCounter = 0.0f;
+	hitCounter = 0;
+	type3Enabled = YES;
+	//arrowVisible = NO; // NO = left, YES = right
+	//[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:255]];
+	[self schedule:@selector(tictoc:)];
+}
+
+
 -(void)tictoc:(ccTime) dt{
 	if (type2Enabled) {
-		
 		timeCounter = timeCounter+dt;
 		[[self getChildByTag:100] setVisible:(bool)floor((int)(timeCounter*3)%2)];
 		
@@ -227,6 +260,15 @@
 			[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
 			[gl ResumeWithImpulse:b2Vec2((float)hitCounter/2.0f,(float)hitCounter/2.0f)];
 			[self removeChildByTag:100 cleanup:YES];
+		}
+	}
+	else if (type3Enabled) {
+		timeCounter = timeCounter+dt;
+		if (timeCounter > 5.0f) {
+			type3Enabled = NO;
+			[self unschedule:@selector(tictoc:)];
+			[gl ResumeWithImpulse:b2Vec2(0.0f,0.0f)];
+			[self removeChildByTag:101 cleanup:YES];
 		}
 	}
 }

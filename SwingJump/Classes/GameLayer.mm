@@ -33,10 +33,11 @@ float timeStationary;
 ContactListener *contactListener;
 
 const int32 k_maxtype = 100;
-const int32 k_numTypes = 2;
+const int32 k_numTypes = 3;
 
 b2Body* type1[k_maxtype];
 b2Body* type2[k_maxtype];
+b2Body* type3[k_maxtype];
 int32 typeCount[k_numTypes];
 
 @implementation Actor
@@ -76,6 +77,15 @@ void ContactListener::Add(const b2ContactPoint* point) {
 		else if (((Actor*)point->shape2->GetBody()->GetUserData()).type == 2){ 
 			type2[typeCount[1]++] = point->shape2->GetBody();
 			printf("Collision with Type 2");
+		}
+		
+		if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 3) {
+			type3[typeCount[2]++] = point->shape1->GetBody();
+			printf("Collision with Type 3");
+		}
+		else if (((Actor*)point->shape2->GetBody()->GetUserData()).type == 3){ 
+			type3[typeCount[2]++] = point->shape2->GetBody();
+			printf("Collision with Type 3");
 		}
         
 	}
@@ -400,6 +410,30 @@ void ContactListener::Result(const b2ContactResult* result) {
 		[self unschedule:@selector(tick:)];
 		[(ControlLayer *)parent handleType2];
 	}
+	
+	else if (typeCount[2] > 0 ) {
+		std::sort(type3, type3 + typeCount[2]);
+		int32 i = 0;
+		while(i < typeCount[2])
+		{
+			b2Body* b = type3[i++];
+			while (i < typeCount[2] && type3[i] == b)
+			{
+				++i;
+			}
+			b2Vec2 point =  b->GetPosition();
+			world->DestroyBody(b);
+		}
+		b2Body *null;
+		for(i = 0; i<typeCount[2];i++){
+			type3[i] = null;
+		}
+		typeCount[2] = 0;
+		
+		[self unschedule:@selector(tick:)];
+		[(ControlLayer *)parent handleType3];
+	}
+	
 }
 
 -(void)DetectStopped:(float)dt{
@@ -454,6 +488,20 @@ void ContactListener::Result(const b2ContactResult* result) {
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(MB_WIDTH, 0.2f);
+		collisionObject->CreateShape(&collisionObjectShapeDef);
+	}
+	
+	randnum = (rand()%10000)+1;
+	if(randnum<(randObjectPercentage/10)*10000) {
+		b2BodyDef collisionObjectDef;
+        Actor* a = [[Actor alloc] init];
+        a.type = 3;
+        collisionObjectDef.userData = a;
+		collisionObjectDef.position.Set(currPos.x+10.0f, 3.5f);
+		b2Body *collisionObject;
+		collisionObject = world->CreateBody(&collisionObjectDef);
+		b2PolygonDef collisionObjectShapeDef;
+		collisionObjectShapeDef.SetAsBox(MGR_WIDTH, 0.5f);
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
