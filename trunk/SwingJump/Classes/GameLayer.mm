@@ -10,6 +10,7 @@
 #import "GameScene.hh"
 #import "ControlLayer.hh"
 #include <algorithm>
+#import "EndGameLayer.hh"
 
 #define PTM_RATIO 32
 
@@ -409,6 +410,12 @@ void ContactListener::Result(const b2ContactResult* result) {
 		if (timeStationary>timeStationaryToStop) {
 			ragdoll->PutToSleep();
 			[self unschedule:@selector(tick:)];
+			EndGameLayer *egl;
+			egl = [EndGameLayer node];
+			[parent addChild:egl z:2];
+			[[(ControlLayer *)parent hl] disableScore];
+			[egl setDistance:[[(ControlLayer *)parent hl] getScore]];
+			//[[(ControlLayer *)parent hl] disableScore];			
 		}
 	}
 	else {

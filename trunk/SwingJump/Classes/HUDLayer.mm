@@ -41,6 +41,8 @@
 		[self schedule:@selector(tick:)];
         
 		launchX = 0.0f;
+		
+	
     }
     
     return self;
@@ -58,6 +60,14 @@
 
 -(void)enableScore {
 	[[self getChildByTag:100] setVisible:true];
+}
+-(void)disableScore {
+	[[self getChildByTag:100] setVisible:false];
+}
+
+-(float)getScore {
+	b2Vec2 headPos = ragdoll->Head->GetPosition();
+	return (headPos.x - launchX);
 }
 
 -(void)setLaunchX:(float)xpos {

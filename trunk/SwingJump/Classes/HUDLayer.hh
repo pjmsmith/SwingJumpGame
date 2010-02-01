@@ -19,6 +19,8 @@
 
 -(void)gameSceneBtn: (id)sender;
 -(void)enableScore;
+-(void)disableScore;
+-(float)getScore;
 -(void)setLaunchX:(float)xpos;
 
 @end
