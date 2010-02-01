@@ -11,10 +11,11 @@ The following is a list of currently active action items.
   # Populate Options, Instructions, and High Score Scenes
 *Game Scene*
   # Create a third type of collision object and associated user input
-  # Create the end game scene showing stats
+  # _~~Create the end game scene~~_
+  # Add Stats to End Game Scene
     * Maximum velocity
     * Maximum Height
-    * Distance Traveled
+    * _~~Distance Traveled~~_
     * Number of collisions with each object type
     * Maximum Monkey Bars hit
   # Display tap counter after ragdoll launches from monkey bars
