@@ -10,7 +10,8 @@ The following is a list of currently active action items.
   # _~~Create Scenes for options, instructions/help, and high scores/statistics~~_
   # Populate Options, Instructions, and High Score Scenes
 *Game Scene*
-  # Create a third type of collision object and associated user input
+  # Create Merry-Go-Round and associated user input
+  # Create See-Saw and associated user input
   # _~~Create the end game scene~~_
   # Add Stats to End Game Scene
     * Maximum velocity
