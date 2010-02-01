@@ -9,7 +9,6 @@
 #import "GameLayer.hh"
 #import "GameScene.hh"
 #import "ControlLayer.hh"
-
 #include <algorithm>
 
 #define PTM_RATIO 32
@@ -79,9 +78,6 @@ void ContactListener::Add(const b2ContactPoint* point) {
 		}
         
 	}
-	
-	
-	
 }
 
 void ContactListener::Persist(const b2ContactPoint* point) {
@@ -427,7 +423,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		currPos.y = 50;
 	}
 	int randnum = (rand()%10000)+1;
-	if(randnum<randObjectPercentage*10000) {
+	if(randnum<randObjectPercentage/5*10000) {
 		b2BodyDef collisionObjectDef;
         Actor* a = [[Actor alloc] init];
         a.type = 1;
@@ -446,11 +442,11 @@ void ContactListener::Result(const b2ContactResult* result) {
         Actor* a = [[Actor alloc] init];
         a.type = 2;
         collisionObjectDef.userData = a;
-		collisionObjectDef.position.Set(currPos.x+10.0f,10.2f);
+		collisionObjectDef.position.Set(currPos.x+10.0f, 8.0f);
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
-		collisionObjectShapeDef.SetAsBox(0.2f, 0.2f);
+		collisionObjectShapeDef.SetAsBox(MB_WIDTH, 0.2f);
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }

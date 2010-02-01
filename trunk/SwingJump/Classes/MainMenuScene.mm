@@ -9,6 +9,9 @@
 #import "MainMenuScene.hh"
 #import "SimpleAudioEngine.h"
 #import "GameScene.hh"
+#import "HighScoreScene.hh"
+#import "OptionScene.hh"
+#import "InstructionScene.hh"
 #import "Box2D.h"
 #import "GLES-Render.h"
 
@@ -215,10 +218,10 @@ b2World *world;
                                              selector:@selector(help:)];
 		CCMenuItem *options = [CCMenuItemFont itemFromString:@"Options"
 												   target:self
-												 selector:@selector(help:)];
+												 selector:@selector(options:)];
 		CCMenuItem *scoreboard = [CCMenuItemFont itemFromString:@"Scoreboard"
 												   target:self
-												 selector:@selector(help:)];
+												 selector:@selector(scoreboard:)];
         CCMenu *menu = [CCMenu menuWithItems:start, space3, help, space1, space2, scoreboard, options, nil];
 		//[menu alignItemsHorizontallyWithPadding:100.0f];
 		[menu alignItemsInColumns:[NSNumber numberWithUnsignedInt:3],[NSNumber numberWithUnsignedInt:2], [NSNumber numberWithUnsignedInt:2], nil];
@@ -240,9 +243,9 @@ b2World *world;
 			toggle.selectedIndex = 1;
 		}
 		else {
-				if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
-					[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"hz_t_menumusic.mp3"];
-				}
+            if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"hz_t_menumusic.mp3"];
+            }
 		}
 		
     }
@@ -270,6 +273,19 @@ b2World *world;
 }
 -(void)help: (id)sender {
        
-	NSLog(@"help");
+	InstructionScene *is = [InstructionScene node];
+	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: is]];
+	NSLog(@"instructions");
+}
+-(void)options: (id)sender {
+    
+	OptionScene *os = [OptionScene node];
+	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: os]];
+	NSLog(@"options");
+}
+-(void)scoreboard: (id)sender {
+    HighScoreScene *hs = [HighScoreScene node];
+	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: hs]];
+	NSLog(@"high scores");
 }
 @end
