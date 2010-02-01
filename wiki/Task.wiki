@@ -7,7 +7,7 @@ The following is a list of currently active action items.
 *System Level*
   # Save and Load Preferences, high scores/statistics
 *Main Menu*
-  # _Create Scenes for options, instructions/help, and high scores/statistics_
+  # _--Create Scenes for options, instructions/help, and high scores/statistics--_
   # Populate Options, Instructions, and High Score Scenes
 *Game Scene*
   # Create a third type of collision object and associated user input
