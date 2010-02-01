@@ -8,7 +8,7 @@ The following is a list of currently active action items.
   # Save and Load Preferences, high scores/statistics
 *Main Menu*
   # _Create Scenes for options, instructions/help, and high scores/statistics_
-  # Populate Options, Instructions, and HighScore Scenes
+  # Populate Options, Instructions, and High Score Scenes
 *Game Scene*
   # Create a third type of collision object and associated user input
   # Create the end game scene showing stats
