@@ -25,6 +25,8 @@
 	int hitCounter;
 	float timeCounter;
 	b2Vec2 locPrev;
+	UISlider *customSlider;
+	UIView *uiView;
 }
 
 @property (nonatomic, retain) CCSprite *leftArrow;
@@ -42,11 +44,15 @@
 @property (nonatomic) int hitCounter;
 @property (nonatomic) float timeCounter;
 @property (nonatomic) b2Vec2 locPrev;
+@property (nonatomic, retain) UISlider *customSlider;
+@property (nonatomic, retain) UIView *uiView;
 
 - (void)rotateChainLeft;
 - (void)rotateChainRight;
 - (void)handleType2;
 - (void)handleType3;
 - (void)launch;
+- (void)create_Custom_UISlider;
+- (void) sliderAction:(id)sender;
 
 @end

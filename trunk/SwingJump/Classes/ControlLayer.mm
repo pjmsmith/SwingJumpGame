@@ -27,6 +27,8 @@
 @synthesize timeCounter;
 @synthesize merryGoRound;
 @synthesize locPrev;
+@synthesize customSlider;
+@synthesize uiView;
 
 - (id) init {
     self = [super init];
@@ -144,17 +146,9 @@
 	UITouch *touch = [[event allTouches] anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 	if (type3Enabled) {
-		if (b2Sqrt((location.y-merryGoRound.position.x)*(location.y-merryGoRound.position.x)+(location.x-merryGoRound.position.y)*(location.x-merryGoRound.position.y))>60.0f) {
-			//Determine the rotation distance...
-			b2Vec2 loc = b2Vec2(abs(location.y-merryGoRound.position.x),abs(location.x-merryGoRound.position.y));
-			float norm = sqrt(loc.x*loc.x+loc.y*loc.y);
-			loc.x = loc.x/norm;
-			loc.y = loc.y/norm;
-			float rotAngle = acosf((locPrev.x*loc.x+locPrev.y*loc.y));
-			locPrev = loc;
-			[merryGoRound setRotation:rotAngle*360.0f/3.1415f];
+		//nothing to do
 		}
-	}
+	
 	
 	return kEventHandled;
 }
@@ -241,16 +235,17 @@
 }
 
 - (void) handleType3 {
-	merryGoRound = [CCSprite spriteWithFile:@"Merry-Go-Round.png"];
-	[merryGoRound setOpacity:128];
-	[merryGoRound setPosition:ccp(240, 150)];
-	[self addChild:merryGoRound z:3 tag:101];
+	
+	[self create_Custom_UISlider];
+	uiView = [[CCDirector sharedDirector] openGLView];
+	CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(3.14159f/2.0f);
+	[customSlider setTransform:landscapeTransform];
+	[uiView addSubview:customSlider];
 	
 	timeCounter = 0.0f;
 	hitCounter = 0;
 	type3Enabled = YES;
-	//arrowVisible = NO; // NO = left, YES = right
-	//[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:255]];
+
 	[self schedule:@selector(tictoc:)];
 }
 
@@ -271,12 +266,49 @@
 	}
 	else if (type3Enabled) {
 		timeCounter = timeCounter+dt;
-		if (timeCounter > 5.0f) {
-			type3Enabled = NO;
-			[self unschedule:@selector(tictoc:)];
-			[gl ResumeWithImpulse:b2Vec2(0.0f,0.0f)];
-			[self removeChildByTag:101 cleanup:YES];
-		}
 	}
+}
+
+- (void)create_Custom_UISlider
+{
+	CGRect frame = CGRectMake(10.0, 200.0, 300.0, 52.0);
+	CGRect thumb = CGRectMake(10.0, 200.0, 47.0, 71.0);
+	
+	customSlider = [[UISlider alloc] initWithFrame:frame];
+	[customSlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventTouchUpInside];
+	// in case the parent view draws with a custom color or gradient, use a transparent color
+	customSlider.backgroundColor = [UIColor clearColor];	
+	UIImage *stetchLeftTrack = [[UIImage imageNamed:@"customTrack.png"]
+								stretchableImageWithLeftCapWidth:300.0 topCapHeight:0.0];
+	UIImage *stetchRightTrack = [[UIImage imageNamed:@"customTrack.png"]
+								stretchableImageWithLeftCapWidth:300.0 topCapHeight:0.0];
+	[customSlider setThumbImage: [UIImage imageNamed:@"customThumb.png"] forState:UIControlStateNormal];
+	
+	[customSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+	[customSlider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
+	[customSlider thumbRectForBounds: thumb trackRect: frame value: customSlider.value];
+	customSlider.minimumValue = 0.0;
+	customSlider.maximumValue = 1.0;
+	customSlider.continuous = YES;
+	customSlider.value = 0.0;
+}
+
+- (void) sliderAction: (id)sender
+{
+	if (customSlider.value != 1.0)  //if the value is not the max, slide this bad boy back to zero
+	{
+		[sender setValue: 0 animated: YES];
+	}
+	else {	
+		type3Enabled = NO;
+		[self unschedule:@selector(tictoc:)];
+		float bonus = (2.5f-timeCounter);
+		if (bonus < 0.0f) {
+			bonus = 0.0f;
+		}
+		[gl ResumeWithImpulse:b2Vec2(bonus,bonus)];
+		[customSlider removeFromSuperview];
+	}
+	
 }
 @end
