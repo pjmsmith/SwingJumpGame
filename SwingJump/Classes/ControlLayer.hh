@@ -24,6 +24,7 @@
 	BOOL arrowVisible; //left = 0, right = 1
 	int hitCounter;
 	float timeCounter;
+	b2Vec2 locPrev;
 }
 
 @property (nonatomic, retain) CCSprite *leftArrow;
@@ -40,6 +41,7 @@
 @property (nonatomic) BOOL arrowVisible;
 @property (nonatomic) int hitCounter;
 @property (nonatomic) float timeCounter;
+@property (nonatomic) b2Vec2 locPrev;
 
 - (void)rotateChainLeft;
 - (void)rotateChainRight;

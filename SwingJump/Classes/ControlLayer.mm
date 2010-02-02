@@ -26,6 +26,7 @@
 @synthesize hitCounter;
 @synthesize timeCounter;
 @synthesize merryGoRound;
+@synthesize locPrev;
 
 - (id) init {
     self = [super init];
@@ -39,6 +40,7 @@
 		arrowVisible = NO;
 		hitCounter = 0;
 		timeCounter = 0.0f;
+		locPrev = b2Vec2(0.0f,1.0f);
 		
         leftArrow = [CCSprite spriteWithFile:@"circlearrow.png"];
         [leftArrow setPosition:ccp(50,160)];
@@ -142,10 +144,15 @@
 	UITouch *touch = [[event allTouches] anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 	if (type3Enabled) {
-		if (CGRectContainsPoint([merryGoRound boundingBox], location)) {
-			
-			[merryGoRound setRotation:timeCounter*10];
-			
+		if (b2Sqrt((location.y-merryGoRound.position.x)*(location.y-merryGoRound.position.x)+(location.x-merryGoRound.position.y)*(location.x-merryGoRound.position.y))>60.0f) {
+			//Determine the rotation distance...
+			b2Vec2 loc = b2Vec2(abs(location.y-merryGoRound.position.x),abs(location.x-merryGoRound.position.y));
+			float norm = sqrt(loc.x*loc.x+loc.y*loc.y);
+			loc.x = loc.x/norm;
+			loc.y = loc.y/norm;
+			float rotAngle = acosf((locPrev.x*loc.x+locPrev.y*loc.y));
+			locPrev = loc;
+			[merryGoRound setRotation:rotAngle*360.0f/3.1415f];
 		}
 	}
 	
