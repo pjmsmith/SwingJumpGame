@@ -511,7 +511,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	{
 		b2Vec2 pos = b->GetPosition();
 		b2Vec2 cam = ragdoll->Head->GetPosition();
-		if(pos.x<(cam.x-7.5f))
+		if(pos.x<(cam.x-10.0f))
 		{
 			world->DestroyBody(b);
 		}
