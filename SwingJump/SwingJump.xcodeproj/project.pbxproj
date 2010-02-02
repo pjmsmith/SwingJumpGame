@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		143ECC131117615000A57A52 /* EndGameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143ECC121117615000A57A52 /* EndGameLayer.mm */; };
-		143ECC2C111776ED00A57A52 /* Merry-Go-Round.png in Resources */ = {isa = PBXBuildFile; fileRef = 143ECC2B111776ED00A57A52 /* Merry-Go-Round.png */; };
+		143ECD981118BDE500A57A52 /* customTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = 143ECD971118BDE500A57A52 /* customTrack.png */; };
+		143ECD9A1118BE2500A57A52 /* customThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 143ECD991118BE2500A57A52 /* customThumb.png */; };
 		146F433311126C3100B7F3D8 /* monkeybars.png in Resources */ = {isa = PBXBuildFile; fileRef = 146F433211126C3100B7F3D8 /* monkeybars.png */; };
 		146F44151116554500B7F3D8 /* OptionScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146F44131116554500B7F3D8 /* OptionScene.mm */; };
 		146F44181116554C00B7F3D8 /* InstructionScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146F44161116554C00B7F3D8 /* InstructionScene.mm */; };
@@ -217,7 +218,8 @@
 /* Begin PBXFileReference section */
 		143ECC111117615000A57A52 /* EndGameLayer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EndGameLayer.hh; sourceTree = "<group>"; };
 		143ECC121117615000A57A52 /* EndGameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EndGameLayer.mm; sourceTree = "<group>"; };
-		143ECC2B111776ED00A57A52 /* Merry-Go-Round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Merry-Go-Round.png"; sourceTree = "<group>"; };
+		143ECD971118BDE500A57A52 /* customTrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = customTrack.png; sourceTree = "<group>"; };
+		143ECD991118BE2500A57A52 /* customThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = customThumb.png; sourceTree = "<group>"; };
 		146F433211126C3100B7F3D8 /* monkeybars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monkeybars.png; sourceTree = "<group>"; };
 		146F44131116554500B7F3D8 /* OptionScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OptionScene.mm; sourceTree = "<group>"; };
 		146F44141116554500B7F3D8 /* OptionScene.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OptionScene.hh; sourceTree = "<group>"; };
@@ -1181,7 +1183,8 @@
 		50F4144210692EE7002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				143ECC2B111776ED00A57A52 /* Merry-Go-Round.png */,
+				143ECD991118BE2500A57A52 /* customThumb.png */,
+				143ECD971118BDE500A57A52 /* customTrack.png */,
 				146F433211126C3100B7F3D8 /* monkeybars.png */,
 				14B6B67C110D1F2A003CDE72 /* title.png */,
 				14B6B4A6110CF935003CDE72 /* soundOFF.png */,
@@ -1296,7 +1299,8 @@
 				14B6B4A9110CF936003CDE72 /* soundON.png in Resources */,
 				14B6B67D110D1F2A003CDE72 /* title.png in Resources */,
 				146F433311126C3100B7F3D8 /* monkeybars.png in Resources */,
-				143ECC2C111776ED00A57A52 /* Merry-Go-Round.png in Resources */,
+				143ECD981118BDE500A57A52 /* customTrack.png in Resources */,
+				143ECD9A1118BE2500A57A52 /* customThumb.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
