@@ -284,6 +284,7 @@
 		if (timeCounter > 4.0f) {
 			type2Enabled = NO;
 			monkeyBarCounter = YES;
+			[lblMonkeyBarCount setString:[NSString stringWithFormat:@"%i", hitCounter]];
 			displayTime = 0.0f;
 			[self unschedule:@selector(tictoc:)];
 			[self schedule:@selector(tickDisplay:)];
@@ -303,7 +304,6 @@
 
 -(void)tickDisplay:(ccTime) dt{
 	displayTime = displayTime+dt;
-	[lblMonkeyBarCount setString:[NSString stringWithFormat:@"%i", hitCounter]];
 	float opacity = 255.0*(1 - displayTime/3.0);
 	if (opacity < 0.0f) {
 		opacity = 0.0f;
