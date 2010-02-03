@@ -38,8 +38,11 @@
 		CCMenuItem *mainmenu = [CCMenuItemFont itemFromString:@"Main Menu"
                                                        target:self
                                                      selector:@selector(mainMenuBtn:)];
+        CCMenuItem *clearScores = [CCMenuItemFont itemFromString:@"Clear Scores"
+                                                       target:self
+                                                     selector:@selector(clearScoresBtn:)];
         
-        CCMenu *menu = [CCMenu menuWithItems:mainmenu, nil];
+        CCMenu *menu = [CCMenu menuWithItems:mainmenu, clearScores, nil];
         [menu setPosition:ccp(440, 20)];
         [menu alignItemsVerticallyWithPadding:10];
         [self addChild:menu z:6];
@@ -55,6 +58,12 @@
     MainMenuScene * ms = [MainMenuScene node];
 	[[CCDirector sharedDirector] replaceScene: [CCFadeTransition transitionWithDuration:0.0 scene: ms]];
 }
+
+-(void)clearScoresBtn: (id)sender 
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"score"];
+    NSLog(@"Cleared high scores");
+}
 @end
 
 @implementation ScoreboardLayer
@@ -62,6 +71,21 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
+        CCLabel* label;
+        NSString* scoreboard = [[NSString alloc] initWithString:@"High Scores\n"];
+        id scoreObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"score"];
+        if (scoreObject == nil) {
+            //populate with default scores
+        }
+        else {
+            //add scores to string
+        }
+
+        label = [CCLabel labelWithString:scoreboard fontName:@"Marker Felt" fontSize:32];
+		CGSize size = [[CCDirector sharedDirector] winSize];
+		label.position =  ccp( size.width /2 , size.height-25);
+		[self addChild:label z:0];
+        
 
     }
     return self;
