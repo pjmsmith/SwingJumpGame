@@ -30,6 +30,10 @@
 @synthesize customSlider;
 @synthesize uiView;
 @synthesize sliderBackground;
+@synthesize maxMonkeyBars;
+@synthesize displayTime;
+@synthesize monkeyBarCounter;
+@synthesize lblMonkeyBarCount;
 
 - (id) init {
     self = [super init];
@@ -41,6 +45,17 @@
 		type2Enabled = NO;
 		type3Enabled = NO;
 		arrowVisible = NO;
+		displayTime = 0.0f;
+		monkeyBarCounter = NO;
+		
+		CGSize size = [[CCDirector sharedDirector] winSize];
+		lblMonkeyBarCount = [CCLabel labelWithString:@"" fontName:@"Marker Felt" fontSize:45];
+		lblMonkeyBarCount.position =  ccp( size.width /2 , size.height/2 + 60);
+		[lblMonkeyBarCount setOpacity:0.0];
+		[self addChild:lblMonkeyBarCount z:0];
+		
+		
+		
 		hitCounter = 0;
 		timeCounter = 0.0f;
 		locPrev = b2Vec2(0.0f,1.0f);
@@ -233,6 +248,7 @@
 	arrowVisible = NO; // NO = left, YES = right
 	[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:255]];
 	[self schedule:@selector(tictoc:)];
+	
 }
 
 - (void) handleType3 {
@@ -267,11 +283,17 @@
 		
 		if (timeCounter > 4.0f) {
 			type2Enabled = NO;
+			monkeyBarCounter = YES;
+			displayTime = 0.0f;
 			[self unschedule:@selector(tictoc:)];
+			[self schedule:@selector(tickDisplay:)];
 			[rightArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
 			[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
 			[gl ResumeWithImpulse:b2Vec2((float)hitCounter/12.0f,(float)hitCounter/12.0f)];
 			[self removeChildByTag:100 cleanup:YES];
+			if (hitCounter > maxMonkeyBars) {
+				maxMonkeyBars = hitCounter;
+			}
 		}
 	}
 	else if (type3Enabled) {
@@ -279,6 +301,21 @@
 	}
 }
 
+-(void)tickDisplay:(ccTime) dt{
+	displayTime = displayTime+dt;
+	[lblMonkeyBarCount setString:[NSString stringWithFormat:@"%i", hitCounter]];
+	float opacity = 255.0*(1 - displayTime/3.0);
+	if (opacity < 0.0f) {
+		opacity = 0.0f;
+	}
+	[lblMonkeyBarCount setOpacity:opacity];
+	if (displayTime > 3.0f) {
+		monkeyBarCounter = NO;
+		[self unschedule:@selector(tickDisplay:)];
+	}
+}
+	
+	
 - (void)create_Custom_UISlider
 {
 	CGRect frame = CGRectMake(10.0, 200.0, 300.0, 44.0);
@@ -314,4 +351,9 @@
 	}
 	
 }
+
+- (int)getMaxMonkeyBars {
+	return maxMonkeyBars;
+}
+
 @end

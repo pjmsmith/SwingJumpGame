@@ -28,6 +28,10 @@
 	UISlider *customSlider;
 	UIView *uiView;
 	UIImageView *sliderBackground;
+	int maxMonkeyBars;
+	BOOL monkeyBarCounter;
+	float displayTime;
+	CCLabel *lblMonkeyBarCount;
 }
 
 @property (nonatomic, retain) CCSprite *leftArrow;
@@ -48,6 +52,10 @@
 @property (nonatomic, retain) UISlider *customSlider;
 @property (nonatomic, retain) UIView *uiView;
 @property (nonatomic, retain) UIImageView *sliderBackground;
+@property (nonatomic) int maxMonkeyBars;
+@property (nonatomic) BOOL monkeyBarCounter;
+@property (nonatomic) float displayTime;
+@property (nonatomic, retain) CCLabel *lblMonkeyBarCount;
 
 - (void)rotateChainLeft;
 - (void)rotateChainRight;
@@ -55,6 +63,7 @@
 - (void)handleType3;
 - (void)launch;
 - (void)create_Custom_UISlider;
-- (void) sliderAction:(id)sender;
+- (void)sliderAction:(id)sender;
+- (int)getMaxMonkeyBars;
 
 @end
