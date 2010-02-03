@@ -5,7 +5,7 @@
 The following is a list of currently active action items.
 
 *System Level*
-  # Save and Load Preferences, high scores/statistics -  http://www.cocos2d-iphone.org/forum/topic/807
+  # Save and Load Preferences, _~~save high scores~~_/statistics -  http://www.cocos2d-iphone.org/forum/topic/807
 *Main Menu*
   # _~~Create Scenes for options, instructions/help, and high scores/statistics~~_
   # Populate Options, Instructions, and High Score Scenes
