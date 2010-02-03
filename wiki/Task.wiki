@@ -21,7 +21,7 @@ The following is a list of currently active action items.
     * Number of collisions with each object type
     * Maximum Monkey Bars hit
   # Display tap counter after ragdoll launches from monkey bars
-  # Zoom out based on how fast the ragdoll is moving (so you can see what's coming up?)
+  # _~~Zoom out based on how fast the ragdoll is moving (so you can see what's coming up?)~~_
 *Media*
   # Create background images
   # Attach sprites to physics objects such that they get acted on accordingly
