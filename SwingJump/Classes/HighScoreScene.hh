@@ -11,6 +11,8 @@
 
 @interface HighScoreScene  : CCScene {}
 -(void)mainMenuBtn: (id)sender; 
+-(void)clearScoresBtn: (id)sender; 
+
 @end
 
 @interface ScoreboardLayer : CCLayer {}

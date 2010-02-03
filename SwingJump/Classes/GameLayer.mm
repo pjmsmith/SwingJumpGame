@@ -31,6 +31,7 @@ b2Vec2 lastCamPos;
 b2Vec2 camPos;
 float timeStationary;
 ContactListener *contactListener;
+float MB_WIDTH  = 2.6f; //monkey bar collision box width
 
 const int32 k_maxtype = 100;
 const int32 k_numTypes = 3;
@@ -464,8 +465,50 @@ void ContactListener::Result(const b2ContactResult* result) {
 			[parent addChild:egl z:2];
 			[[(ControlLayer *)parent hl] disableScore];
 			[egl setDistance:[[(ControlLayer *)parent hl] getScore] maxSpeed:maxSpeed maxHeight:maxHeight];
-			//[[(ControlLayer *)parent hl] disableScore];			
-		}
+#pragma mark High Score and Stats Saving            
+            NSMutableArray* scores = [[NSMutableArray alloc] initWithCapacity:10];
+            NSNumber* lastScore = [[NSNumber alloc] initWithFloat:[[(ControlLayer *)parent hl] getScore]];
+            id scoreObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"score"];
+            if(scoreObject == nil)
+            {
+                [scores addObject:lastScore];
+                [[NSUserDefaults standardUserDefaults] setObject:scores forKey:@"score"];
+                NSLog(@"new entry");
+            }
+            else
+            {
+                scores = [[NSMutableArray alloc] initWithArray:(NSMutableArray*)[[NSUserDefaults standardUserDefaults] objectForKey:@"score"]];
+                BOOL didUpdate = false;
+                NSInteger oldCount = [scores count];
+                for(int i = 0; i < oldCount; i++)
+                {
+                    if([lastScore floatValue]>[[scores objectAtIndex:i] floatValue])
+                    {
+                        didUpdate = true;
+                        [scores insertObject:lastScore atIndex:i];
+                        break;
+                    }
+                }
+                if(!didUpdate && ([scores count]<10))
+                {
+                    //add to end
+                    [scores addObject:lastScore];
+                    didUpdate = true;
+                }
+                else if(didUpdate && ([scores count]>10))
+                {
+                    //drop last value
+                    [scores removeLastObject];
+                }
+                NSLog(@"Number of objects in score list: %d", [scores count]);
+                if(didUpdate)
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:scores forKey:@"score"];
+                }
+            }
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            //END High Score and Stats saving
+        }
 	}
 	else {
 		timeStationary = 0.0f;
