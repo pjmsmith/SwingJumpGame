@@ -103,6 +103,8 @@ void ContactListener::Result(const b2ContactResult* result) {
 
 @implementation GameLayer
 @synthesize world;
+@synthesize maxSpeed;
+@synthesize maxHeight;
 
 - (id) init {
     self = [super init];
@@ -112,10 +114,7 @@ void ContactListener::Result(const b2ContactResult* result) {
         [swingSet setPosition:ccp(240,210)];
         [self addChild:swingSet z:4];
 		
-        //swingChain = [CCSprite spriteWithFile:@"swingchain.png"];
-        //[swingChain setAnchorPoint:ccp(0.5,1)];
-        //[swingChain setPosition:ccp((swingSet.contentSize.width/2), (swingSet.contentSize.height)-2)];
-        //[self addChild:swingChain z:1];
+		maxSpeed = 0.0f;
 		
 		//Create a world
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -363,6 +362,18 @@ void ContactListener::Result(const b2ContactResult* result) {
 		[self DetectStopped:dt];
 	}
 	
+	//Detect High Scores
+	b2Vec2 vel = ragdoll->Chest->GetLinearVelocity();
+	float speed =  sqrt(vel.x*vel.x+vel.y*vel.y);
+	if (speed > maxSpeed) {
+		maxSpeed = speed;	
+	}
+	
+	float height = ragdoll->Chest->GetPosition().x;
+	if (height > maxHeight) {
+		maxHeight = height;
+	}
+	
 }
 
 -(void)CollisionHandler{
@@ -448,7 +459,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 			egl = [EndGameLayer node];
 			[parent addChild:egl z:2];
 			[[(ControlLayer *)parent hl] disableScore];
-			[egl setDistance:[[(ControlLayer *)parent hl] getScore]];
+			[egl setDistance:[[(ControlLayer *)parent hl] getScore] maxSpeed:maxSpeed maxHeight:maxHeight];
 			//[[(ControlLayer *)parent hl] disableScore];			
 		}
 	}

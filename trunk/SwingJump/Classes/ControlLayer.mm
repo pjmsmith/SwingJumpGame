@@ -29,6 +29,7 @@
 @synthesize locPrev;
 @synthesize customSlider;
 @synthesize uiView;
+@synthesize sliderBackground;
 
 - (id) init {
     self = [super init];
@@ -238,8 +239,17 @@
 	
 	[self create_Custom_UISlider];
 	uiView = [[CCDirector sharedDirector] openGLView];
-	CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(3.14159f/2.0f);
+	CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(3.14159267f/2.0f);
+	
+	UIImage *track = [UIImage imageNamed:@"sliderTrack.png"];
+	sliderBackground = [[UIImageView alloc] initWithImage:track];
+	[sliderBackground setFrame:CGRectMake(0.0, 170.0, 320.0, 105.0)];
+	[sliderBackground setAlpha:0.7f];
+	[sliderBackground setTransform:landscapeTransform];
+	[uiView addSubview:sliderBackground];
+	
 	[customSlider setTransform:landscapeTransform];
+	[customSlider setAlpha:0.7f];
 	[uiView addSubview:customSlider];
 	
 	timeCounter = 0.0f;
@@ -260,7 +270,7 @@
 			[self unschedule:@selector(tictoc:)];
 			[rightArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
 			[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
-			[gl ResumeWithImpulse:b2Vec2((float)hitCounter/2.0f,(float)hitCounter/2.0f)];
+			[gl ResumeWithImpulse:b2Vec2((float)hitCounter/6.0f,(float)hitCounter/6.0f)];
 			[self removeChildByTag:100 cleanup:YES];
 		}
 	}
@@ -271,21 +281,13 @@
 
 - (void)create_Custom_UISlider
 {
-	CGRect frame = CGRectMake(10.0, 200.0, 300.0, 52.0);
-	CGRect thumb = CGRectMake(10.0, 200.0, 47.0, 71.0);
-	
+	CGRect frame = CGRectMake(10.0, 200.0, 300.0, 44.0);
+	CGRect thumb = CGRectMake(10.0, 200.0, 44.0, 90.0);
 	customSlider = [[UISlider alloc] initWithFrame:frame];
 	[customSlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventTouchUpInside];
 	// in case the parent view draws with a custom color or gradient, use a transparent color
 	customSlider.backgroundColor = [UIColor clearColor];	
-	UIImage *stetchLeftTrack = [[UIImage imageNamed:@"customTrack.png"]
-								stretchableImageWithLeftCapWidth:300.0 topCapHeight:0.0];
-	UIImage *stetchRightTrack = [[UIImage imageNamed:@"customTrack.png"]
-								stretchableImageWithLeftCapWidth:300.0 topCapHeight:0.0];
 	[customSlider setThumbImage: [UIImage imageNamed:@"customThumb.png"] forState:UIControlStateNormal];
-	
-	[customSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
-	[customSlider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
 	[customSlider thumbRectForBounds: thumb trackRect: frame value: customSlider.value];
 	customSlider.minimumValue = 0.0;
 	customSlider.maximumValue = 1.0;
@@ -308,6 +310,7 @@
 		}
 		[gl ResumeWithImpulse:b2Vec2(bonus,bonus)];
 		[customSlider removeFromSuperview];
+		[sliderBackground removeFromSuperview];
 	}
 	
 }
