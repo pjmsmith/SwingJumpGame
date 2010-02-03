@@ -13,12 +13,14 @@
 	CCLabel* label;
 	CCLabel* lblMaxSpeed;
 	CCLabel* lblMaxHeight;
+	CCLabel* lblMaxMonkeyBars;
 }
 
 @property (nonatomic, retain) CCLabel *label;
 @property (nonatomic, retain) CCLabel *lblMaxSpeed;
 @property (nonatomic, retain) CCLabel *lblMaxHeight;
+@property (nonatomic, retain) CCLabel *lblMaxMonkeyBars;
 
--(void) setDistance:(float)distance maxSpeed:(float)maxSpeed maxHeight:(float)maxHeight;
+-(void) setDistance:(float)distance maxSpeed:(float)maxSpeed maxHeight:(float)maxHeight maxMonkeyBars:(int)maxMonkeyBars;
 @end
 
