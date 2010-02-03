@@ -12,10 +12,11 @@ The following is a list of currently active action items.
 *Game Scene*
   # Create Merry-Go-Round and associated user input
   # Create See-Saw and associated user input
+  # _~~Create spring-seat and associated user input~~_
   # _~~Create the end game scene~~_
   # Add Stats to End Game Scene
-    * Maximum velocity
-    * Maximum Height
+    * _~~Maximum velocity~~_
+    * _~~Maximum Height~~_
     * _~~Distance Traveled~~_
     * Number of collisions with each object type
     * Maximum Monkey Bars hit
