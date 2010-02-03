@@ -270,7 +270,7 @@
 			[self unschedule:@selector(tictoc:)];
 			[rightArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
 			[leftArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
-			[gl ResumeWithImpulse:b2Vec2((float)hitCounter/6.0f,(float)hitCounter/6.0f)];
+			[gl ResumeWithImpulse:b2Vec2((float)hitCounter/12.0f,(float)hitCounter/12.0f)];
 			[self removeChildByTag:100 cleanup:YES];
 		}
 	}
