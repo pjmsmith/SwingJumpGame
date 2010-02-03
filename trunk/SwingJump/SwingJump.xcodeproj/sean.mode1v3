@@ -271,19 +271,20 @@
 								<string>46C0CCAA10F66CEE00CE2AE1</string>
 								<string>46C0CCAB10F66CEE00CE2AE1</string>
 								<string>46C0CCAD10F66CEE00CE2AE1</string>
+								<string>2D500B1D0D5A766B00DBA0E3</string>
 								<string>1C37FAAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
-									<integer>3</integer>
+									<integer>29</integer>
+									<integer>17</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {311, 646}}</string>
+							<string>{{0, 68}, {311, 646}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -320,7 +321,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>TestIt.m</string>
+								<string>GameLayer.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -328,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>TestIt.m</string>
+										<string>GameLayer.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>143ECF751118FA6F00A57A52</string>
+										<string>143ECF8C1118FB2800A57A52</string>
 										<key>history</key>
 										<array>
 											<string>14B6AFF91106B70F003CDE72</string>
@@ -421,7 +422,6 @@
 											<string>143ECEE11118EAB600A57A52</string>
 											<string>143ECEE31118EAB600A57A52</string>
 											<string>143ECF001118F2DA00A57A52</string>
-											<string>143ECF271118F4FE00A57A52</string>
 											<string>143ECF281118F4FE00A57A52</string>
 											<string>143ECF291118F4FE00A57A52</string>
 											<string>143ECF2A1118F4FE00A57A52</string>
@@ -431,8 +431,8 @@
 											<string>143ECF431118F71800A57A52</string>
 											<string>143ECF441118F71800A57A52</string>
 											<string>143ECF451118F71800A57A52</string>
-											<string>143ECF6E1118FA5800A57A52</string>
-											<string>143ECF6F1118FA5800A57A52</string>
+											<string>143ECF861118FB1E00A57A52</string>
+											<string>143ECF871118FB1E00A57A52</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -779,7 +779,8 @@
 											<string>143ECF481118F71800A57A52</string>
 											<string>143ECF491118F71800A57A52</string>
 											<string>143ECF4A1118F71800A57A52</string>
-											<string>143ECF711118FA5800A57A52</string>
+											<string>143ECF881118FB1E00A57A52</string>
+											<string>143ECF891118FB1E00A57A52</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -979,6 +980,7 @@
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>141252EA10F948E700A7C85E</string>
+		<string>/Users/sean/Projects/pubmix/SwingJump/SwingJump.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>100 172 1273 705 0 0 1440 878 </string>
