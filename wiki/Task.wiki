@@ -19,8 +19,8 @@ The following is a list of currently active action items.
     * _~~Maximum Height~~_
     * _~~Distance Traveled~~_
     * Number of collisions with each object type
-    * Maximum Monkey Bars hit
-  # Display tap counter after ragdoll launches from monkey bars
+    * _~~Maximum Monkey Bars hit~~_
+  # _~~Display tap counter after ragdoll launches from monkey bars~~_
   # _~~Zoom out based on how fast the ragdoll is moving (so you can see what's coming up?)~~_
 *Media*
   # Create background images
