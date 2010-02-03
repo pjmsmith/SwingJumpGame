@@ -2180,7 +2180,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 278";
 		rLen = 0;
-		rLoc = 9193;
+		rLoc = 9195;
 		rType = 0;
 		vrLen = 1041;
 		vrLoc = 2998;
@@ -2220,7 +2220,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 276";
 		rLen = 30;
-		rLoc = 9054;
+		rLoc = 9056;
 		rType = 0;
 		vrLen = 1453;
 		vrLoc = 7816;
@@ -2240,7 +2240,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 294";
 		rLen = 0;
-		rLoc = 9792;
+		rLoc = 9794;
 		rType = 0;
 		vrLen = 1509;
 		vrLoc = 7760;
@@ -2294,7 +2294,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 301";
 		rLen = 0;
-		rLoc = 9856;
+		rLoc = 9858;
 		rType = 0;
 		vrLen = 1288;
 		vrLoc = 7981;
@@ -2374,7 +2374,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 293";
 		rLen = 0;
-		rLoc = 9504;
+		rLoc = 9506;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 7924;
@@ -2408,7 +2408,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 304";
 		rLen = 0;
-		rLoc = 10273;
+		rLoc = 10275;
 		rType = 0;
 		vrLen = 694;
 		vrLoc = 3;
@@ -2468,7 +2468,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 278";
 		rLen = 0;
-		rLoc = 9114;
+		rLoc = 9116;
 		rType = 0;
 		vrLen = 1704;
 		vrLoc = 7565;
@@ -2500,7 +2500,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 283";
 		rLen = 0;
-		rLoc = 9176;
+		rLoc = 9178;
 		rType = 0;
 		vrLen = 1454;
 		vrLoc = 7815;
@@ -2540,7 +2540,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 292";
 		rLen = 0;
-		rLoc = 9504;
+		rLoc = 9506;
 		rType = 0;
 		vrLen = 1454;
 		vrLoc = 7815;
@@ -2558,7 +2558,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 274";
 		rLen = 0;
-		rLoc = 9088;
+		rLoc = 9090;
 		rType = 0;
 		vrLen = 1739;
 		vrLoc = 7057;
@@ -2710,7 +2710,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 302";
 		rLen = 0;
-		rLoc = 9981;
+		rLoc = 9983;
 		rType = 0;
 		vrLen = 1265;
 		vrLoc = 6732;
@@ -3540,7 +3540,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 322";
 		rLen = 0;
-		rLoc = 10307;
+		rLoc = 10309;
 		rType = 0;
 		vrLen = 482;
 		vrLoc = 8941;
@@ -3630,7 +3630,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 277";
 		rLen = 0;
-		rLoc = 8637;
+		rLoc = 8717;
 		rType = 0;
 		vrLen = 898;
 		vrLoc = 7444;
@@ -3660,7 +3660,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 277";
 		rLen = 0;
-		rLoc = 8637;
+		rLoc = 8717;
 		rType = 0;
 		vrLen = 525;
 		vrLoc = 8744;
@@ -3680,7 +3680,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 277";
 		rLen = 0;
-		rLoc = 8637;
+		rLoc = 8717;
 		rType = 0;
 		vrLen = 525;
 		vrLoc = 8744;
@@ -3720,7 +3720,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 276";
 		rLen = 0;
-		rLoc = 8604;
+		rLoc = 8684;
 		rType = 0;
 		vrLen = 762;
 		vrLoc = 3310;
@@ -3750,7 +3750,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 325";
 		rLen = 0;
-		rLoc = 10333;
+		rLoc = 10335;
 		rType = 0;
 		vrLen = 511;
 		vrLoc = 8906;
@@ -3770,7 +3770,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 322";
 		rLen = 0;
-		rLoc = 10307;
+		rLoc = 10309;
 		rType = 0;
 		vrLen = 482;
 		vrLoc = 8941;
@@ -3994,7 +3994,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 323";
 		rLen = 0;
-		rLoc = 10308;
+		rLoc = 10310;
 		rType = 0;
 		vrLen = 480;
 		vrLoc = 8943;
@@ -4261,7 +4261,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 296";
 		rLen = 0;
-		rLoc = 8999;
+		rLoc = 9001;
 		rType = 0;
 		vrLen = 428;
 		vrLoc = 4090;
@@ -4361,7 +4361,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 305";
 		rLen = 0;
-		rLoc = 8947;
+		rLoc = 8949;
 		rType = 0;
 		vrLen = 463;
 		vrLoc = 3;
@@ -4431,7 +4431,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 305";
 		rLen = 0;
-		rLoc = 8906;
+		rLoc = 8908;
 		rType = 0;
 		vrLen = 508;
 		vrLoc = 8503;
@@ -4441,7 +4441,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 305";
 		rLen = 0;
-		rLoc = 8906;
+		rLoc = 8908;
 		rType = 0;
 		vrLen = 954;
 		vrLoc = 8969;
@@ -4451,7 +4451,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 306";
 		rLen = 0;
-		rLoc = 8945;
+		rLoc = 8947;
 		rType = 0;
 		vrLen = 552;
 		vrLoc = 8464;
@@ -4461,7 +4461,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 287";
 		rLen = 0;
-		rLoc = 8175;
+		rLoc = 8255;
 		rType = 0;
 		vrLen = 758;
 		vrLoc = 7915;
@@ -4471,7 +4471,7 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 311";
 		rLen = 0;
-		rLoc = 8945;
+		rLoc = 8947;
 		rType = 0;
 		vrLen = 482;
 		vrLoc = 8605;
@@ -4481,10 +4481,46 @@
 		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
 		name = "ControlLayer.mm: 304";
 		rLen = 0;
-		rLoc = 8707;
+		rLoc = 8787;
 		rType = 0;
 		vrLen = 589;
 		vrLoc = 8605;
+	};
+	143ED04A111A217A00A57A52 /* ControlLayer.mm:306 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		functionName = "-tickDisplay:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 306;
+		modificationTime = 286925182.555261;
+		state = 2;
+	};
+	143ED04C111A218E00A57A52 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		name = "ControlLayer.mm: 304";
+		rLen = 0;
+		rLoc = 8787;
+		rType = 0;
+		vrLen = 589;
+		vrLoc = 8605;
+	};
+	143ED04D111A218E00A57A52 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		name = "ControlLayer.mm: 287";
+		rLen = 0;
+		rLoc = 8232;
+		rType = 0;
+		vrLen = 780;
+		vrLoc = 7912;
 	};
 	146779B8110DF48A00859430 /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -5429,9 +5465,9 @@
 	};
 	14B6B0991106C899003CDE72 /* ControlLayer.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1014, 5040}}";
-			sepNavSelRange = "{8707, 0}";
-			sepNavVisRange = "{8605, 589}";
+			sepNavIntBoundsRect = "{{0, 0}, {1014, 4928}}";
+			sepNavSelRange = "{8232, 0}";
+			sepNavVisRange = "{7912, 780}";
 			sepNavWindowFrame = "{{434, 105}, {694, 696}}";
 		};
 	};
@@ -5787,6 +5823,7 @@
 			143ECD5911178AC700A57A52 /* ControlLayer.mm:167 */,
 			143ECFF2111A14D500A57A52 /* GameLayer.mm:467 */,
 			143ECFFD111A159C00A57A52 /* EndGameLayer.mm:49 */,
+			143ED04A111A217A00A57A52 /* ControlLayer.mm:306 */,
 		);
 		codeSenseManager = 1412514010F8013E00A7C85E /* Code sense */;
 		executables = (
@@ -6257,6 +6294,8 @@
 			143ED044111A1AAB00A57A52 /* PBXTextBookmark */ = 143ED044111A1AAB00A57A52 /* PBXTextBookmark */;
 			143ED047111A1B7A00A57A52 /* PBXTextBookmark */ = 143ED047111A1B7A00A57A52 /* PBXTextBookmark */;
 			143ED048111A1C1A00A57A52 /* PBXTextBookmark */ = 143ED048111A1C1A00A57A52 /* PBXTextBookmark */;
+			143ED04C111A218E00A57A52 /* PBXTextBookmark */ = 143ED04C111A218E00A57A52 /* PBXTextBookmark */;
+			143ED04D111A218E00A57A52 /* PBXTextBookmark */ = 143ED04D111A218E00A57A52 /* PBXTextBookmark */;
 			146779B8110DF48A00859430 = 146779B8110DF48A00859430 /* PBXBookmark */;
 			146779BA110DF48A00859430 = 146779BA110DF48A00859430 /* PBXBookmark */;
 			146F3F7B110E454500B7F3D8 = 146F3F7B110E454500B7F3D8 /* PBXTextBookmark */;
