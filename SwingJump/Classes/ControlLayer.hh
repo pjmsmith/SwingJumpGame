@@ -27,6 +27,7 @@
 	b2Vec2 locPrev;
 	UISlider *customSlider;
 	UIView *uiView;
+	UIImageView *sliderBackground;
 }
 
 @property (nonatomic, retain) CCSprite *leftArrow;
@@ -46,6 +47,7 @@
 @property (nonatomic) b2Vec2 locPrev;
 @property (nonatomic, retain) UISlider *customSlider;
 @property (nonatomic, retain) UIView *uiView;
+@property (nonatomic, retain) UIImageView *sliderBackground;
 
 - (void)rotateChainLeft;
 - (void)rotateChainRight;

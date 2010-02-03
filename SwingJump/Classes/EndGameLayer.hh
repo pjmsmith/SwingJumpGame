@@ -11,9 +11,14 @@
 
 @interface EndGameLayer : CCLayer {
 	CCLabel* label;
+	CCLabel* lblMaxSpeed;
+	CCLabel* lblMaxHeight;
 }
 
 @property (nonatomic, retain) CCLabel *label;
--(void) setDistance:(float)distance;
+@property (nonatomic, retain) CCLabel *lblMaxSpeed;
+@property (nonatomic, retain) CCLabel *lblMaxHeight;
+
+-(void) setDistance:(float)distance maxSpeed:(float)maxSpeed maxHeight:(float)maxHeight;
 @end
 

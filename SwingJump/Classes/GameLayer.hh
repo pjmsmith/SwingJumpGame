@@ -38,8 +38,12 @@ public:
 
 @interface GameLayer : CCLayer {
     b2World *world;
+	float maxSpeed;
+	float maxHeight;
 }
 @property (nonatomic, readwrite) b2World *world;
+@property (nonatomic) float maxSpeed;
+@property (nonatomic) float maxHeight;
 
 -(void)createSwingChain:(float)yPos;
 -(void)DetectStopped:(float)dt;
