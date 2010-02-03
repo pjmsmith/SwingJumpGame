@@ -512,11 +512,11 @@ void ContactListener::Result(const b2ContactResult* result) {
         Actor* a = [[Actor alloc] init];
         a.type = 3;
         collisionObjectDef.userData = a;
-		collisionObjectDef.position.Set(currPos.x+10.0f, 3.5f);
+		collisionObjectDef.position.Set(currPos.x+10.0f, 4.0f);
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
-		collisionObjectShapeDef.SetAsBox(MGR_WIDTH, 0.5f);
+		collisionObjectShapeDef.SetAsBox(MGR_WIDTH, 1.0f);
 		collisionObject->CreateShape(&collisionObjectShapeDef);
 	}
 }
