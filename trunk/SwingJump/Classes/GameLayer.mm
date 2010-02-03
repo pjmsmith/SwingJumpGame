@@ -335,12 +335,16 @@ void ContactListener::Result(const b2ContactResult* result) {
 	if (camY<240/PTM_RATIO) {
 		camY = 240/PTM_RATIO;
 	}
+	float eyeZ = 415.0f+camY*3;
+	if (eyeZ >1000.0f) {
+		eyeZ = 1000.0f;
+	}
 	//b2Vec2 vel = ragdoll->Head->GetLinearVelocity();
 	b2Vec2 scrolldiff = b2Vec2((camX-lastCamPos.x)*PTM_RATIO,(camY-lastCamPos.y)*PTM_RATIO);
 	lastCamPos = b2Vec2(camX, camY);
 	[parallaxNode scrollX:scrolldiff.x scrollY:-scrolldiff.y];
-	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:100.0f];
-	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:415.0f];
+	[self.camera setCenterX:camX*PTM_RATIO-80.0f centerY:camY*PTM_RATIO+80.0f centerZ:(100+eyeZ/8)];
+	[self.camera setEyeX:camX*PTM_RATIO-80.0f eyeY:camY*PTM_RATIO+80.0f eyeZ:eyeZ];
 	
 	//Nuke Bodies and Perform Actions
 	if (typeCount>(int32)0) {
@@ -369,7 +373,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		maxSpeed = speed;	
 	}
 	
-	float height = ragdoll->Chest->GetPosition().x;
+	float height = ragdoll->Chest->GetPosition().y;
 	if (height > maxHeight) {
 		maxHeight = height;
 	}
@@ -475,7 +479,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		currPos.y = 50;
 	}
 	int randnum = (rand()%10000)+1;
-	if(randnum<randObjectPercentage/5*10000) {
+	if(randnum<randObjectPercentage/10*10000) {
 		b2BodyDef collisionObjectDef;
         Actor* a = [[Actor alloc] init];
         a.type = 1;
@@ -489,7 +493,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	
 	randnum = (rand()%10000)+1;
-	if(randnum<(randObjectPercentage/10)*10000) {
+	if(randnum<(randObjectPercentage/14)*10000) {
 		b2BodyDef collisionObjectDef;
         Actor* a = [[Actor alloc] init];
         a.type = 2;
@@ -503,7 +507,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	
 	randnum = (rand()%10000)+1;
-	if(randnum<(randObjectPercentage/10)*10000) {
+	if(randnum<(randObjectPercentage/14)*10000) {
 		b2BodyDef collisionObjectDef;
         Actor* a = [[Actor alloc] init];
         a.type = 3;

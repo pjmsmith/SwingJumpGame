@@ -265,7 +265,7 @@
 		timeCounter = timeCounter+dt;
 		[[self getChildByTag:100] setVisible:(bool)floor((int)(timeCounter*3)%2)];
 		
-		if (timeCounter > 5.0f) {
+		if (timeCounter > 4.0f) {
 			type2Enabled = NO;
 			[self unschedule:@selector(tictoc:)];
 			[rightArrow runAction:[CCFadeTo actionWithDuration:0.05 opacity:0]];
