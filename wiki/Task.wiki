@@ -7,22 +7,12 @@ The following is a list of currently active action items.
 *System Level*
   # Save and Load Preferences, _~~save high scores~~_/statistics -  http://www.cocos2d-iphone.org/forum/topic/807
 *Main Menu*
-  # _~~Create Scenes for options, instructions/help, and high scores/statistics~~_
   # Populate Options, Instructions, and High Score Scenes
 *Game Scene*
-  # _~~Create Merry-Go-Round and associated user input~~_
+  # Fix 'tap-really-fast' bug
   # Create See-Saw and associated user input
-  # _~~Create the end game scene~~_
-  # _~~Add Stats to End Game Scene~~_
-    * _~~Maximum velocity~~_
-    * _~~Maximum Height~~_
-    * _~~Distance Traveled~~_
-    * _~~Number of collisions with each object type~~_
-    * _~~Maximum Monkey Bars hit~~_
-    * _~~Fastest merry go round (time before completing action, or later, how many pushes given)~~_
+  # Add Stats
     * Fastest see saw hit, maybe as a force? Get the acceleration of swipe, etc...
-  # _~~Display tap counter after ragdoll launches from monkey bars~~_
-  # _~~Zoom out based on how fast the ragdoll is moving (so you can see what's coming up?)~~_
 *Media*
   # Create background images
   # Attach sprites to physics objects such that they get acted on accordingly
