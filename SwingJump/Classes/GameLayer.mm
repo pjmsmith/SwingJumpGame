@@ -106,6 +106,9 @@ void ContactListener::Result(const b2ContactResult* result) {
 @synthesize world;
 @synthesize maxSpeed;
 @synthesize maxHeight;
+@synthesize noType1;
+@synthesize noType2;
+@synthesize noType3;
 
 - (id) init {
     self = [super init];
@@ -402,6 +405,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 			type1[i] = null;
 		}
 		typeCount[0] = 0;
+		noType1++;
 	}
 	
 	else if (typeCount[1] > 0 ) {
@@ -425,6 +429,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		
 		[self unschedule:@selector(tick:)];
 		[(ControlLayer *)parent handleType2];
+		noType2++;
 	}
 	
 	else if (typeCount[2] > 0 ) {
@@ -448,6 +453,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		
 		[self unschedule:@selector(tick:)];
 		[(ControlLayer *)parent handleType3];
+		noType3++;
 	}
 	
 }
@@ -464,7 +470,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 			egl = [EndGameLayer node];
 			[parent addChild:egl z:2];
 			[[(ControlLayer *)parent hl] disableScore];
-			[egl setDistance:[[(ControlLayer *)parent hl] getScore] maxSpeed:maxSpeed maxHeight:maxHeight maxMonkeyBars:[(ControlLayer *)parent getMaxMonkeyBars]];
+			[egl setDistance:[[(ControlLayer *)parent hl] getScore] maxSpeed:maxSpeed maxHeight:maxHeight maxMonkeyBars:[(ControlLayer *)parent getMaxMonkeyBars] noType1:noType1 noType2:noType2 noType3:noType3];
 #pragma mark High Score and Stats Saving            
             NSMutableArray* scores = [[NSMutableArray alloc] initWithCapacity:10];
             NSNumber* lastScore = [[NSNumber alloc] initWithFloat:[[(ControlLayer *)parent hl] getScore]];

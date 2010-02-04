@@ -14,6 +14,7 @@
 @synthesize lblMaxSpeed;
 @synthesize lblMaxHeight;
 @synthesize lblMaxMonkeyBars;
+@synthesize lblnoType;
 
 - (id) init {
     self = [super init];
@@ -35,6 +36,10 @@
 		lblMaxMonkeyBars.position =  ccp( size.width /2 , size.height/2 - 100.0f);
 		[self addChild:lblMaxMonkeyBars z:0];
 		
+		lblnoType = [CCLabel labelWithString:@"noType" fontName:@"Marker Felt" fontSize:20];
+		lblnoType.position =  ccp( size.width /2 , size.height/2 + 50.0f);
+		[self addChild:lblnoType z:0];
+		
 		
 		
     }
@@ -42,11 +47,12 @@
     return self;
 }
 
--(void) setDistance:(float)distance maxSpeed:(float)maxSpeed maxHeight:(float)maxHeight maxMonkeyBars:(int)maxMonkeyBars{
+-(void) setDistance:(float)distance maxSpeed:(float)maxSpeed maxHeight:(float)maxHeight maxMonkeyBars:(int)maxMonkeyBars noType1:(int)t1 noType2:(int)t2 noType3:(int)t3{
 	[label setString:[NSString stringWithFormat:@"Distance: %4.0fm", distance]];
 	[lblMaxSpeed setString:[NSString stringWithFormat:@"Max Speed: %4.0fm/s", maxSpeed]];
 	[lblMaxHeight setString:[NSString stringWithFormat:@"Max Height: %4.0fm", maxHeight]];
 	[lblMaxMonkeyBars setString:[NSString stringWithFormat:@"Max Monkey Bars Hit: %i", maxMonkeyBars]];
+	[lblnoType setString:[NSString stringWithFormat:@"Dynamite: %i     Monkey Bars: %i     Spring Seat: %i", t1, t2, t3]];
 }
 
 @end
