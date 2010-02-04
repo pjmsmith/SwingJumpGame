@@ -1,6 +1,6 @@
 #summary Action items for SwingJump game.
 
-= Task List =
+= Alpha Task List =
 
 The following is a list of currently active action items.
 
@@ -26,3 +26,6 @@ The following is a list of currently active action items.
    * See-Saw
   # Create or obtain permission to use music
   # Attach sprites to physics objects such that they get acted on accordingly
+
+= Beta Task List =
+ *Too many to list.
