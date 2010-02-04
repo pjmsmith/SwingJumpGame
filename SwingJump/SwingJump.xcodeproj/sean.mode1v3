@@ -275,7 +275,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>22</integer>
+									<integer>14</integer>
 									<integer>11</integer>
 									<integer>0</integer>
 								</array>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameLayer.hh</string>
+								<string>HighScoreScene.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GameLayer.hh</string>
+										<string>HighScoreScene.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>14FCB45D111A79F500EBEFF4</string>
+										<string>14FCB4AB111AB44200EBEFF4</string>
 										<key>history</key>
 										<array>
 											<string>14B6AFF91106B70F003CDE72</string>
@@ -416,20 +416,20 @@
 											<string>143ECFA4111A03B500A57A52</string>
 											<string>143ECFA5111A03B500A57A52</string>
 											<string>143ECFA7111A03B500A57A52</string>
-											<string>143ECFC3111A13D500A57A52</string>
 											<string>143ED011111A161400A57A52</string>
 											<string>14FCB3D7111A68FD00EBEFF4</string>
 											<string>14FCB3D8111A68FD00EBEFF4</string>
 											<string>14FCB3D9111A68FD00EBEFF4</string>
-											<string>14FCB3DC111A68FD00EBEFF4</string>
 											<string>14FCB432111A6F4100EBEFF4</string>
 											<string>14FCB436111A700200EBEFF4</string>
 											<string>14FCB437111A700200EBEFF4</string>
-											<string>14FCB445111A71A000EBEFF4</string>
 											<string>14FCB44F111A732800EBEFF4</string>
-											<string>14FCB459111A79F500EBEFF4</string>
-											<string>14FCB45A111A79F500EBEFF4</string>
-											<string>14FCB3DA111A68FD00EBEFF4</string>
+											<string>14FCB473111AA53600EBEFF4</string>
+											<string>14FCB492111AA7AB00EBEFF4</string>
+											<string>14FCB498111AA84600EBEFF4</string>
+											<string>14FCB4A1111AA8E100EBEFF4</string>
+											<string>14FCB4A9111AB44200EBEFF4</string>
+											<string>14FCB484111AA72B00EBEFF4</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -582,6 +582,35 @@
 											<string>14FCB452111A732800EBEFF4</string>
 											<string>14FCB45B111A79F500EBEFF4</string>
 											<string>14FCB45C111A79F500EBEFF4</string>
+											<string>14FCB460111AA21A00EBEFF4</string>
+											<string>14FCB461111AA21A00EBEFF4</string>
+											<string>14FCB462111AA21A00EBEFF4</string>
+											<string>14FCB469111AA34E00EBEFF4</string>
+											<string>14FCB46A111AA34E00EBEFF4</string>
+											<string>14FCB46F111AA36300EBEFF4</string>
+											<string>14FCB470111AA36300EBEFF4</string>
+											<string>14FCB471111AA36300EBEFF4</string>
+											<string>14FCB475111AA53600EBEFF4</string>
+											<string>14FCB476111AA53600EBEFF4</string>
+											<string>14FCB477111AA53600EBEFF4</string>
+											<string>14FCB478111AA53600EBEFF4</string>
+											<string>14FCB479111AA53600EBEFF4</string>
+											<string>14FCB47A111AA53600EBEFF4</string>
+											<string>14FCB47B111AA53600EBEFF4</string>
+											<string>14FCB481111AA5B200EBEFF4</string>
+											<string>14FCB488111AA72B00EBEFF4</string>
+											<string>14FCB489111AA72B00EBEFF4</string>
+											<string>14FCB48A111AA72B00EBEFF4</string>
+											<string>14FCB48B111AA72B00EBEFF4</string>
+											<string>14FCB48C111AA72B00EBEFF4</string>
+											<string>14FCB48D111AA72B00EBEFF4</string>
+											<string>14FCB48E111AA72B00EBEFF4</string>
+											<string>14FCB493111AA7AB00EBEFF4</string>
+											<string>14FCB494111AA7AB00EBEFF4</string>
+											<string>14FCB49A111AA84600EBEFF4</string>
+											<string>14FCB49B111AA84600EBEFF4</string>
+											<string>14FCB4A3111AA8E100EBEFF4</string>
+											<string>14FCB4AA111AB44200EBEFF4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -593,14 +622,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {940, 378}}</string>
+								<string>{{0, 0}, {940, 659}}</string>
 								<key>RubberWindowFrame</key>
 								<string>35 119 1273 705 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>378pt</string>
+							<string>659pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -613,14 +642,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 383}, {940, 281}}</string>
+								<string>{{0, 664}, {940, 0}}</string>
 								<key>RubberWindowFrame</key>
 								<string>35 119 1273 705 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>281pt</string>
+							<string>0pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>

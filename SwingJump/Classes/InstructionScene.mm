@@ -45,7 +45,7 @@
         [self addChild:menu z:6];
         
 		[self addChild:[InstructionLayer node] z:4];
-		
+
     }
     return self;
 }
@@ -62,7 +62,23 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        
+        CCLabel* label = [CCLabel labelWithString:@"1. Cut a hole in a box." fontName:@"Marker Felt" fontSize:30];
+		CGSize size = [[CCDirector sharedDirector] winSize];
+		label.position =  ccp( size.width /2 , size.height/2 + 75);
+		[self addChild:label z:1];
+		
+		CCLabel* label2 = [CCLabel labelWithString:@"2. Put your junk in that box." fontName:@"Marker Felt" fontSize:30];
+		label2.position =  ccp( size.width /2 , size.height/2 + 25);
+		[self addChild:label2 z:1];
+		
+		CCLabel* label3 = [CCLabel labelWithString:@"3. Make her open that box." fontName:@"Marker Felt" fontSize:30];
+		label3.position =  ccp( size.width /2  , size.height/2 - 25);
+		[self addChild:label3 z:1];
+		
+		CCLabel* label4 = [CCLabel labelWithString:@"...and thats the way you do it!" fontName:@"Marker Felt" fontSize:30];
+		label4.position =  ccp( size.width /2  , size.height/2 - 75 );
+		[self addChild:label4 z:1];
+		
     }
     return self;
 }
