@@ -39,10 +39,16 @@ public:
     b2World *world;
 	float maxSpeed;
 	float maxHeight;
+	int noType1;
+	int noType2;
+	int noType3;
 }
 @property (nonatomic, readwrite) b2World *world;
 @property (nonatomic) float maxSpeed;
 @property (nonatomic) float maxHeight;
+@property (nonatomic) int noType1;
+@property (nonatomic) int noType2;
+@property (nonatomic) int noType3;
 
 -(void)createSwingChain:(float)yPos;
 -(void)DetectStopped:(float)dt;
