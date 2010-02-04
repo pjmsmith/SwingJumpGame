@@ -2444,17 +2444,17 @@
 	};
 	14B6B0991106C899003CDE72 /* ControlLayer.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1014, 5208}}";
-			sepNavSelRange = "{10175, 0}";
-			sepNavVisRange = "{9856, 673}";
+			sepNavIntBoundsRect = "{{0, 0}, {1014, 5250}}";
+			sepNavSelRange = "{5531, 0}";
+			sepNavVisRange = "{5261, 963}";
 			sepNavWindowFrame = "{{434, 105}, {694, 696}}";
 		};
 	};
 	14B6B09A1106C899003CDE72 /* GameLayer.hh */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {879, 1162}}";
-			sepNavSelRange = "{1158, 0}";
-			sepNavVisRange = "{702, 649}";
+			sepNavSelRange = "{361, 0}";
+			sepNavVisRange = "{0, 491}";
 		};
 	};
 	14B6B09B1106C899003CDE72 /* GameLayer.mm */ = {
@@ -3805,6 +3805,86 @@
 		vrLen = 673;
 		vrLoc = 9856;
 	};
+	14FCB454111A748500EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		name = "ControlLayer.mm: 347";
+		rLen = 0;
+		rLoc = 10175;
+		rType = 0;
+		vrLen = 675;
+		vrLoc = 9856;
+	};
+	14FCB455111A748500EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		name = "ControlLayer.mm: 202";
+		rLen = 0;
+		rLoc = 5686;
+		rType = 0;
+		vrLen = 963;
+		vrLoc = 5261;
+	};
+	14FCB457111A74F600EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		name = "ControlLayer.mm: 200";
+		rLen = 0;
+		rLoc = 5531;
+		rType = 0;
+		vrLen = 963;
+		vrLoc = 5261;
+	};
+	14FCB459111A79F500EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		name = "ControlLayer.mm: 200";
+		rLen = 0;
+		rLoc = 5531;
+		rType = 0;
+		vrLen = 963;
+		vrLoc = 5261;
+	};
+	14FCB45A111A79F500EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0981106C899003CDE72 /* ControlLayer.hh */;
+		name = "ControlLayer.hh: 70";
+		rLen = 0;
+		rLoc = 2055;
+		rType = 0;
+		vrLen = 548;
+		vrLoc = 0;
+	};
+	14FCB45B111A79F500EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0991106C899003CDE72 /* ControlLayer.mm */;
+		name = "ControlLayer.mm: 200";
+		rLen = 0;
+		rLoc = 5531;
+		rType = 0;
+		vrLen = 963;
+		vrLoc = 5261;
+	};
+	14FCB45C111A79F500EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B0981106C899003CDE72 /* ControlLayer.hh */;
+		name = "ControlLayer.hh: 70";
+		rLen = 0;
+		rLoc = 2055;
+		rType = 0;
+		vrLen = 548;
+		vrLoc = 0;
+	};
+	14FCB45D111A79F500EBEFF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 14B6B09A1106C899003CDE72 /* GameLayer.hh */;
+		name = "GameLayer.hh: 18";
+		rLen = 0;
+		rLoc = 361;
+		rType = 0;
+		vrLen = 491;
+		vrLoc = 0;
+	};
 	1D6058900D05DD3D006BFB54 /* SwingJump */ = {
 		activeExec = 0;
 		executables = (
@@ -4225,6 +4305,14 @@
 			14FCB451111A732800EBEFF4 /* PBXTextBookmark */ = 14FCB451111A732800EBEFF4 /* PBXTextBookmark */;
 			14FCB452111A732800EBEFF4 /* PBXTextBookmark */ = 14FCB452111A732800EBEFF4 /* PBXTextBookmark */;
 			14FCB453111A732800EBEFF4 /* PBXTextBookmark */ = 14FCB453111A732800EBEFF4 /* PBXTextBookmark */;
+			14FCB454111A748500EBEFF4 /* PBXTextBookmark */ = 14FCB454111A748500EBEFF4 /* PBXTextBookmark */;
+			14FCB455111A748500EBEFF4 /* PBXTextBookmark */ = 14FCB455111A748500EBEFF4 /* PBXTextBookmark */;
+			14FCB457111A74F600EBEFF4 /* PBXTextBookmark */ = 14FCB457111A74F600EBEFF4 /* PBXTextBookmark */;
+			14FCB459111A79F500EBEFF4 /* PBXTextBookmark */ = 14FCB459111A79F500EBEFF4 /* PBXTextBookmark */;
+			14FCB45A111A79F500EBEFF4 /* PBXTextBookmark */ = 14FCB45A111A79F500EBEFF4 /* PBXTextBookmark */;
+			14FCB45B111A79F500EBEFF4 /* PBXTextBookmark */ = 14FCB45B111A79F500EBEFF4 /* PBXTextBookmark */;
+			14FCB45C111A79F500EBEFF4 /* PBXTextBookmark */ = 14FCB45C111A79F500EBEFF4 /* PBXTextBookmark */;
+			14FCB45D111A79F500EBEFF4 /* PBXTextBookmark */ = 14FCB45D111A79F500EBEFF4 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 1412513F10F8013E00A7C85E /* Source Control */;
 		userBuildSettings = {
