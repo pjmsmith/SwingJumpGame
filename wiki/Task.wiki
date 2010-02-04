@@ -8,9 +8,9 @@ The following is a list of currently active action items.
   # Save and Load Preferences, _~~save high scores~~_/statistics -  http://www.cocos2d-iphone.org/forum/topic/807
 *Main Menu*
   # Populate Scenes
-    *Options
-    *Instructions
-    *Scoreboard 
+    * Options
+    * Instructions
+    * Scoreboard 
 *Game Scene*
   # Fix 'tap-really-fast' bug
   # Create See-Saw and associated user input
