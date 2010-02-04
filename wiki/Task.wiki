@@ -28,4 +28,4 @@ The following is a list of currently active action items.
   # Attach sprites to physics objects such that they get acted on accordingly
 
 = Beta Task List =
- * Too many to list
+ * Looping world (to allow infinite world distances)
