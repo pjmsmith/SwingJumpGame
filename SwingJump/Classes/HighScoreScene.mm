@@ -73,19 +73,35 @@
     if (self != nil) {
         CCLabel* label;
         NSString* scoreboard = [[NSString alloc] initWithString:@"High Scores\n"];
-        id scoreObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"score"];
-        if (scoreObject == nil) {
-            //populate with default scores
-        }
-        else {
-            //add scores to string
-        }
-
+        
         label = [CCLabel labelWithString:scoreboard fontName:@"Marker Felt" fontSize:32];
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		label.position =  ccp( size.width /2 , size.height-25);
 		[self addChild:label z:0];
         
+        id scoreObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"score"];
+        int i = 1;
+        if (scoreObject == nil) {
+            //populate with default scores
+            for(; i <= 9; i++)
+            {
+                NSString* scoreString = [[NSString alloc] initWithFormat:@"%3d. %20.1d", i, 0];
+                label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
+                CGSize size = [[CCDirector sharedDirector] winSize];
+                label.position =  ccp( size.width /2 ,size.height-40-(25*i));
+                [self addChild:label z:0];                
+            }
+            NSString* scoreString = [[NSString alloc] initWithFormat:@"%3d. %19.1d", 10, 0];
+            label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
+            CGSize size = [[CCDirector sharedDirector] winSize];
+            label.position =  ccp( size.width /2 ,size.height-40-(25*i));
+            [self addChild:label z:0]; 
+        }
+        else {
+            //add scores to string
+        }
+
+                
 
     }
     return self;
