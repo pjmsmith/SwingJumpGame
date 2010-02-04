@@ -12,6 +12,7 @@ The following is a list of currently active action items.
     * Instructions
     * Scoreboard 
 *Game Scene*
+  # Change "Jump" button to a swipe of the screen or a shake of the iPhone
   # Fix 'tap-really-fast' bug
   # Create See-Saw and associated user input
   # Add Stats
