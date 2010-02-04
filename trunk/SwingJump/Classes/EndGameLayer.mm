@@ -62,7 +62,7 @@
 	if (fastestSwipe == 1000.0f) {
 		[lblfastestSwipe setString:@"Fastest Swipe: N/A"];
 	} else {
-		[lblfastestSwipe setString:[NSString stringWithFormat:@"Fastest Swipe: %3.2f", fastestSwipe]];
+		[lblfastestSwipe setString:[NSString stringWithFormat:@"Fastest Swipe: %3.2fs", fastestSwipe]];
 	}
 	[lblnoType setString:[NSString stringWithFormat:@"Dynamites: %i     Monkey Bars: %i     Merry-Go-Rounds: %i", t1, t2, t3]];
 }
