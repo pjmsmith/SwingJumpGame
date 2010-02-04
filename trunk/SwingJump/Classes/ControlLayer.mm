@@ -33,7 +33,8 @@
 @synthesize maxMonkeyBars;
 @synthesize displayTime;
 @synthesize monkeyBarCounter;
-@synthesize lblMonkeyBarCount;
+@synthesize lblDisplayStat;
+@synthesize fastestSwipe;
 
 - (id) init {
     self = [super init];
@@ -46,13 +47,14 @@
 		type3Enabled = NO;
 		arrowVisible = NO;
 		displayTime = 0.0f;
+		fastestSwipe = 1000.0f;
 		monkeyBarCounter = NO;
 		
 		CGSize size = [[CCDirector sharedDirector] winSize];
-		lblMonkeyBarCount = [CCLabel labelWithString:@"" fontName:@"Marker Felt" fontSize:45];
-		lblMonkeyBarCount.position =  ccp( size.width /2 , size.height/2 + 60);
-		[lblMonkeyBarCount setOpacity:0.0];
-		[self addChild:lblMonkeyBarCount z:0];
+		lblDisplayStat = [CCLabel labelWithString:@"" fontName:@"Marker Felt" fontSize:45];
+		lblDisplayStat.position =  ccp( size.width /2 , size.height/2 + 60);
+		[lblDisplayStat setOpacity:0.0];
+		[self addChild:lblDisplayStat z:0];
 		
 		
 		
@@ -284,7 +286,7 @@
 		if (timeCounter > 4.0f) {
 			type2Enabled = NO;
 			monkeyBarCounter = YES;
-			[lblMonkeyBarCount setString:[NSString stringWithFormat:@"%i", hitCounter]];
+			[lblDisplayStat setString:[NSString stringWithFormat:@"%i", hitCounter]];
 			displayTime = 0.0f;
 			[self unschedule:@selector(tictoc:)];
 			[self schedule:@selector(tickDisplay:)];
@@ -308,7 +310,7 @@
 	if (opacity < 0.0f) {
 		opacity = 0.0f;
 	}
-	[lblMonkeyBarCount setOpacity:opacity];
+	[lblDisplayStat setOpacity:opacity];
 	if (displayTime > 3.0f) {
 		monkeyBarCounter = NO;
 		[self unschedule:@selector(tickDisplay:)];
@@ -339,6 +341,12 @@
 		[sender setValue: 0 animated: YES];
 	}
 	else {	
+		if (fastestSwipe > timeCounter) {
+			fastestSwipe = timeCounter;
+		}
+		[lblDisplayStat setString:[NSString stringWithFormat:@"%4.2fs!", timeCounter]];
+		displayTime = 0.0f;
+		[self schedule:@selector(tickDisplay:)];
 		type3Enabled = NO;
 		[self unschedule:@selector(tictoc:)];
 		float bonus = (2.5f-timeCounter);
@@ -354,6 +362,10 @@
 
 - (int)getMaxMonkeyBars {
 	return maxMonkeyBars;
+}
+
+- (float)getFastestSwipe {
+	return fastestSwipe;
 }
 
 @end

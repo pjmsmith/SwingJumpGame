@@ -470,7 +470,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 			egl = [EndGameLayer node];
 			[parent addChild:egl z:2];
 			[[(ControlLayer *)parent hl] disableScore];
-			[egl setDistance:[[(ControlLayer *)parent hl] getScore] maxSpeed:maxSpeed maxHeight:maxHeight maxMonkeyBars:[(ControlLayer *)parent getMaxMonkeyBars] noType1:noType1 noType2:noType2 noType3:noType3];
+			[egl setDistance:[[(ControlLayer *)parent hl] getScore] maxSpeed:maxSpeed maxHeight:maxHeight maxMonkeyBars:[(ControlLayer *)parent getMaxMonkeyBars] fastestSwipe:[(ControlLayer *)parent getFastestSwipe] noType1:noType1 noType2:noType2 noType3:noType3];
 #pragma mark High Score and Stats Saving            
             NSMutableArray* scores = [[NSMutableArray alloc] initWithCapacity:10];
             NSNumber* lastScore = [[NSNumber alloc] initWithFloat:[[(ControlLayer *)parent hl] getScore]];
