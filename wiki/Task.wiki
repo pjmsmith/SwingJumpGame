@@ -15,4 +15,5 @@ The following is a list of currently active action items.
     * Fastest see saw hit, maybe as a force? Get the acceleration of swipe, etc...
 *Media*
   # Create background images
+  # Create or obtain permission to use music
   # Attach sprites to physics objects such that they get acted on accordingly
