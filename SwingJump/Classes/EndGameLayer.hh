@@ -15,6 +15,7 @@
 	CCLabel* lblMaxHeight;
 	CCLabel* lblMaxMonkeyBars;
 	CCLabel* lblnoType;
+	CCLabel* lblfastestSwipe;
 }
 
 @property (nonatomic, retain) CCLabel *label;
@@ -22,7 +23,8 @@
 @property (nonatomic, retain) CCLabel *lblMaxHeight;
 @property (nonatomic, retain) CCLabel *lblMaxMonkeyBars;
 @property (nonatomic, retain) CCLabel *lblnoType;
+@property (nonatomic, retain) CCLabel *lblfastestSwipe;
 
--(void) setDistance:(float)distance maxSpeed:(float)maxSpeed maxHeight:(float)maxHeight maxMonkeyBars:(int)maxMonkeyBars noType1:(int)t1 noType2:(int)t2 noType3:(int)t3;
+-(void) setDistance:(float)distance maxSpeed:(float)maxSpeed maxHeight:(float)maxHeight maxMonkeyBars:(int)maxMonkeyBars fastestSwipe:(float)fastestSwipe noType1:(int)t1 noType2:(int)t2 noType3:(int)t3;
 @end
 

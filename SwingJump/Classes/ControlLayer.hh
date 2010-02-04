@@ -31,7 +31,8 @@
 	int maxMonkeyBars;
 	BOOL monkeyBarCounter;
 	float displayTime;
-	CCLabel *lblMonkeyBarCount;
+	CCLabel *lblDisplayStat;
+	float fastestSwipe;
 }
 
 @property (nonatomic, retain) CCSprite *leftArrow;
@@ -55,7 +56,8 @@
 @property (nonatomic) int maxMonkeyBars;
 @property (nonatomic) BOOL monkeyBarCounter;
 @property (nonatomic) float displayTime;
-@property (nonatomic, retain) CCLabel *lblMonkeyBarCount;
+@property (nonatomic, retain) CCLabel *lblDisplayStat;
+@property (nonatomic) float fastestSwipe;
 
 - (void)rotateChainLeft;
 - (void)rotateChainRight;
@@ -65,5 +67,6 @@
 - (void)create_Custom_UISlider;
 - (void)sliderAction:(id)sender;
 - (int)getMaxMonkeyBars;
+- (float)getFastestSwipe;
 
 @end
