@@ -10,11 +10,11 @@ The following is a list of currently active action items.
   # Populate Scenes
     * Options
     * Instructions
-    * Scoreboard 
+    * _~~Scoreboard~~_
 *Game Scene*
   # Change "Jump" button to a swipe of the screen or a shake of the iPhone
   # Fix 'tap-really-fast' bug
-  # Create See-Saw and associated user input
+  # _~~Create See-Saw and associated user input~~_
   # Add Stats
     * Fastest see saw hit, maybe as a force? Get the acceleration of swipe, etc...
 *Media*
