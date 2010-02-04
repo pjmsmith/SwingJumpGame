@@ -17,7 +17,8 @@
 #define randObjectPercentage 0.3f
 #define timeStationaryToStop 2.0f //seconds
 #define speedStationaryToStop 1.0f //m/s
-#define MGR_WIDTH 0.5f
+#define MGR_WIDTH 1.5f
+#define SS_WIDTH 1.0f
 
 @interface Actor : CCLayer {
     NSInteger type;
@@ -42,6 +43,7 @@ public:
 	int noType1;
 	int noType2;
 	int noType3;
+	int noType4;
 }
 @property (nonatomic, readwrite) b2World *world;
 @property (nonatomic) float maxSpeed;
@@ -49,6 +51,7 @@ public:
 @property (nonatomic) int noType1;
 @property (nonatomic) int noType2;
 @property (nonatomic) int noType3;
+@property (nonatomic) int noType4;
 
 -(void)createSwingChain:(float)yPos;
 -(void)DetectStopped:(float)dt;

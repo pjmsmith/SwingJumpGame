@@ -21,6 +21,7 @@
 	BOOL hasJumped;
 	BOOL type2Enabled;
 	BOOL type3Enabled;
+	BOOL type4Enabled;
 	BOOL arrowVisible; //left = 0, right = 1
 	int hitCounter;
 	float timeCounter;
@@ -46,6 +47,7 @@
 @property (nonatomic) BOOL hasJumped;
 @property (nonatomic) BOOL type2Enabled;
 @property (nonatomic) BOOL type3Enabled;
+@property (nonatomic) BOOL type4Enabled;
 @property (nonatomic) BOOL arrowVisible;
 @property (nonatomic) int hitCounter;
 @property (nonatomic) float timeCounter;
@@ -63,6 +65,7 @@
 - (void)rotateChainRight;
 - (void)handleType2;
 - (void)handleType3;
+- (void)handleType4;
 - (void)launch;
 - (void)create_Custom_UISlider;
 - (void)sliderAction:(id)sender;

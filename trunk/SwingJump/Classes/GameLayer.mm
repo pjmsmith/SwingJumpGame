@@ -34,11 +34,12 @@ ContactListener *contactListener;
 float MB_WIDTH  = 2.6f; //monkey bar collision box width
 
 const int32 k_maxtype = 100;
-const int32 k_numTypes = 3;
+const int32 k_numTypes = 4;
 
 b2Body* type1[k_maxtype];
 b2Body* type2[k_maxtype];
 b2Body* type3[k_maxtype];
+b2Body* type4[k_maxtype];
 int32 typeCount[k_numTypes];
 
 @implementation Actor
@@ -71,7 +72,7 @@ void ContactListener::Add(const b2ContactPoint* point) {
 			printf("Collision with Type 1");
 		}
 		
-		if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 2) {
+		else if (((Actor*)point->shape1->GetBody()->GetUserData()).type == 2) {
 			type2[typeCount[1]++] = point->shape1->GetBody();
 			printf("Collision with Type 2");
 		}
@@ -80,7 +81,7 @@ void ContactListener::Add(const b2ContactPoint* point) {
 			printf("Collision with Type 2");
 		}
 		
-		if(((Actor*)point->shape1->GetBody()->GetUserData()).type == 3) {
+		else if (((Actor*)point->shape1->GetBody()->GetUserData()).type == 3) {
 			type3[typeCount[2]++] = point->shape1->GetBody();
 			printf("Collision with Type 3");
 		}
@@ -88,6 +89,16 @@ void ContactListener::Add(const b2ContactPoint* point) {
 			type3[typeCount[2]++] = point->shape2->GetBody();
 			printf("Collision with Type 3");
 		}
+		
+		else if (((Actor*)point->shape1->GetBody()->GetUserData()).type == 4) {
+			type4[typeCount[3]++] = point->shape1->GetBody();
+			printf("Collision with Type 3");
+		}
+		else if (((Actor*)point->shape2->GetBody()->GetUserData()).type == 4){ 
+			type4[typeCount[3]++] = point->shape2->GetBody();
+			printf("Collision with Type 3");
+		}
+		
         
 	}
 }
@@ -109,6 +120,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 @synthesize noType1;
 @synthesize noType2;
 @synthesize noType3;
+@synthesize noType4;
 
 - (id) init {
     self = [super init];
@@ -456,6 +468,31 @@ void ContactListener::Result(const b2ContactResult* result) {
 		noType3++;
 	}
 	
+	else if (typeCount[3] > 0 ) {
+		std::sort(type4, type4 + typeCount[3]);
+		int32 i = 0;
+		while(i < typeCount[3])
+		{
+			b2Body* b = type4[i++];
+			while (i < typeCount[3] && type4[i] == b)
+			{
+				++i;
+			}
+			b2Vec2 point =  b->GetPosition();
+			world->DestroyBody(b);
+		}
+		b2Body *null;
+		for(i = 0; i<typeCount[3];i++){
+			type4[i] = null;
+		}
+		typeCount[3] = 0;
+		
+		[self unschedule:@selector(tick:)];
+		[(ControlLayer *)parent handleType4];
+		noType4++;
+	}
+	
+	
 }
 
 -(void)DetectStopped:(float)dt{
@@ -560,6 +597,20 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2BodyDef collisionObjectDef;
         Actor* a = [[Actor alloc] init];
         a.type = 3;
+        collisionObjectDef.userData = a;
+		collisionObjectDef.position.Set(currPos.x+10.0f, 3.6f);
+		b2Body *collisionObject;
+		collisionObject = world->CreateBody(&collisionObjectDef);
+		b2PolygonDef collisionObjectShapeDef;
+		collisionObjectShapeDef.SetAsBox(SS_WIDTH, 0.6f);
+		collisionObject->CreateShape(&collisionObjectShapeDef);
+	}
+	
+	randnum = (rand()%10000)+1;
+	if(randnum<(randObjectPercentage/14)*10000) {
+		b2BodyDef collisionObjectDef;
+        Actor* a = [[Actor alloc] init];
+        a.type = 4;
         collisionObjectDef.userData = a;
 		collisionObjectDef.position.Set(currPos.x+10.0f, 4.0f);
 		b2Body *collisionObject;

@@ -22,6 +22,7 @@
 @synthesize hasJumped;
 @synthesize type2Enabled;
 @synthesize type3Enabled;
+@synthesize type4Enabled;
 @synthesize arrowVisible;
 @synthesize hitCounter;
 @synthesize timeCounter;
@@ -254,22 +255,18 @@
 }
 
 - (void) handleType3 {
-	
 	[self create_Custom_UISlider];
 	uiView = [[CCDirector sharedDirector] openGLView];
-	CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(3.14159267f/2.0f);
-	
+	//CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(3.14159267f/2.0f);
 	UIImage *track = [UIImage imageNamed:@"sliderTrack.png"];
 	sliderBackground = [[UIImageView alloc] initWithImage:track];
 	[sliderBackground setFrame:CGRectMake(0.0, 170.0, 320.0, 105.0)];
 	[sliderBackground setAlpha:0.7f];
-	[sliderBackground setTransform:landscapeTransform];
+	//[sliderBackground setTransform:landscapeTransform];
 	[uiView addSubview:sliderBackground];
-	
-	[customSlider setTransform:landscapeTransform];
+	//[customSlider setTransform:landscapeTransform];
 	[customSlider setAlpha:0.7f];
 	[uiView addSubview:customSlider];
-	
 	timeCounter = 0.0f;
 	hitCounter = 0;
 	type3Enabled = YES;
@@ -277,13 +274,33 @@
 	[self schedule:@selector(tictoc:)];
 }
 
+- (void) handleType4 {
+	[self create_Custom_UISlider];
+	uiView = [[CCDirector sharedDirector] openGLView];
+	CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(3.14159267f/2.0f);
+	UIImage *track = [UIImage imageNamed:@"sliderTrack.png"];
+	sliderBackground = [[UIImageView alloc] initWithImage:track];
+	[sliderBackground setFrame:CGRectMake(0.0, 170.0, 320.0, 105.0)];
+	[sliderBackground setAlpha:0.7f];
+	[sliderBackground setTransform:landscapeTransform];
+	[uiView addSubview:sliderBackground];
+	[customSlider setTransform:landscapeTransform];
+	[customSlider setAlpha:0.7f];
+	[uiView addSubview:customSlider];
+	timeCounter = 0.0f;
+	hitCounter = 0;
+	type4Enabled = YES;
+	[self schedule:@selector(tictoc:)];
+}
+
+
 
 -(void)tictoc:(ccTime) dt{
 	if (type2Enabled) {
 		timeCounter = timeCounter+dt;
 		[[self getChildByTag:100] setVisible:(bool)floor((int)(timeCounter*3)%2)];
 		
-		if (timeCounter > 4.0f) {
+		if (timeCounter > 3.0f) {
 			type2Enabled = NO;
 			monkeyBarCounter = YES;
 			[lblDisplayStat setString:[NSString stringWithFormat:@"%i", hitCounter]];
@@ -301,6 +318,16 @@
 	}
 	else if (type3Enabled) {
 		timeCounter = timeCounter+dt;
+	}
+	else if (type4Enabled) {
+		timeCounter = timeCounter+dt;
+		if (timeCounter> 3.0f) {
+			type4Enabled = NO;
+			[self unschedule:@selector(tictoc:)];
+			[gl ResumeWithImpulse:b2Vec2(hitCounter/2,hitCounter/2)];
+			[customSlider removeFromSuperview];
+			[sliderBackground removeFromSuperview];
+		}
 	}
 }
 
@@ -340,7 +367,7 @@
 	{
 		[sender setValue: 0 animated: YES];
 	}
-	else {	
+	else if (type3Enabled) {	
 		if (fastestSwipe > timeCounter) {
 			fastestSwipe = timeCounter;
 		}
@@ -356,6 +383,13 @@
 		[gl ResumeWithImpulse:b2Vec2(bonus,bonus)];
 		[customSlider removeFromSuperview];
 		[sliderBackground removeFromSuperview];
+	}
+	else if (type4Enabled) {
+		[sender setValue: 0 animated: YES];
+		hitCounter++;
+		[lblDisplayStat setString:[NSString stringWithFormat:@"%i", hitCounter]];
+		displayTime = 0.0f;
+		[self schedule:@selector(tickDisplay:)];
 	}
 	
 }
