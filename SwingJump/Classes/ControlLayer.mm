@@ -344,7 +344,7 @@
 		if (fastestSwipe > timeCounter) {
 			fastestSwipe = timeCounter;
 		}
-		[lblDisplayStat setString:[NSString stringWithFormat:@"%4.2fs!", timeCounter]];
+		[lblDisplayStat setString:[NSString stringWithFormat:@"%4.2fs", timeCounter]];
 		displayTime = 0.0f;
 		[self schedule:@selector(tickDisplay:)];
 		type3Enabled = NO;
