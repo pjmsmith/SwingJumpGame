@@ -14,11 +14,11 @@ The following is a list of currently active action items.
   # Create See-Saw and associated user input
   # _~~Create spring-seat and associated user input~~_
   # _~~Create the end game scene~~_
-  # Add Stats to End Game Scene
+  # _~~Add Stats to End Game Scene~~_
     * _~~Maximum velocity~~_
     * _~~Maximum Height~~_
     * _~~Distance Traveled~~_
-    * Number of collisions with each object type
+    * _~~Number of collisions with each object type~~_
     * _~~Maximum Monkey Bars hit~~_
     * Fastest merry go round (time before completing action, or later, how many pushes given)
     * Fastest see saw hit, maybe as a force? Get the acceleration of swipe, etc...
