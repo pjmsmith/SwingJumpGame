@@ -105,12 +105,13 @@
             {
                 NSString* scoreString = [[NSString alloc] initWithFormat:@"%3d. %20.1f", i+1, [[(NSMutableArray*)scoreObject objectAtIndex:i] floatValue]];
                 label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
+                
                 CGSize size = [[CCDirector sharedDirector] winSize];
                 label.position =  ccp( size.width /2 ,size.height-50-(25*i+1));
                 [self addChild:label z:0];                
             }
             //pad with 0's
-            for(;i <=10-numScores;i++)
+            for(;i <9;i++)
             {
                 NSString* scoreString = [[NSString alloc] initWithFormat:@"%3d. %20.1d", i+1, 0];
                 label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
@@ -120,7 +121,7 @@
             }
             if(numScores<10)
             {
-                NSString* scoreString = [[NSString alloc] initWithFormat:@"%3d. %19.1d", 10, 0];
+                NSString* scoreString = [[NSString alloc] initWithFormat:@"%3d. %19.1d", i+1, 0];
                 label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
                 CGSize size = [[CCDirector sharedDirector] winSize];
                 label.position =  ccp( size.width /2 ,size.height-50-(25*i));
