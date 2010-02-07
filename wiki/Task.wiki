@@ -2,11 +2,9 @@
 
 = Alpha Task List =
 
-Phase 1: Collect Underpants
-
-Phase 2: ?
-
-Phase 3: Profit
+*Phase 1:* Collect Underpants
+*Phase 2:* ?
+*Phase 3:* Profit
 
 The following is a list of currently active action items.
 
