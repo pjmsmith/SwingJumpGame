@@ -62,16 +62,16 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        CCLabel* label = [CCLabel labelWithString:@"1. Cut a hole in a box." fontName:@"Marker Felt" fontSize:30];
+        CCLabel* label = [CCLabel labelWithString:@"1. Swing." fontName:@"Marker Felt" fontSize:30];
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		label.position =  ccp( size.width /2 , size.height/2 + 75);
 		[self addChild:label z:1];
 		
-		CCLabel* label2 = [CCLabel labelWithString:@"2. Put your junk in that box." fontName:@"Marker Felt" fontSize:30];
+		CCLabel* label2 = [CCLabel labelWithString:@"2. Jump." fontName:@"Marker Felt" fontSize:30];
 		label2.position =  ccp( size.width /2 , size.height/2 + 25);
 		[self addChild:label2 z:1];
 		
-		CCLabel* label3 = [CCLabel labelWithString:@"3. Make her open that box." fontName:@"Marker Felt" fontSize:30];
+		CCLabel* label3 = [CCLabel labelWithString:@"3. Do the thing." fontName:@"Marker Felt" fontSize:30];
 		label3.position =  ccp( size.width /2  , size.height/2 - 25);
 		[self addChild:label3 z:1];
 		
