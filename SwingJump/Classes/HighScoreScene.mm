@@ -86,7 +86,7 @@
         if (scoreObject == nil) {
             //populate with default scores
             int i = 1;
-            for(; i <= 9; i++)
+            for(; i < 11; i++)
             {
                 NSString* scoreString = [[NSString alloc] initWithFormat:@"%d.", i];
                 label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
@@ -102,19 +102,6 @@
                 label.position =  ccp( size.width /2 + 125,size.height-50-(25*(i-1)));
                 [self addChild:label z:0];               
             }
-            NSString* scoreString = [[NSString alloc] initWithFormat:@"%d.", 10];
-            label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
-            CGSize size = [[CCDirector sharedDirector] winSize];
-            [label setAnchorPoint:ccp(0,0.5)];
-            label.position =  ccp( size.width /2 - 125,size.height-50-(25*9));
-            [self addChild:label z:0]; 
-            
-            scoreString = [[NSString alloc] initWithFormat:@"%0.1f", 0.0];
-            label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
-            size = [[CCDirector sharedDirector] winSize];
-            [label setAnchorPoint:ccp(1,0.5)];
-            label.position =  ccp( size.width /2 + 125 ,size.height-50-(25*9));
-            [self addChild:label z:0]; 
         }
         else {
             //add scores to string
@@ -137,7 +124,7 @@
                 [self addChild:label z:0];                
             }
             //pad with 0's
-            for(;i <9;i++)
+            for(;i <10;i++)
             {
                 NSString* scoreString = [[NSString alloc] initWithFormat:@"%d.", i+1];
                 label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
@@ -151,38 +138,6 @@
                 size = [[CCDirector sharedDirector] winSize];
                 [label setAnchorPoint:ccp(1,0.5)];
                 label.position =  ccp( size.width /2 + 125,size.height-50-(25*i));
-                [self addChild:label z:0]; 
-            }
-            if(numScores<10)
-            {
-                NSString* scoreString = [[NSString alloc] initWithFormat:@"%d.", i+1];
-                label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
-                CGSize size = [[CCDirector sharedDirector] winSize];
-                [label setAnchorPoint:ccp(0,0.5)];
-                label.position =  ccp( size.width /2 - 125,size.height-50-(25*i));
-                [self addChild:label z:0]; 
-                
-                scoreString = [[NSString alloc] initWithFormat:@"%0.1f", 0.0];
-                label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
-                size = [[CCDirector sharedDirector] winSize];
-                [label setAnchorPoint:ccp(1,0.5)];
-                label.position =  ccp( size.width /2 + 125 ,size.height-50-(25*i));
-                [self addChild:label z:0]; 
-            }
-            else
-            {
-                NSString* scoreString = [[NSString alloc] initWithFormat:@"%d.", i+1];
-                label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
-                CGSize size = [[CCDirector sharedDirector] winSize];
-                [label setAnchorPoint:ccp(0,0.5)];
-                label.position =  ccp( size.width /2 - 125 ,size.height-50-(25*i));
-                [self addChild:label z:0]; 
-                
-                scoreString = [[NSString alloc] initWithFormat:@"%0.1f", [[(NSMutableArray*)scoreObject objectAtIndex:i] floatValue]];
-                label = [CCLabel labelWithString:scoreString fontName:@"Marker Felt" fontSize:28];
-                size = [[CCDirector sharedDirector] winSize];
-                [label setAnchorPoint:ccp(1,0.5)];
-                label.position =  ccp( size.width /2 + 125 ,size.height-50-(25*i));
                 [self addChild:label z:0]; 
             }
         }
