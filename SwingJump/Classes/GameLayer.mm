@@ -508,54 +508,115 @@ void ContactListener::Result(const b2ContactResult* result) {
 			[parent addChild:egl z:2];
 			[[(ControlLayer *)parent hl] disableScore];
 			[egl setDistance:[[(ControlLayer *)parent hl] getScore] maxSpeed:maxSpeed maxHeight:maxHeight maxMonkeyBars:[(ControlLayer *)parent getMaxMonkeyBars] fastestSwipe:[(ControlLayer *)parent getFastestSwipe] noType1:noType1 noType2:noType2 noType3:noType3];
-#pragma mark High Score and Stats Saving            
-            NSMutableArray* scores = [[NSMutableArray alloc] initWithCapacity:10];
-            NSNumber* lastScore = [[NSNumber alloc] initWithFloat:[[(ControlLayer *)parent hl] getScore]];
-            id scoreObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"score"];
-            if(scoreObject == nil)
-            {
-                [scores addObject:lastScore];
-                [[NSUserDefaults standardUserDefaults] setObject:scores forKey:@"score"];
-                NSLog(@"new entry");
-            }
-            else
-            {
-                scores = [[NSMutableArray alloc] initWithArray:(NSMutableArray*)[[NSUserDefaults standardUserDefaults] objectForKey:@"score"]];
-                BOOL didUpdate = false;
-                NSInteger oldCount = [scores count];
-                for(int i = 0; i < oldCount; i++)
-                {
-                    if([lastScore floatValue]>[[scores objectAtIndex:i] floatValue])
-                    {
-                        didUpdate = true;
-                        [scores insertObject:lastScore atIndex:i];
-                        break;
-                    }
-                }
-                if(!didUpdate && ([scores count]<10))
-                {
-                    //add to end
-                    [scores addObject:lastScore];
-                    didUpdate = true;
-                }
-                else if(didUpdate && ([scores count]>10))
-                {
-                    //drop last value
-                    [scores removeLastObject];
-                }
-                NSLog(@"Number of objects in score list: %d", [scores count]);
-                if(didUpdate)
-                {
-                    [[NSUserDefaults standardUserDefaults] setObject:scores forKey:@"score"];
-                }
-            }
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            //END High Score and Stats saving
+
+            [self saveStats];
+            [self saveHighScore];
         }
 	}
 	else {
 		timeStationary = 0.0f;
 	}
+}
+
+#pragma mark High Score and Stats Saving 
+-(void)saveStats
+{
+    id statObject = [[NSUserDefaults standardUserDefaults] floatForKey:@"maxSpeed"];
+    if(statObject == nil)
+    {
+        [[NSUserDefaults standardUserDefaults] setFloat:maxSpeed forKey:@"maxSpeed"];
+    }
+    else 
+    {
+       if(maxSpeed > (float)statObject)
+       {
+           [[NSUserDefaults standardUserDefaults] setFloat:maxSpeed forKey:@"maxSpeed"];
+       }
+    }
+
+    statObject = [[NSUserDefaults standardUserDefaults] floatForKey:@"maxHeight"];
+    if(statObject == nil)
+    {
+        [[NSUserDefaults standardUserDefaults] setFloat:maxHeight forKey:@"maxHeight"];
+    }
+    else 
+    {
+        if(maxHeight > (float)statObject)
+        {
+            [[NSUserDefaults standardUserDefaults] setFloat:maxHeight forKey:@"maxHeight"];
+        }
+    }
+
+    statObject = [[NSUserDefaults standardUserDefaults] integerForKey:@"maxMonkeyBars"];
+    if(statObject == nil)
+    {
+        [[NSUserDefaults standardUserDefaults] setInteger:[(ControlLayer *)parent getMaxMonkeyBars] forKey:@"maxMonkeyBars"];
+    }
+    else 
+    {
+        if([(ControlLayer *)parent getMaxMonkeyBars] > (int)statObject)
+        {
+            [[NSUserDefaults standardUserDefaults] setInteger:[(ControlLayer *)parent getMaxMonkeyBars] forKey:@"maxMonkeyBars"]; 
+        }
+    }
+
+    statObject = [[NSUserDefaults standardUserDefaults] floatForKey:@"fastestSwipe"];
+    if(statObject == nil)
+    {
+        [[NSUserDefaults standardUserDefaults] setFloat:[(ControlLayer *)parent getFastestSwipe] forKey:@"fastestSwipe"];
+    }
+    else 
+    {
+        if([(ControlLayer *)parent getFastestSwipe] > (float)statObject)
+        {
+            [[NSUserDefaults standardUserDefaults] setFloat:[(ControlLayer *)parent getFastestSwipe] forKey:@"fastestSwipe"];
+        }
+    }
+}
+
+-(void)saveHighScore
+{
+    NSMutableArray* scores = [[NSMutableArray alloc] initWithCapacity:10];
+    NSNumber* lastScore = [[NSNumber alloc] initWithFloat:[[(ControlLayer *)parent hl] getScore]];
+    id scoreObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"score"];
+    if(scoreObject == nil)
+    {
+        [scores addObject:lastScore];
+        [[NSUserDefaults standardUserDefaults] setObject:scores forKey:@"score"];
+        NSLog(@"new entry");
+    }
+    else
+    {
+        scores = [[NSMutableArray alloc] initWithArray:(NSMutableArray*)[[NSUserDefaults standardUserDefaults] objectForKey:@"score"]];
+        BOOL didUpdate = false;
+        NSInteger oldCount = [scores count];
+        for(int i = 0; i < oldCount; i++)
+        {
+            if([lastScore floatValue]>[[scores objectAtIndex:i] floatValue])
+            {
+                didUpdate = true;
+                [scores insertObject:lastScore atIndex:i];
+                break;
+            }
+        }
+        if(!didUpdate && ([scores count]<10))
+        {
+            //add to end
+            [scores addObject:lastScore];
+            didUpdate = true;
+        }
+        else if(didUpdate && ([scores count]>10))
+        {
+            //drop last value
+            [scores removeLastObject];
+        }
+        NSLog(@"Number of objects in score list: %d", [scores count]);
+        if(didUpdate)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:scores forKey:@"score"];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];   
 }
 
 -(void)CreateRandomObjects{
