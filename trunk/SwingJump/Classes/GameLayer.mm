@@ -537,13 +537,13 @@ void ContactListener::Result(const b2ContactResult* result) {
     statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"maxHeight"];
     if(statObject == nil)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxSpeed] forKey:@"maxHeight"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxHeight] forKey:@"maxHeight"];
     }
     else 
     {
         if(maxHeight > [(NSNumber*)statObject floatValue])
         {
-            [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxSpeed] forKey:@"maxHeight"];
+            [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxHeight] forKey:@"maxHeight"];
         }
     }
 

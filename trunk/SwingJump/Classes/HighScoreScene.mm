@@ -175,7 +175,7 @@ BOOL scoreboardShowing;
 		label.position =  ccp( size.width /2 , size.height-25);
 		[self addChild:label z:0];
         
-        label = [CCLabel labelWithString:@"Most Speed Achieved:" fontName:@"Marker Felt" fontSize:20];
+        label = [CCLabel labelWithString:@"Fastest Speed Achieved:" fontName:@"Marker Felt" fontSize:20];
 		size = [[CCDirector sharedDirector] winSize];
         [label setAnchorPoint:ccp(0,0.5)];
 		label.position =  ccp( size.width /2 -200, size.height-100);
@@ -184,11 +184,11 @@ BOOL scoreboardShowing;
         statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"maxSpeed"];
         if(statObject == nil)
         {
-            statString = @"0.0";
+            statString = @"0.0m/s";
         }
         else 
         {
-            statString = [[NSString alloc] initWithFormat:@"%0.2f", [statObject floatValue]];
+            statString = [[NSString alloc] initWithFormat:@"%0.2fm/s", [statObject floatValue]];
         }
         
         label = [CCLabel labelWithString:statString fontName:@"Marker Felt" fontSize:20];
@@ -198,7 +198,7 @@ BOOL scoreboardShowing;
 		[self addChild:label z:0];
 
         
-        label = [CCLabel labelWithString:@"Most Height Achieved:" fontName:@"Marker Felt" fontSize:20];
+        label = [CCLabel labelWithString:@"Maximum Height Achieved:" fontName:@"Marker Felt" fontSize:20];
 		size = [[CCDirector sharedDirector] winSize];
         [label setAnchorPoint:ccp(0,0.5)];
 		label.position =  ccp( size.width /2 -200, size.height-125);
@@ -207,11 +207,11 @@ BOOL scoreboardShowing;
         statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"maxHeight"];
         if(statObject == nil)
         {
-            statString = @"0.0";
+            statString = @"0.0m";
         }
         else 
         {
-            statString = [[NSString alloc] initWithFormat:@"%0.2f", [statObject floatValue]];
+            statString = [[NSString alloc] initWithFormat:@"%0.2fm", [statObject floatValue]];
         }
         
         label = [CCLabel labelWithString:statString fontName:@"Marker Felt" fontSize:20];
@@ -255,10 +255,10 @@ BOOL scoreboardShowing;
         statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"fastestSwipe"];
         if(statObject == nil)
         {
-            statString = @"0.0";
+            statString = @"0.0s";
         }
         else {
-            statString = [[NSString alloc] initWithFormat:@"%0.2f", [statObject floatValue]];
+            statString = [[NSString alloc] initWithFormat:@"%0.2fs", [statObject floatValue]];
         }
         
         label = [CCLabel labelWithString:statString fontName:@"Marker Felt" fontSize:20];
