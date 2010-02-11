@@ -15,6 +15,7 @@ The following is a list of currently active action items.
     * Options
     * Instructions
     * _~~Scoreboard~~_
+    * _~~Statistics~~_
 *Game Scene*
   # Change "Jump" button to a swipe of the screen or a shake of the iPhone
   # Fix 'tap-really-fast' bug
