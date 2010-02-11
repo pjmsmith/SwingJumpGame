@@ -60,7 +60,7 @@ public:
 -(void)CollisionHandler;
 -(void)ResumeWithImpulse:(b2Vec2)impulse;
 -(void)saveStats;
--(void)saveScores;
+-(void)saveHighScore;
 
 @end
 

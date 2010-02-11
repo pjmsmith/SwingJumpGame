@@ -521,55 +521,55 @@ void ContactListener::Result(const b2ContactResult* result) {
 #pragma mark High Score and Stats Saving 
 -(void)saveStats
 {
-    id statObject = [[NSUserDefaults standardUserDefaults] floatForKey:@"maxSpeed"];
+    id statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"maxSpeed"];
     if(statObject == nil)
     {
-        [[NSUserDefaults standardUserDefaults] setFloat:maxSpeed forKey:@"maxSpeed"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxSpeed] forKey:@"maxSpeed"];
     }
     else 
     {
-       if(maxSpeed > (float)statObject)
+       if(maxSpeed > [(NSNumber*)statObject floatValue])
        {
-           [[NSUserDefaults standardUserDefaults] setFloat:maxSpeed forKey:@"maxSpeed"];
+           [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxSpeed] forKey:@"maxSpeed"];
        }
     }
 
-    statObject = [[NSUserDefaults standardUserDefaults] floatForKey:@"maxHeight"];
+    statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"maxHeight"];
     if(statObject == nil)
     {
-        [[NSUserDefaults standardUserDefaults] setFloat:maxHeight forKey:@"maxHeight"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxSpeed] forKey:@"maxHeight"];
     }
     else 
     {
-        if(maxHeight > (float)statObject)
+        if(maxHeight > [(NSNumber*)statObject floatValue])
         {
-            [[NSUserDefaults standardUserDefaults] setFloat:maxHeight forKey:@"maxHeight"];
+            [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:maxSpeed] forKey:@"maxHeight"];
         }
     }
 
-    statObject = [[NSUserDefaults standardUserDefaults] integerForKey:@"maxMonkeyBars"];
+    statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"maxMonkeyBars"];
     if(statObject == nil)
     {
-        [[NSUserDefaults standardUserDefaults] setInteger:[(ControlLayer *)parent getMaxMonkeyBars] forKey:@"maxMonkeyBars"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithInt:[(ControlLayer *)parent getMaxMonkeyBars]] forKey:@"maxMonkeyBars"];
     }
     else 
     {
-        if([(ControlLayer *)parent getMaxMonkeyBars] > (int)statObject)
+        if([(ControlLayer *)parent getMaxMonkeyBars] > [(NSNumber*)statObject intValue])
         {
-            [[NSUserDefaults standardUserDefaults] setInteger:[(ControlLayer *)parent getMaxMonkeyBars] forKey:@"maxMonkeyBars"]; 
+            [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithInt:[(ControlLayer *)parent getMaxMonkeyBars]] forKey:@"maxMonkeyBars"]; 
         }
     }
 
-    statObject = [[NSUserDefaults standardUserDefaults] floatForKey:@"fastestSwipe"];
+    statObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"fastestSwipe"];
     if(statObject == nil)
     {
-        [[NSUserDefaults standardUserDefaults] setFloat:[(ControlLayer *)parent getFastestSwipe] forKey:@"fastestSwipe"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:[(ControlLayer *)parent getFastestSwipe]] forKey:@"fastestSwipe"];
     }
     else 
     {
-        if([(ControlLayer *)parent getFastestSwipe] > (float)statObject)
+        if([(ControlLayer *)parent getFastestSwipe] > [(NSNumber*)statObject floatValue])
         {
-            [[NSUserDefaults standardUserDefaults] setFloat:[(ControlLayer *)parent getFastestSwipe] forKey:@"fastestSwipe"];
+            [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:[(ControlLayer *)parent getFastestSwipe]] forKey:@"fastestSwipe"];
         }
     }
 }
