@@ -17,7 +17,7 @@ The following is a list of currently active action items.
     * _~~Scoreboard~~_
     * _~~Statistics~~_
 *Game Scene*
-  # Change "Jump" button to a swipe of the screen or a shake of the iPhone
+  # Change "Jump" button to a swipe of the screen or a shake of the iPhone _~~(OR... get rid of the button and make the tap area 1/3 screen width in the middle of the screen)~~_
   # Fix 'tap-really-fast' bug
 
 *Media*
