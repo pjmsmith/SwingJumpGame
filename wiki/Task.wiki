@@ -24,9 +24,9 @@ The following is a list of currently active action items.
   # Create Images
    * Background
    * Ragdoll
-   * Merry - Go - Round
-   * Monkey Bars
-   * See-Saw
+   * _~~Merry - Go - Round~~_ (merry-go-round_gfx.png)
+   * _~~Monkey Bars~~_ (monkeybar_gfx.png)
+   * _~~See-Saw~~_ (see-saw_gfx.png)
   # Create or obtain permission to use music
   # Attach sprites to physics objects such that they get acted on accordingly -http://www.cocos2d-iphone.org/forum/topic/1409#post-8512  http://www.cocos2d-iphone.org/forum/topic/1288
 
