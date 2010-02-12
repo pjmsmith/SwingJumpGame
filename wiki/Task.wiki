@@ -28,7 +28,7 @@ The following is a list of currently active action items.
    * Monkey Bars
    * See-Saw
   # Create or obtain permission to use music
-  # Attach sprites to physics objects such that they get acted on accordingly -http://www.cocos2d-iphone.org/forum/topic/1409#post-8512
+  # Attach sprites to physics objects such that they get acted on accordingly -http://www.cocos2d-iphone.org/forum/topic/1409#post-8512  http://www.cocos2d-iphone.org/forum/topic/1288
 
 = Beta Task List =
  * Looping world (to allow infinite world distances)
