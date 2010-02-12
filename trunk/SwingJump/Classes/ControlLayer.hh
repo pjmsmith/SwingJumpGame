@@ -12,7 +12,7 @@
 @interface ControlLayer : CCLayer {
     CCSprite *leftArrow;
     CCSprite *rightArrow;
-	CCSprite *jumpButton;
+	CGRect jumpRect;
 	CCSprite * merryGoRound;
     GameLayer *gl;
 	HUDLayer *hl;
@@ -38,7 +38,7 @@
 
 @property (nonatomic, retain) CCSprite *leftArrow;
 @property (nonatomic, retain) CCSprite *rightArrow;
-@property (nonatomic, retain) CCSprite *jumpButton;
+@property (nonatomic) CGRect jumpRect;
 @property (nonatomic, retain) CCSprite * merryGoRound;
 @property (nonatomic, retain) GameLayer *gl;
 @property (nonatomic, retain) HUDLayer *hl;

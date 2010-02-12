@@ -14,7 +14,7 @@
 @implementation ControlLayer
 @synthesize leftArrow;
 @synthesize rightArrow;
-@synthesize jumpButton;
+@synthesize jumpRect;
 @synthesize gl;
 @synthesize hl;
 @synthesize isRightBeingTouched;
@@ -73,12 +73,12 @@
         [rightArrow setOpacity:128];
         [self addChild:rightArrow z:1];
         
-		jumpButton = [CCSprite spriteWithFile:@"jumpBtn.png"];
+		/*jumpButton = [CCSprite spriteWithFile:@"jumpBtn.png"];
 		[jumpButton setPosition:ccp(240,270)];
         [jumpButton setOpacity:128];
-        [self addChild:jumpButton z:1];
+        [self addChild:jumpButton z:1];*/
 		
-		
+		jumpRect = CGRectMake(160.0f, 0.0f, 160.0f, 320.0f);
         
         gl = [GameLayer node];
         [self addChild:gl z:0]; //added as a child so touchesEnded can call a function contained in GameLayer
@@ -108,10 +108,11 @@
 					
 				}
 			}
-			if (CGRectContainsPoint([jumpButton boundingBox], location)) {
+            
+			if (CGRectContainsPoint(jumpRect, location)) {
 				//NSLog(@"Left touched");
 					hasJumped = YES;
-					[jumpButton runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
+					//[jumpButton runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
 					[leftArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
 					[rightArrow runAction:[CCFadeTo actionWithDuration:0.2 opacity:0]];
 					[self launch];
