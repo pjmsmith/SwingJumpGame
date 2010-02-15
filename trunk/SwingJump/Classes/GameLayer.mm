@@ -328,12 +328,12 @@ void ContactListener::Result(const b2ContactResult* result) {
 	//Head
 	b2Body* b = ragdoll->Head;
 	Actor* a = [[Actor alloc] init];
-	[(Actor*)a initWithFile:@"pixel.png"];
+	[(Actor*)a initWithFile:@"pat.png"];
 	[self addChild:a];
-	[(Actor*)a setScale:5.0f];
+	[(Actor*)a setScale:0.3f];
 	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
 	b->SetUserData((Actor*)a);
-	
+	/**
 	//Chest
 	b = ragdoll->Chest;
 	a = [[Actor alloc] init];
@@ -494,7 +494,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
 	b->SetUserData((Actor*)a);
 	
-
+**/
 	
 }
 
