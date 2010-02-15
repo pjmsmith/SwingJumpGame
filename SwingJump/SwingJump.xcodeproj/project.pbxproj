@@ -29,6 +29,7 @@
 		14B6B67D110D1F2A003CDE72 /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B6B67C110D1F2A003CDE72 /* title.png */; };
 		14FCB5C01129F4C700EBEFF4 /* Actor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14FCB5BF1129F4C700EBEFF4 /* Actor.mm */; };
 		14FCB6B81129FACF00EBEFF4 /* pixel.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FCB6B71129FACF00EBEFF4 /* pixel.png */; };
+		14FCB727112A0D3300EBEFF4 /* pat.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FCB726112A0D3300EBEFF4 /* pat.png */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		4607DBF710F45ED7007BEA9F /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4607DB7710F45ED7007BEA9F /* CCAction.m */; };
 		4607DBF810F45ED7007BEA9F /* CCActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4607DB7910F45ED7007BEA9F /* CCActionManager.m */; };
@@ -253,6 +254,7 @@
 		14FCB5BE1129F4C700EBEFF4 /* Actor.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Actor.hh; sourceTree = "<group>"; };
 		14FCB5BF1129F4C700EBEFF4 /* Actor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Actor.mm; sourceTree = "<group>"; };
 		14FCB6B71129FACF00EBEFF4 /* pixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pixel.png; sourceTree = "<group>"; };
+		14FCB726112A0D3300EBEFF4 /* pat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pat.png; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* SwingJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwingJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3B9A2C0EF2145700286867 /* SwingJumpAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingJumpAppDelegate.h; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1204,6 +1206,7 @@
 		50F4144210692EE7002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				14FCB726112A0D3300EBEFF4 /* pat.png */,
 				14FCB6B71129FACF00EBEFF4 /* pixel.png */,
 				46FC9E481125396900A89B4D /* merry-go-round_gfx.png */,
 				46FC9E491125396900A89B4D /* see-saw_gfx.png */,
@@ -1330,6 +1333,7 @@
 				46FC9E4A1125396900A89B4D /* merry-go-round_gfx.png in Resources */,
 				46FC9E4B1125396900A89B4D /* see-saw_gfx.png in Resources */,
 				14FCB6B81129FACF00EBEFF4 /* pixel.png in Resources */,
+				14FCB727112A0D3300EBEFF4 /* pat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
