@@ -11,6 +11,7 @@
 #import "ControlLayer.hh"
 #include <algorithm>
 #import "EndGameLayer.hh"
+#import "Actor.hh"
 
 #define PTM_RATIO 32
 
@@ -41,24 +42,6 @@ b2Body* type2[k_maxtype];
 b2Body* type3[k_maxtype];
 b2Body* type4[k_maxtype];
 int32 typeCount[k_numTypes];
-
-@implementation Actor
-@synthesize type;
-
-- (id) init {
-    self = [super init];
-    if (self != nil) {
-        self.type = -1;
-    }
-    return self;
-}
-
-- (void)dealloc {
-	[super dealloc];
-}
-
-@end
-
 
 void ContactListener::Add(const b2ContactPoint* point) {
 	if(((Actor*)point->shape1->GetBody()->GetUserData()).type > 0 || ((Actor*)point->shape2->GetBody()->GetUserData()).type > 0)
@@ -151,7 +134,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		flags += 1	* b2DebugDraw::e_shapeBit;
 		//flags += 1	* b2DebugDraw::e_jointBit;
 		//flags += 1	* b2DebugDraw::e_controllerBit;
-		flags += 1	* b2DebugDraw::e_coreShapeBit;
+		//flags += 1	* b2DebugDraw::e_coreShapeBit;
 		//flags += 1	* b2DebugDraw::e_aabbBit;
 		//flags += 1	* b2DebugDraw::e_obbBit;
 		//flags += 1	* b2DebugDraw::e_pairBit;
@@ -176,6 +159,7 @@ void ContactListener::Result(const b2ContactResult* result) {
 		[self schedule:@selector(tick:)];
 		
 		timeStationary = 0;
+		
 		
     }
     return self;
@@ -332,7 +316,188 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	ragdoll->SetLinearDamping(13.0f);
 	ragdoll->SetAngularDamping(13.0f);
+	
+	[self attachSpritesToRagdoll];
+	} 
+
+-(void) attachSpritesToRagdoll {
+	/**
+	 *LUpperArm, *RUpperArm, *LForearm, *RForearm,
+	 **/
+	
+	//Head
+	b2Body* b = ragdoll->Head;
+	Actor* a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScale:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//Chest
+	b = ragdoll->Chest;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//LHand
+	b = ragdoll->LHand;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//RHand
+	b = ragdoll->RHand;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//LFoot
+	b = ragdoll->LFoot;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//RFoot
+	b = ragdoll->RFoot;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//RCalf
+	b = ragdoll->RCalf;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//LCalf
+	b = ragdoll->LCalf;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//LThigh
+	b = ragdoll->LThigh;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//RThigh
+	b = ragdoll->RThigh;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//Pelvis
+	b = ragdoll->Pelvis;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//Stomach
+	b = ragdoll->Stomach;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//Neck
+	b = ragdoll->Neck;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//LUpperArm
+	b = ragdoll->LUpperArm;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//RUpperArm
+	b = ragdoll->RUpperArm;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//LForearm
+	b = ragdoll->LForearm;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+	//RForearm
+	b = ragdoll->RForearm;
+	a = [[Actor alloc] init];
+	[(Actor*)a initWithFile:@"pixel.png"];
+	[self addChild:a];
+	[(Actor*)a setScaleX:5.0f];
+	[(Actor*)a setScaleY:5.0f];
+	[(Actor*)a setPosition:CGPointMake(b->GetPosition().x*32,b->GetPosition().y*32)];
+	b->SetUserData((Actor*)a);
+	
+
+	
 }
+
 
 -(void) draw{
 	[super draw];
@@ -376,6 +541,16 @@ void ContactListener::Result(const b2ContactResult* result) {
 	}
 	//Delete Objects
 	[self RemovePastObjects];
+	
+	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+		if (b->GetUserData() != NULL) {
+			Actor *actor = (Actor*)b->GetUserData();
+			b2Vec2 position = b->GetPosition();
+			actor.position = CGPointMake(position.x*PTM_RATIO, position.y*PTM_RATIO);// b2toCGPoint(position);
+			actor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+		}
+	}
+	
 	
 	//Detect Stopped
 	if (ragdoll->hasLaunched()) {
@@ -645,12 +820,14 @@ void ContactListener::Result(const b2ContactResult* result) {
         Actor* a = [[Actor alloc] init];
         a.type = 2;
         collisionObjectDef.userData = a;
-		collisionObjectDef.position.Set(currPos.x+10.0f, 8.0f);
+		collisionObjectDef.position.Set(currPos.x+10.0f, 4.6f);
 		b2Body *collisionObject;
 		collisionObject = world->CreateBody(&collisionObjectDef);
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(MB_WIDTH, 0.2f);
 		collisionObject->CreateShape(&collisionObjectShapeDef);
+		[(Actor*)a initWithFile:@"monkeybar_gfx.png"];
+		[self addChild:a];
 	}
 	
 	randnum = (rand()%10000)+1;
@@ -665,8 +842,10 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(SS_WIDTH, 0.6f);
 		collisionObject->CreateShape(&collisionObjectShapeDef);
+		[(Actor*)a initWithFile:@"see-saw_gfx.png"];
+		[self addChild:a];
 	}
-	
+
 	randnum = (rand()%10000)+1;
 	if(randnum<(randObjectPercentage/14)*10000) {
 		b2BodyDef collisionObjectDef;
@@ -679,6 +858,8 @@ void ContactListener::Result(const b2ContactResult* result) {
 		b2PolygonDef collisionObjectShapeDef;
 		collisionObjectShapeDef.SetAsBox(MGR_WIDTH, 1.0f);
 		collisionObject->CreateShape(&collisionObjectShapeDef);
+		[(Actor*)a initWithFile:@"merry-go-round_gfx.png"];
+		[self addChild:a];
 	}
 }
 

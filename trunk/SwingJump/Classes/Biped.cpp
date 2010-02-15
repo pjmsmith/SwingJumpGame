@@ -1,7 +1,5 @@
 #include "Biped.h"
 #include "BipedDef.h"
-
-
 #define PI 3.14159
 
 BipedDef* def = new BipedDef();

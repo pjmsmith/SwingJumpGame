@@ -20,13 +20,6 @@
 #define MGR_WIDTH 1.5f
 #define SS_WIDTH 1.0f
 
-@interface Actor : CCLayer {
-    NSInteger type;
-}
-@property (nonatomic, readwrite) NSInteger type;
-
-@end
-
 class ContactListener : public b2ContactListener
 {
 public:        
@@ -53,6 +46,7 @@ public:
 @property (nonatomic) int noType3;
 @property (nonatomic) int noType4;
 
+-(void)attachSpritesToRagdoll;
 -(void)createSwingChain:(float)yPos;
 -(void)DetectStopped:(float)dt;
 -(void)CreateRandomObjects;
