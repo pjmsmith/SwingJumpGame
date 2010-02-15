@@ -742,7 +742,7 @@ void ContactListener::Result(const b2ContactResult* result) {
     }
     else 
     {
-        if([(ControlLayer *)parent getFastestSwipe] > [(NSNumber*)statObject floatValue])
+        if([(ControlLayer *)parent getFastestSwipe] < [(NSNumber*)statObject floatValue])
         {
             [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithFloat:[(ControlLayer *)parent getFastestSwipe]] forKey:@"fastestSwipe"];
         }
