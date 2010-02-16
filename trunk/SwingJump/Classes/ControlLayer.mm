@@ -319,6 +319,13 @@
 	}
 	else if (type3Enabled) {
 		timeCounter = timeCounter+dt;
+		if (timeCounter> 3.0f) {
+			type3Enabled = NO;
+			[self unschedule:@selector(tictoc:)];
+			[gl ResumeWithImpulse:b2Vec2(0.0f,0.0f)];
+			[customSlider removeFromSuperview];
+			[sliderBackground removeFromSuperview];
+		}
 	}
 	else if (type4Enabled) {
 		timeCounter = timeCounter+dt;
